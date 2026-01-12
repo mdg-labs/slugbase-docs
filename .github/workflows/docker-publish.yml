@@ -79,22 +79,42 @@ jobs:
           sleep 10
           tailscale status
 
+      - name: Get Tailscale IP address
+        id: get-ip
+        run: |
+          HOSTNAME="v2202508292409370353"
+          # Wait a bit more for DNS to propagate
+          sleep 5
+          # Get the Tailscale IP address
+          TS_IP=$(tailscale status | grep "$HOSTNAME" | awk '{print $1}' | head -n1)
+          if [ -z "$TS_IP" ]; then
+            # Fallback: try to resolve via getent or ping
+            TS_IP=$(getent hosts "$HOSTNAME" | awk '{print $1}' | head -n1)
+          fi
+          if [ -z "$TS_IP" ]; then
+            echo "Error: Could not resolve Tailscale IP for $HOSTNAME"
+            tailscale status
+            exit 1
+          fi
+          echo "TS_IP=$TS_IP" >> $GITHUB_OUTPUT
+          echo "Resolved $HOSTNAME to $TS_IP"
+
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H v2202508292409370353 >> ~/.ssh/known_hosts || true
+          # Use the Tailscale IP instead of hostname to avoid Tailscale SSH
+          ssh-keyscan -H ${{ steps.get-ip.outputs.TS_IP }} >> ~/.ssh/known_hosts || true
 
       - name: Deploy to remote server
         env:
           IMAGE_NAME: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          HOSTNAME: v2202508292409370353
+          TS_IP: ${{ steps.get-ip.outputs.TS_IP }}
           PORT: 8413
         run: |
-          # Login to GHCR on remote machine
-          # Deploy on remote machine via Tailscale
-          ssh -o StrictHostKeyChecking=no root@${HOSTNAME} << EOF
+          # Deploy on remote machine via Tailscale IP (using regular SSH, not Tailscale SSH)
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts root@${TS_IP} << EOF
             # Login to GHCR
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
             
