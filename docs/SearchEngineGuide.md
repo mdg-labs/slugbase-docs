@@ -49,7 +49,7 @@ The guide provides step-by-step instructions for:
 
 2. **Your Search URL**
    - White card with code display
-   - Personalized URL: `{`{`BASE_URL`}`}/{`{`user_key`}`}/%s`
+   - Personalized URL: `{BASE_URL}/{user_key}/%s`
    - Note about `%s` placeholder
 
 3. **Chromium-based Browsers**
@@ -87,7 +87,7 @@ The guide provides step-by-step instructions for:
      - Name: SlugBase (or preferred name)
      - Keyword: go (or preferred keyword)
      - URL: Use the provided search URL
-4. Test by typing `go {`{`slug`}`}` in address bar
+4. Test by typing `go {slug}` in address bar
 
 ### Returning to Bookmarks
 
@@ -135,7 +135,7 @@ The search URL is dynamically generated based on:
 - **User Key**: Current user's unique user key
 - **Placeholder**: `%s` for the bookmark slug
 
-**Format**: `{`{`BASE_URL`}`}/{`{`user_key`}`}/%s`
+**Format**: `{BASE_URL}/{user_key}/%s`
 
 **Example**: `https://slugbase.example.com/user123/%s`
 
@@ -171,7 +171,7 @@ After setup, users can:
 
 1. Type in browser address bar: `go test`
 2. Press Enter
-3. Browser navigates to: `{`{`BASE_URL`}`}/{`{`user_key`}`}/test`
+3. Browser navigates to: `{BASE_URL}/{user_key}/test`
 4. SlugBase redirects to the bookmark URL associated with slug "test"
 
 **Note**: Replace "test" with any bookmark slug created in SlugBase.
@@ -182,7 +182,7 @@ The custom search engine feature works by:
 
 1. User types keyword + slug in address bar (e.g., `go mylink`)
 2. Browser replaces keyword and query with search URL
-3. Browser navigates to: `{`{`BASE_URL`}`}/{`{`user_key`}`}/mylink`
+3. Browser navigates to: `{BASE_URL}/{user_key}/mylink`
 4. SlugBase backend receives request
 5. Backend looks up bookmark by user_key and slug
 6. If found and forwarding enabled, redirects to bookmark URL
@@ -198,8 +198,8 @@ The custom search engine feature works by:
 
 ## Related Pages
 
-- [Bookmarks](./Bookmarks.md) - Create bookmarks with slugs
-- [Profile](./Profile.md) - View your user key
+- [Bookmarks](bookmarks) - Create bookmarks with slugs
+- [Profile](profile) - View your user key
 
 ## Technical Details
 
