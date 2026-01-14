@@ -12,7 +12,7 @@ const config: Config = {
   url: 'https://slugbase.ghotso.dev',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployments, it is often '/<projectName>/'
-  baseUrl: '/docs/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -46,8 +46,6 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: undefined,
-          // Set routeBasePath to empty so docs are at /docs/ not /docs/docs/
-          routeBasePath: '/',
         },
         blog: false,
         theme: {
@@ -103,11 +101,11 @@ const config: Config = {
           items: [
             {
               label: 'Introduction',
-              to: '/docs/intro',
+              to: '/intro',
             },
             {
               label: 'Setup',
-              to: '/docs/setup',
+              to: '/setup',
             },
           ],
         },
