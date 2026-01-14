@@ -21,6 +21,13 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
+  
+  // Markdown configuration (migrating from deprecated onBrokenMarkdownLinks)
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is in Chinese, you may
@@ -94,11 +101,11 @@ const config: Config = {
           items: [
             {
               label: 'Introduction',
-              to: '/docs/intro',
+              to: '/intro',
             },
             {
               label: 'Setup',
-              to: '/docs/setup',
+              to: '/setup',
             },
           ],
         },
