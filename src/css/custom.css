@@ -4,27 +4,81 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* SlugBase Color Scheme - Matching Application Colors */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Primary Blue - Main brand color */
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
+  
+  /* Background and text colors */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f9fafb;
+  --ifm-font-color-base: #1f2937;
+  --ifm-font-color-secondary: #6b7280;
+  
+  /* Code and syntax highlighting */
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(37, 99, 235, 0.1);
+  
+  /* Link colors */
+  --ifm-link-color: #2563eb;
+  --ifm-link-hover-color: #1d4ed8;
+  
+  /* Navbar */
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  
+  /* Footer */
+  --ifm-footer-background-color: #1f2937;
+  --ifm-footer-color: #f9fafb;
+  --ifm-footer-link-color: #d1d5db;
+  --ifm-footer-link-hover-color: #ffffff;
+  
+  /* Hero section */
+  --ifm-hero-background-color: #eff6ff;
+  --ifm-hero-text-color: #1e40af;
 }
 
-/* For readability concerns, you should choose a lighter theme in dark mode. */
+/* Dark mode - Lighter blue for better contrast */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* Primary Blue - Lighter for dark mode */
+  --ifm-color-primary: #60a5fa;
+  --ifm-color-primary-dark: #3b82f6;
+  --ifm-color-primary-darker: #2563eb;
+  --ifm-color-primary-darkest: #1d4ed8;
+  --ifm-color-primary-light: #93c5fd;
+  --ifm-color-primary-lighter: #bfdbfe;
+  --ifm-color-primary-lightest: #dbeafe;
+  
+  /* Background and text colors */
+  --ifm-background-color: #111827;
+  --ifm-background-surface-color: #1f2937;
+  --ifm-font-color-base: #f9fafb;
+  --ifm-font-color-secondary: #d1d5db;
+  
+  /* Code and syntax highlighting */
+  --docusaurus-highlighted-code-line-bg: rgba(96, 165, 250, 0.2);
+  
+  /* Link colors */
+  --ifm-link-color: #60a5fa;
+  --ifm-link-hover-color: #93c5fd;
+  
+  /* Navbar */
+  --ifm-navbar-background-color: #1f2937;
+  --ifm-navbar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  
+  /* Footer */
+  --ifm-footer-background-color: #0f172a;
+  --ifm-footer-color: #e5e7eb;
+  --ifm-footer-link-color: #9ca3af;
+  --ifm-footer-link-hover-color: #ffffff;
+  
+  /* Hero section */
+  --ifm-hero-background-color: #1e3a8a;
+  --ifm-hero-text-color: #ffffff;
 }

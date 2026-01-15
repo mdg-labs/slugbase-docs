@@ -6,7 +6,7 @@ import searchLocal from '@easyops-cn/docusaurus-search-local';
 const config: Config = {
   title: 'SlugBase Documentation',
   tagline: 'Your links. Your structure. Your language. Your rules.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
   url: 'https://slugbase.ghotso.dev',
@@ -78,6 +78,7 @@ const config: Config = {
       logo: {
         alt: 'SlugBase Logo',
         src: 'img/logo.svg',
+        srcDark: 'img/logo-dark.svg',
       },
       items: [
         {
