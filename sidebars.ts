@@ -1,11 +1,35 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 /**
- * Creates a sidebar from the docs folder structure
+ * Sidebars configuration for Cloud and Selfhosted documentation
  */
 const sidebars: SidebarsConfig = {
-  // By default, Docusaurus generates a sidebar from the docs folder structure
-  tutorialSidebar: [
+  // Cloud documentation sidebar
+  cloudSidebar: [
+    {
+      type: 'doc',
+      id: 'overview',
+      label: 'Overview',
+    },
+    {
+      type: 'doc',
+      id: 'auth',
+      label: 'Authentication',
+    },
+    {
+      type: 'doc',
+      id: 'data-privacy',
+      label: 'Data Privacy',
+    },
+    {
+      type: 'doc',
+      id: 'plans-billing',
+      label: 'Plans & Billing',
+    },
+  ],
+
+  // Selfhosted documentation sidebar
+  selfhostedSidebar: [
     {
       type: 'doc',
       id: 'intro',
@@ -15,36 +39,37 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Getting Started',
       items: [
-        'setup',
-        'login',
-        'password-reset',
+        'Setup',
+        'Login',
+        'PasswordReset',
       ],
     },
     {
       type: 'category',
       label: 'Core Features',
       items: [
-        'dashboard',
-        'bookmarks',
-        'folders',
-        'tags',
-        'shared',
+        'Dashboard',
+        'Bookmarks',
+        'Folders',
+        'Tags',
+        'Shared',
       ],
     },
     {
       type: 'category',
       label: 'User Features',
       items: [
-        'profile',
-        'search-engine-guide',
+        'Profile',
+        'SearchEngineGuide',
+        'Demo',
       ],
     },
     {
       type: 'category',
       label: 'Administration',
       items: [
-        'admin',
-        'oidc-setup',
+        'Admin',
+        'OIDC_Setup',
       ],
     },
   ],

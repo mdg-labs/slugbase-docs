@@ -1,7 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import searchLocal from '@easyops-cn/docusaurus-search-local';
+import type {PluginOptions} from '@easyops-cn/docusaurus-search-local';
 
 const config: Config = {
   title: 'SlugBase Documentation',
@@ -42,9 +42,10 @@ const config: Config = {
       'classic',
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
+          // Selfhosted docs as default
+          path: 'docs/selfhosted',
+          routeBasePath: 'selfhosted',
+          sidebarPath: './sidebars-selfhosted.ts',
           editUrl: undefined,
         },
         blog: false,
@@ -57,7 +58,17 @@ const config: Config = {
 
   plugins: [
     [
-      searchLocal,
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cloud',
+        path: 'docs/cloud',
+        routeBasePath: 'cloud',
+        sidebarPath: './sidebars-cloud.ts',
+        editUrl: undefined,
+      },
+    ],
+    [
+      '@easyops-cn/docusaurus-search-local',
       {
         // Options for the search plugin
         hashed: true,
@@ -66,7 +77,9 @@ const config: Config = {
         explicitSearchResultPath: true,
         indexBlog: false,
         indexPages: false,
-      },
+        indexDocs: true,
+        docsRouteBasePath: ['cloud', 'selfhosted'],
+      } satisfies PluginOptions,
     ],
   ],
 
@@ -83,9 +96,16 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'cloudSidebar',
           position: 'left',
-          label: 'Documentation',
+          label: 'Cloud',
+          docsPluginId: 'cloud',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'selfhostedSidebar',
+          position: 'left',
+          label: 'Selfhosted',
         },
         {
           href: 'https://github.com/ghotso/slugbase',
@@ -101,12 +121,12 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Introduction',
-              to: '/docs/intro',
+              label: 'Cloud',
+              to: '/cloud/overview',
             },
             {
-              label: 'Setup',
-              to: '/docs/setup',
+              label: 'Selfhosted',
+              to: '/selfhosted/intro',
             },
           ],
         },

@@ -22,12 +22,12 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
+            to="/selfhosted/intro">
             Get Started - 5min ⏱️
           </Link>
           <Link
             className="button button--outline button--secondary button--lg"
-            to="/docs/setup">
+            to="/selfhosted/setup">
             Setup Guide →
           </Link>
         </div>
@@ -64,7 +64,7 @@ export default function Home(): React.JSX.Element {
                     Store and organize your bookmarks with titles, URLs, and optional custom slugs. 
                     Create a personal knowledge base of your favorite links with full control over your data.
                   </p>
-                  <Link to="/docs/bookmarks" className={styles.cardLink}>
+                  <Link to="/selfhosted/bookmarks" className={styles.cardLink}>
                     Learn more →
                   </Link>
                 </div>
@@ -81,7 +81,7 @@ export default function Home(): React.JSX.Element {
                     Organize bookmarks using folders, tags, and filters. 
                     Flexible labeling system with many-to-many relationships for maximum flexibility.
                   </p>
-                  <Link to="/docs/folders" className={styles.cardLink}>
+                  <Link to="/selfhosted/folders" className={styles.cardLink}>
                     Learn more →
                   </Link>
                 </div>
@@ -95,10 +95,10 @@ export default function Home(): React.JSX.Element {
                 </div>
                 <div className="card__body">
                   <p>
-                    Expose your bookmarks as short redirect URLs using the format 
+                    Expose your bookmarks as short redirect URLs using the format
                     <code>{'/{user_key}/{slug}'}</code>. Perfect for creating memorable, shareable links.
                   </p>
-                  <Link to="/docs/intro" className={styles.cardLink}>
+                  <Link to="/selfhosted/intro" className={styles.cardLink}>
                     Learn more →
                   </Link>
                 </div>
@@ -115,7 +115,7 @@ export default function Home(): React.JSX.Element {
                     Share bookmarks and folders with teams or individual users. 
                     Access all shared content in a dedicated shared view for seamless collaboration.
                   </p>
-                  <Link to="/docs/shared" className={styles.cardLink}>
+                  <Link to="/selfhosted/shared" className={styles.cardLink}>
                     Learn more →
                   </Link>
                 </div>
@@ -132,7 +132,7 @@ export default function Home(): React.JSX.Element {
                     Login with OIDC providers (GitHub, Google Workspace) or use local 
                     email/password authentication. Full admin system included for complete control.
                   </p>
-                  <Link to="/docs/login" className={styles.cardLink}>
+                  <Link to="/selfhosted/login" className={styles.cardLink}>
                     Learn more →
                   </Link>
                 </div>
@@ -146,10 +146,10 @@ export default function Home(): React.JSX.Element {
                 </div>
                 <div className="card__body">
                   <p>
-                    Full i18n support with multiple languages (English, German, French) 
+                    Full i18n support with multiple languages (English, German, French)
                     and easy extension for more languages. Use SlugBase in your preferred language.
                   </p>
-                  <Link to="/docs/intro" className={styles.cardLink}>
+                  <Link to="/selfhosted/intro" className={styles.cardLink}>
                     Learn more →
                   </Link>
                 </div>
@@ -167,12 +167,12 @@ export default function Home(): React.JSX.Element {
                 <div className={styles.buttons}>
                   <Link
                     className="button button--primary button--lg"
-                    to="/docs/setup">
+                    to="/selfhosted/setup">
                     Start Setup →
                   </Link>
                   <Link
                     className="button button--outline button--secondary button--lg"
-                    to="/docs/intro">
+                    to="/selfhosted/intro">
                     Read Documentation
                   </Link>
                 </div>
