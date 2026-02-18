@@ -9,14 +9,14 @@ const config: Config = {
   favicon: 'img/favicon.svg',
 
   // Set the production url of your site here
-  url: 'https://slugbase.ghotso.dev',
+  url: 'https://docs.slugbase.app',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployments, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'slugbase', // Usually your GitHub org/user name.
+  organizationName: 'mdg-labs', // Usually your GitHub org/user name.
   projectName: 'slugbase-docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -108,7 +108,7 @@ const config: Config = {
           label: 'Selfhosted',
         },
         {
-          href: 'https://github.com/ghotso/slugbase',
+          href: 'https://github.com/mdg-labs/slugbase',
           label: 'GitHub',
           position: 'right',
         },
@@ -135,7 +135,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/ghotso/slugbase',
+              href: 'https://github.com/mdg-labs/slugbase',
             },
           ],
         },
