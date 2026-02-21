@@ -1,0 +1,13 @@
+---
+alwaysApply: true
+---
+
+# slugbase-docs: Documentation Boundaries
+
+This repo is the **source of truth for customer-facing documentation**. One Docusaurus site, two strictly separated sections.
+
+- **Self-hosted** (`docs/selfhosted`, `/selfhosted/...`): Document only features and flows available to self-hosted deployments. No SaaS features (plans, billing, orgs, cloud-only signup, feature limits) in this section.
+- **Cloud** (`docs/cloud`, `/cloud/...`): Document SaaS features, plans, billing, and cloud-only behavior. Keep sidebars and routes separate from self-hosted.
+- When documenting a feature, state clearly whether it applies to **self-hosted**, **cloud**, or **both**. Do not blur the boundary.
+
+For full workspace architecture and documentation rules, see **slugbase** `.cursor/rules/workspace-architecture.mdc`.
