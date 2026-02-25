@@ -2,83 +2,94 @@
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
+ *
+ * SlugBase color scheme: matches slugbase-core frontend (orange #E64100, navy #0b162A).
  */
 
-/* SlugBase Color Scheme - Matching Application Colors */
+/* Match slugbase-core app font stack */
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Light mode - navy-tinted bg, white cards, orange primary (#E64100) */
 :root {
-  /* Primary Blue - Main brand color */
-  --ifm-color-primary: #2563eb;
-  --ifm-color-primary-dark: #1d4ed8;
-  --ifm-color-primary-darker: #1e40af;
-  --ifm-color-primary-darkest: #1e3a8a;
-  --ifm-color-primary-light: #3b82f6;
-  --ifm-color-primary-lighter: #60a5fa;
-  --ifm-color-primary-lightest: #93c5fd;
-  
-  /* Background and text colors */
+  /* Primary - Orange #E64100 (HSL 17 100% 45%) */
+  --ifm-color-primary: #E64100;
+  --ifm-color-primary-dark: #cc3a00;
+  --ifm-color-primary-darker: #b33300;
+  --ifm-color-primary-darkest: #992b00;
+  --ifm-color-primary-light: #ff5819;
+  --ifm-color-primary-lighter: #ff7a4d;
+  --ifm-color-primary-lightest: #ff9c7f;
+
+  /* Background and text - align with app */
   --ifm-background-color: #ffffff;
-  --ifm-background-surface-color: #f9fafb;
-  --ifm-font-color-base: #1f2937;
-  --ifm-font-color-secondary: #6b7280;
-  
+  --ifm-background-surface-color: hsl(219, 30%, 97%);
+  --ifm-font-color-base: #0b162A;
+  --ifm-font-color-secondary: hsl(219, 20%, 46%);
+
   /* Code and syntax highlighting */
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(37, 99, 235, 0.1);
-  
+  --docusaurus-highlighted-code-line-bg: rgba(230, 65, 0, 0.1);
+
   /* Link colors */
-  --ifm-link-color: #2563eb;
-  --ifm-link-hover-color: #1d4ed8;
-  
+  --ifm-link-color: #E64100;
+  --ifm-link-hover-color: #cc3a00;
+
   /* Navbar */
   --ifm-navbar-background-color: #ffffff;
   --ifm-navbar-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  
-  /* Footer */
-  --ifm-footer-background-color: #1f2937;
+
+  /* Footer - navy to match app sidebar/header */
+  --ifm-footer-background-color: #0b162A;
   --ifm-footer-color: #f9fafb;
   --ifm-footer-link-color: #d1d5db;
   --ifm-footer-link-hover-color: #ffffff;
-  
-  /* Hero section */
-  --ifm-hero-background-color: #eff6ff;
-  --ifm-hero-text-color: #1e40af;
+
+  /* Hero - soft orange-tinted, navy text */
+  --ifm-hero-background-color: hsl(17, 50%, 96%);
+  --ifm-hero-text-color: #0b162A;
 }
 
-/* Dark mode - Lighter blue for better contrast */
+/* Dark mode - #0b162A bg, navy cards, orange primary (#E64100) */
 [data-theme='dark'] {
-  /* Primary Blue - Lighter for dark mode */
-  --ifm-color-primary: #60a5fa;
-  --ifm-color-primary-dark: #3b82f6;
-  --ifm-color-primary-darker: #2563eb;
-  --ifm-color-primary-darkest: #1d4ed8;
-  --ifm-color-primary-light: #93c5fd;
-  --ifm-color-primary-lighter: #bfdbfe;
-  --ifm-color-primary-lightest: #dbeafe;
-  
-  /* Background and text colors */
-  --ifm-background-color: #111827;
-  --ifm-background-surface-color: #1f2937;
-  --ifm-font-color-base: #f9fafb;
-  --ifm-font-color-secondary: #d1d5db;
-  
+  /* Primary - same orange, same scale as light (dark = darker, light = lighter) */
+  --ifm-color-primary: #E64100;
+  --ifm-color-primary-dark: #cc3a00;
+  --ifm-color-primary-darker: #b33300;
+  --ifm-color-primary-darkest: #992b00;
+  --ifm-color-primary-light: #ff5819;
+  --ifm-color-primary-lighter: #ff7a4d;
+  --ifm-color-primary-lightest: #ff9c7f;
+
+  /* Background and text */
+  --ifm-background-color: #0b162A;
+  --ifm-background-surface-color: hsl(219, 40%, 14%);
+  --ifm-font-color-base: #fafafa;
+  --ifm-font-color-secondary: hsl(219, 20%, 65%);
+
   /* Code and syntax highlighting */
-  --docusaurus-highlighted-code-line-bg: rgba(96, 165, 250, 0.2);
-  
+  --docusaurus-highlighted-code-line-bg: rgba(230, 65, 0, 0.2);
+
   /* Link colors */
-  --ifm-link-color: #60a5fa;
-  --ifm-link-hover-color: #93c5fd;
-  
+  --ifm-link-color: #E64100;
+  --ifm-link-hover-color: #ff5819;
+
   /* Navbar */
-  --ifm-navbar-background-color: #1f2937;
+  --ifm-navbar-background-color: #0b162A;
   --ifm-navbar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-  
-  /* Footer */
-  --ifm-footer-background-color: #0f172a;
+
+  /* Footer - same navy */
+  --ifm-footer-background-color: #0b162A;
   --ifm-footer-color: #e5e7eb;
   --ifm-footer-link-color: #9ca3af;
   --ifm-footer-link-hover-color: #ffffff;
-  
-  /* Hero section */
-  --ifm-hero-background-color: #1e3a8a;
+
+  /* Hero */
+  --ifm-hero-background-color: hsl(219, 40%, 14%);
   --ifm-hero-text-color: #ffffff;
 }
