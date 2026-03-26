@@ -2,30 +2,35 @@
 
 Customer-facing documentation for SlugBase, published with [Documentation.AI](https://documentation.ai/) from this Git repository.
 
-## Layout
+## Layout (Documentation.AI code layout)
 
-- [`docs/documentation.json`](docs/documentation.json) — site name, theme colors, navbar, and **navigation** (`products` → **Self-hosted** / **Cloud**, each with **Guides** and **API Reference** tabs).
-- [`docs/selfhosted/`](docs/selfhosted/) — self-hosted–only guides and API pages (`.mdx`).
-- [`docs/cloud/`](docs/cloud/) — cloud/SaaS guides and API pages (`.mdx`).
-- [`docs/assets/`](docs/assets/) — images and static assets; reference from MDX as `/assets/…` (root-absolute from the docs site).
+This matches how [Documentation.AI describes](https://documentation.ai/docs/write-and-publish/code-editor) a typical project: **`documentation.json` at the repository root** next to your content folders, with each navigation **`path`** equal to the **relative path to the `.mdx` file without the extension** (see [site configuration](https://documentation.ai/docs/customize/site-configuration)).
+
+```
+slugbase-docs/
+├── documentation.json    # Site name, theme, navbar, navigation (products → tabs → groups → pages)
+├── selfhosted/           # Self-hosted guides and API pages (.mdx)
+├── cloud/                # Cloud / SaaS guides and API pages (.mdx)
+└── assets/               # Images and static files; use /assets/… in MDX links
+```
+
+Published URLs stay **`/selfhosted/...`** and **`/cloud/...`**; internal links in MDX should stay root-absolute (e.g. `[Setup](/selfhosted/setup)`, images `![…](/assets/…)`).
 
 ## Authoring
 
-- Use **MDX** with YAML frontmatter: `title` and `description` on every page.
-- Use **lowercase, hyphenated** filenames (e.g. `api-reference-auth.mdx`).
-- Use **root-absolute** internal links, e.g. `[Setup](/selfhosted/setup)`, `[Overview](/cloud/overview)`.
-- After adding, renaming, or removing pages, update **`documentation.json`** so `path` values match files (paths omit the `.mdx` extension).
+- **MDX** with YAML frontmatter: `title` and `description` on every page.
+- **Lowercase, hyphenated** filenames (e.g. `api-reference-auth.mdx`).
+- After add/rename/remove pages, update **`documentation.json`** so each `path` matches the file on disk (no `.mdx` suffix).
 
 ## Publishing
 
-1. In the Documentation.AI dashboard, connect this repo (GitHub/GitLab) and choose the deployment branch (e.g. `main`).
-2. Pushes to that branch trigger builds and deploys; pull requests get preview builds.
-3. Configure **custom domain** (e.g. `docs.slugbase.app`) and optional **logo** URLs in the dashboard if not set in `documentation.json` (logo fields in config expect full `https://` URIs per schema).
+1. In the Documentation.AI dashboard, connect this repo and set the deploy branch (e.g. `main`). Use the **repository root** as the project root so `documentation.json` is found at the top level (or the equivalent setting in your project settings if the UI offers a subdirectory).
+2. Pushes trigger builds; PRs get previews.
+3. **Logo / favicon** fields in `documentation.json` must be full `https://…` URIs per the [JSON schema](https://dashboard.documentation.ai/documentation.json), or configure them in the dashboard.
 
-There is **no** local `npm` build in this repo; Documentation.AI is the publisher.
-
-## Documentation.AI references
+## References
 
 - [Code editor / Git workflow](https://documentation.ai/docs/write-and-publish/code-editor)
-- [Site configuration & `documentation.json` schema](https://documentation.ai/docs/customize/site-configuration)
-- [JSON schema (machine-readable)](https://dashboard.documentation.ai/documentation.json)
+- [Site configuration](https://documentation.ai/docs/customize/site-configuration)
+- [Organize / navigation model](https://documentation.ai/docs/organize/overview)
+- [Schema: `documentation.json`](https://dashboard.documentation.ai/documentation.json)
