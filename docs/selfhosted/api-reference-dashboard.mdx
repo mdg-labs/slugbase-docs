@@ -1,0 +1,16 @@
+---
+title: Dashboard
+description: "SlugBase documentation: Dashboard."
+---
+
+# Dashboard
+
+**Authentication:** Required.
+
+## GET /api/dashboard/stats
+
+Returns aggregated stats: totalBookmarks, totalFolders, totalTags, sharedBookmarks, sharedFolders, recentBookmarks, topTags, quickAccessBookmarks, pinnedBookmarks.
+
+**Response (200):** JSON object with the above fields.
+
+**Errors:** 500 — server error.

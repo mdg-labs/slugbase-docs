@@ -1,0 +1,400 @@
+{
+  "name": "SlugBase Documentation",
+  "initialRoute": "selfhosted/intro",
+  "template": "classic",
+  "colors": {
+    "light": {
+      "brand": "#2563eb",
+      "heading": "#1a1a1a",
+      "text": "#374151"
+    },
+    "dark": {
+      "brand": "#60a5fa",
+      "heading": "#f2f2f2",
+      "text": "#c1c1c1"
+    }
+  },
+  "navbar": {
+    "actions": {
+      "links": [
+        {
+          "title": "GitHub",
+          "link": "https://github.com/mdg-labs/slugbase"
+        }
+      ]
+    }
+  },
+  "navigation": {
+    "products": [
+      {
+        "product": "Self-hosted",
+        "icon": "server",
+        "tabs": [
+          {
+            "tab": "Guides",
+            "icon": "book",
+            "groups": [
+              {
+                "group": "Introduction",
+                "icon": "sparkles",
+                "expandable": false,
+                "pages": [
+                  {
+                    "title": "Introduction",
+                    "path": "selfhosted/intro"
+                  }
+                ]
+              },
+              {
+                "group": "Getting Started",
+                "icon": "rocket",
+                "pages": [
+                  {
+                    "title": "Setup Page",
+                    "path": "selfhosted/setup"
+                  },
+                  {
+                    "title": "Login",
+                    "path": "selfhosted/login"
+                  },
+                  {
+                    "title": "Password Reset",
+                    "path": "selfhosted/password-reset"
+                  }
+                ]
+              },
+              {
+                "group": "Core Features",
+                "icon": "layers",
+                "pages": [
+                  {
+                    "title": "Dashboard",
+                    "path": "selfhosted/dashboard"
+                  },
+                  {
+                    "title": "Bookmarks",
+                    "path": "selfhosted/bookmarks"
+                  },
+                  {
+                    "title": "Folders",
+                    "path": "selfhosted/folders"
+                  },
+                  {
+                    "title": "Tags",
+                    "path": "selfhosted/tags"
+                  },
+                  {
+                    "title": "Shared",
+                    "path": "selfhosted/shared"
+                  }
+                ]
+              },
+              {
+                "group": "User Features",
+                "icon": "user",
+                "pages": [
+                  {
+                    "title": "Profile",
+                    "path": "selfhosted/profile"
+                  },
+                  {
+                    "title": "Search Engine Guide",
+                    "path": "selfhosted/search-engine-guide"
+                  },
+                  {
+                    "title": "Try SlugBase Cloud",
+                    "path": "selfhosted/demo"
+                  }
+                ]
+              },
+              {
+                "group": "Administration",
+                "icon": "shield",
+                "pages": [
+                  {
+                    "title": "Admin Page",
+                    "path": "selfhosted/admin"
+                  },
+                  {
+                    "title": "OIDC Provider Setup",
+                    "path": "selfhosted/oidc-setup"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "API Reference",
+            "icon": "code",
+            "groups": [
+              {
+                "group": "REST API",
+                "icon": "file-code",
+                "pages": [
+                  {
+                    "title": "API Reference",
+                    "path": "selfhosted/api-reference"
+                  },
+                  {
+                    "title": "CSRF & Health",
+                    "path": "selfhosted/api-reference-csrf-health"
+                  },
+                  {
+                    "title": "Auth",
+                    "path": "selfhosted/api-reference-auth"
+                  },
+                  {
+                    "title": "Password Reset",
+                    "path": "selfhosted/api-reference-password-reset"
+                  },
+                  {
+                    "title": "Email Verification",
+                    "path": "selfhosted/api-reference-email-verification"
+                  },
+                  {
+                    "title": "Bookmarks",
+                    "path": "selfhosted/api-reference-bookmarks"
+                  },
+                  {
+                    "title": "Folders",
+                    "path": "selfhosted/api-reference-folders"
+                  },
+                  {
+                    "title": "Tags",
+                    "path": "selfhosted/api-reference-tags"
+                  },
+                  {
+                    "title": "Users",
+                    "path": "selfhosted/api-reference-users"
+                  },
+                  {
+                    "title": "Teams",
+                    "path": "selfhosted/api-reference-teams"
+                  },
+                  {
+                    "title": "Tokens",
+                    "path": "selfhosted/api-reference-tokens"
+                  },
+                  {
+                    "title": "Config",
+                    "path": "selfhosted/api-reference-config"
+                  },
+                  {
+                    "title": "OIDC Providers",
+                    "path": "selfhosted/api-reference-oidc-providers"
+                  },
+                  {
+                    "title": "Admin Users",
+                    "path": "selfhosted/api-reference-admin-users"
+                  },
+                  {
+                    "title": "Admin Teams",
+                    "path": "selfhosted/api-reference-admin-teams"
+                  },
+                  {
+                    "title": "Admin Settings",
+                    "path": "selfhosted/api-reference-admin-settings"
+                  },
+                  {
+                    "title": "Admin Stats",
+                    "path": "selfhosted/api-reference-admin-stats"
+                  },
+                  {
+                    "title": "Dashboard",
+                    "path": "selfhosted/api-reference-dashboard"
+                  },
+                  {
+                    "title": "Go (Short Links)",
+                    "path": "selfhosted/api-reference-go"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Cloud",
+        "icon": "cloud",
+        "tabs": [
+          {
+            "tab": "Guides",
+            "icon": "book",
+            "groups": [
+              {
+                "group": "Platform",
+                "icon": "cloud",
+                "pages": [
+                  {
+                    "title": "Overview",
+                    "path": "cloud/overview"
+                  },
+                  {
+                    "title": "Authentication",
+                    "path": "cloud/auth"
+                  },
+                  {
+                    "title": "Data Privacy",
+                    "path": "cloud/data-privacy"
+                  },
+                  {
+                    "title": "Plans & Billing",
+                    "path": "cloud/plans-billing"
+                  }
+                ]
+              },
+              {
+                "group": "Using SlugBase",
+                "icon": "book-open",
+                "pages": [
+                  {
+                    "title": "Features and User Guide",
+                    "path": "cloud/features"
+                  },
+                  {
+                    "title": "Dashboard",
+                    "path": "cloud/dashboard"
+                  },
+                  {
+                    "title": "Bookmarks",
+                    "path": "cloud/bookmarks"
+                  },
+                  {
+                    "title": "Folders",
+                    "path": "cloud/folders"
+                  },
+                  {
+                    "title": "Tags",
+                    "path": "cloud/tags"
+                  },
+                  {
+                    "title": "Shared",
+                    "path": "cloud/shared"
+                  },
+                  {
+                    "title": "Profile",
+                    "path": "cloud/profile"
+                  },
+                  {
+                    "title": "Login Page",
+                    "path": "cloud/login"
+                  },
+                  {
+                    "title": "Password Reset",
+                    "path": "cloud/password-reset"
+                  },
+                  {
+                    "title": "Search Engine Guide",
+                    "path": "cloud/search-engine-guide"
+                  }
+                ]
+              },
+              {
+                "group": "Administration",
+                "icon": "shield",
+                "pages": [
+                  {
+                    "title": "Admin",
+                    "path": "cloud/admin"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "API Reference",
+            "icon": "code",
+            "groups": [
+              {
+                "group": "REST API",
+                "icon": "file-code",
+                "pages": [
+                  {
+                    "title": "API Reference",
+                    "path": "cloud/api-reference"
+                  },
+                  {
+                    "title": "Cloud-Only Endpoints",
+                    "path": "cloud/api-reference-cloud-only"
+                  },
+                  {
+                    "title": "CSRF & Health",
+                    "path": "cloud/api-reference-csrf-health"
+                  },
+                  {
+                    "title": "Auth",
+                    "path": "cloud/api-reference-auth"
+                  },
+                  {
+                    "title": "Password Reset",
+                    "path": "cloud/api-reference-password-reset"
+                  },
+                  {
+                    "title": "Email Verification",
+                    "path": "cloud/api-reference-email-verification"
+                  },
+                  {
+                    "title": "Bookmarks",
+                    "path": "cloud/api-reference-bookmarks"
+                  },
+                  {
+                    "title": "Folders",
+                    "path": "cloud/api-reference-folders"
+                  },
+                  {
+                    "title": "Tags",
+                    "path": "cloud/api-reference-tags"
+                  },
+                  {
+                    "title": "Users",
+                    "path": "cloud/api-reference-users"
+                  },
+                  {
+                    "title": "Teams",
+                    "path": "cloud/api-reference-teams"
+                  },
+                  {
+                    "title": "Tokens",
+                    "path": "cloud/api-reference-tokens"
+                  },
+                  {
+                    "title": "Config",
+                    "path": "cloud/api-reference-config"
+                  },
+                  {
+                    "title": "OIDC Providers",
+                    "path": "cloud/api-reference-oidc-providers"
+                  },
+                  {
+                    "title": "Admin Users",
+                    "path": "cloud/api-reference-admin-users"
+                  },
+                  {
+                    "title": "Admin Teams",
+                    "path": "cloud/api-reference-admin-teams"
+                  },
+                  {
+                    "title": "Admin Settings",
+                    "path": "cloud/api-reference-admin-settings"
+                  },
+                  {
+                    "title": "Admin Stats",
+                    "path": "cloud/api-reference-admin-stats"
+                  },
+                  {
+                    "title": "Dashboard",
+                    "path": "cloud/api-reference-dashboard"
+                  },
+                  {
+                    "title": "Go (Short Links)",
+                    "path": "cloud/api-reference-go"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
