@@ -27,7 +27,7 @@
   "navigation": {
     "products": [
       {
-        "product": "Self-hosted",
+        "product": "SlugBase Self-hosted",
         "icon": "server",
         "tabs": [
           {
@@ -214,7 +214,7 @@
         ]
       },
       {
-        "product": "Cloud",
+        "product": "SlugBaseCloud",
         "icon": "cloud",
         "tabs": [
           {
