@@ -2,12 +2,16 @@
 alwaysApply: true
 ---
 
-# slugbase-docs: Documentation Boundaries
+# slugbase-docs (customer-facing documentation)
 
-This repo is the **source of truth for customer-facing documentation**. It is built and hosted by **Documentation.AI** from the **repo root** (`documentation.json` plus content folders), with two strictly separated trees.
+This repository is the **source of truth for customer-facing documentation**. It is **published with [Documentation.AI](https://documentation.ai)** from the **repository root** (`documentation.json` and the content folders).
 
-- **Self-hosted** (`selfhosted/`, URLs `/selfhosted/...`): Document only features and flows available to self-hosted deployments. No SaaS features (plans, billing, orgs, cloud-only signup, feature limits) in this section.
-- **Cloud** (`cloud/`, URLs `/cloud/...`): Document SaaS features, plans, billing, and cloud-only behavior. Do not move cloud-only content into `selfhosted/`.
-- When documenting a feature, state clearly whether it applies to **self-hosted**, **cloud**, or **both**. Do not blur the boundary.
+**Conceptual map:** **Self-hosted** docs describe what ships from **slugbase** (the open-source / core app). **Cloud** docs describe what **slugbase-cloud** adds for the **multi-tenant SaaS** product.
 
-For full workspace architecture and documentation rules, see **slugbase** `.cursor/rules/workspace-architecture.mdc`.
+## Boundaries
+
+- **Self-hosted** (`selfhosted/`, URLs `/selfhosted/...`): Document features and flows available to **self-hosted** deployments only. Do **not** document SaaS-only topics here (plans, billing, orgs as a cloud product surface, cloud-only signup, hosted feature limits), except brief cross-links to cloud where helpful.
+- **Cloud** (`cloud/`, URLs `/cloud/...`): Document **SaaS** features—plans, billing, cloud-only behavior, and anything that assumes the **slugbase-cloud** hosted stack. Do **not** move cloud-only content into `selfhosted/`.
+- When you document a feature, state whether it applies to **self-hosted**, **cloud**, or **both**. Keep the boundary explicit; do not imply self-hosters get cloud-only capabilities.
+
+For a fuller workspace picture (if maintained), see **slugbase** `.cursor/rules/workspace-architecture.mdc`.
