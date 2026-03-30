@@ -49,7 +49,7 @@ Create a new API token. The full token value is returned only in this response; 
 |--------|------|-------------|
 | 400 | `{ "error": "Token name is required" }` | Missing or invalid name |
 | 400 | `{ "error": "<message>" }` | Validation or create failure |
-| 429 | — | Rate limit exceeded |
+| 429 | - | Rate limit exceeded |
 | 500 | `{ "error": "<message>" }` | Server error |
 
 ---
@@ -60,7 +60,7 @@ Revoke an API token by ID. The token will no longer authenticate.
 
 **Authentication:** Required.
 
-**Path parameters:** `id` — token ID (UUID).
+**Path parameters:** `id` - token ID (UUID).
 
 **Request:** None.
 

@@ -25,7 +25,7 @@ Submit the contact form. Sends email via Postmark to internal recipient and opti
 
 **Response (200):** `{ "success": true }`
 
-**Errors:** 400 — Name/email/message required; invalid email; length exceeded. 429 — rate limit. 503 — Postmark not configured or CONTACT_FORM_RECIPIENT not set.
+**Errors:** 400 - Name/email/message required; invalid email; length exceeded. 429 - rate limit. 503 - Postmark not configured or CONTACT_FORM_RECIPIENT not set.
 
 ---
 
@@ -117,7 +117,7 @@ Create a Stripe Checkout session for subscription. Auth required. Requires STRIP
 
 **Request body (JSON):** `organizationId` (required), `priceId` (required, Stripe price ID).
 
-**Response (200):** `{ "url": "string" }` — redirect user to this URL for checkout.
+**Response (200):** `{ "url": "string" }` - redirect user to this URL for checkout.
 
 **Errors:** 400 organizationId and priceId required. 403 Not a member of this organization. 404 Organization not found. 501 Billing not configured. 500 Stripe error.
 
@@ -127,7 +127,7 @@ Create a Stripe Customer Portal session for managing subscription. Auth required
 
 **Request body (JSON):** `organizationId` (required).
 
-**Response (200):** `{ "url": "string" }` — redirect user to this URL for portal.
+**Response (200):** `{ "url": "string" }` - redirect user to this URL for portal.
 
 **Errors:** 400 organizationId required. 403 Not a member. 404 Organization not found. 501 Billing not configured. 500 Stripe error.
 

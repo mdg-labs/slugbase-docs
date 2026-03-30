@@ -19,7 +19,7 @@ List the current user's tags. Optional pagination and sort.
 
 **Response (200):** Array of tag objects, or with pagination `{ items: [], total }`.
 
-**Errors:** 500 — server error.
+**Errors:** 500 - server error.
 
 ---
 
@@ -29,7 +29,7 @@ Get a single tag by ID.
 
 **Response (200):** Tag object.
 
-**Errors:** 404 — `{ "error": "Tag not found" }`. 500 — server error.
+**Errors:** 404 - `{ "error": "Tag not found" }`. 500 - server error.
 
 ---
 
@@ -41,7 +41,7 @@ Create a tag. Name must be unique per user.
 
 **Response (201):** Created tag object.
 
-**Errors:** 400 — Name required; validation; tag with this name already exists. 500 — server error.
+**Errors:** 400 - Name required; validation; tag with this name already exists. 500 - server error.
 
 ---
 
@@ -53,7 +53,7 @@ Update a tag (name only).
 
 **Response (200):** Updated tag object.
 
-**Errors:** 400 — Name required; validation; name conflict. 404 — Tag not found. 500 — server error.
+**Errors:** 400 - Name required; validation; name conflict. 404 - Tag not found. 500 - server error.
 
 ---
 
@@ -63,4 +63,4 @@ Delete a tag.
 
 **Response (200):** `{ "message": "Tag deleted" }`
 
-**Errors:** 404 — Tag not found. 500 — server error.
+**Errors:** 404 - Tag not found. 500 - server error.

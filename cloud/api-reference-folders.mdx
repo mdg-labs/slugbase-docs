@@ -19,7 +19,7 @@ List folders (own and shared). Supports scope filter and pagination.
 
 **Response (200):** Array of folder objects, or with pagination `{ items: [], total }`. Each folder may include `folder_type` (`own`|`shared`), `shared_teams`, `shared_users`, `user_name`, `user_email` for shared.
 
-**Errors:** 404 — folder not found (when filtering by folder). 500 — server error.
+**Errors:** 404 - folder not found (when filtering by folder). 500 - server error.
 
 ---
 
@@ -29,7 +29,7 @@ Get a single folder by ID (own or shared). Returns shared_teams and shared_users
 
 **Response (200):** Folder object with `shared_teams`, `shared_users`.
 
-**Errors:** 404 — `{ "error": "Folder not found" }`. 500 — server error.
+**Errors:** 404 - `{ "error": "Folder not found" }`. 500 - server error.
 
 ---
 
@@ -41,7 +41,7 @@ Create a folder. Name required; optional icon, team_ids, user_ids, share_all_tea
 
 **Response (201):** Created folder object.
 
-**Errors:** 400 — Name required; name validation; folder with this name already exists; icon length. 403 — Not a member of team. 404 — User not found for share. 500 — server error.
+**Errors:** 400 - Name required; name validation; folder with this name already exists; icon length. 403 - Not a member of team. 404 - User not found for share. 500 - server error.
 
 ---
 
@@ -53,7 +53,7 @@ Update folder (name, icon, team shares, user shares). Must own or have modify ac
 
 **Response (200):** Updated folder object.
 
-**Errors:** 400 — Name required; validation; name conflict. 403 — Not a member of team. 404 — Folder not found; user not found. 500 — server error.
+**Errors:** 400 - Name required; validation; name conflict. 403 - Not a member of team. 404 - Folder not found; user not found. 500 - server error.
 
 ---
 
@@ -63,4 +63,4 @@ Delete a folder. Must own or have modify access.
 
 **Response (200):** `{ "message": "Folder deleted" }`
 
-**Errors:** 404 — Folder not found. 500 — server error.
+**Errors:** 404 - Folder not found. 500 - server error.

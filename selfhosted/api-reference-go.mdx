@@ -17,7 +17,7 @@ List the current user's slug preferences (personal short links). Each preference
 
 **Response (200):** Array of `{ slug, bookmark_id, title, url, workspace, created_at, updated_at }`. `workspace` is "Personal" for own bookmarks or owner name for shared.
 
-**Errors:** 500 — `{ "error": "Internal server error" }`.
+**Errors:** 500 - `{ "error": "Internal server error" }`.
 
 ---
 
@@ -31,7 +31,7 @@ Add or update a slug preference: map a slug to a bookmark. The bookmark must hav
 
 **Response (201):** `{ slug, bookmark_id }`
 
-**Errors:** 400 — slug and bookmark_id required; slug validation. 403 — `{ "error": "Forbidden" }` (no access to bookmark). 404 — `{ "error": "Bookmark not found or slug mismatch" }`. 500 — server error.
+**Errors:** 400 - slug and bookmark_id required; slug validation. 403 - `{ "error": "Forbidden" }` (no access to bookmark). 404 - `{ "error": "Bookmark not found or slug mismatch" }`. 500 - server error.
 
 ---
 
@@ -43,7 +43,7 @@ Remove a slug preference for the current user.
 
 **Response (200):** Success.
 
-**Errors:** 400 — Invalid slug format. 404 — `{ "error": "Preference not found" }`. 500 — server error.
+**Errors:** 400 - Invalid slug format. 404 - `{ "error": "Preference not found" }`. 500 - server error.
 
 ---
 

@@ -52,7 +52,7 @@ Returns the current authenticated user's profile (from JWT/session).
 
 | Status | Body | Description |
 |--------|------|-------------|
-| 401 | — | Not authenticated |
+| 401 | - | Not authenticated |
 
 ---
 
@@ -274,7 +274,7 @@ Starts the OIDC login flow for the given provider (e.g. `google`, `github`). Red
 
 **Authentication:** None (public).
 
-**Path parameters:** `provider` — provider key as configured in Admin OIDC (e.g. `google`).
+**Path parameters:** `provider` - provider key as configured in Admin OIDC (e.g. `google`).
 
 **Response:** Redirect to identity provider. No JSON.
 

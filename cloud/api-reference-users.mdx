@@ -17,7 +17,7 @@ Returns the current user's profile (id, email, name, user_key, is_admin, languag
 
 **Response (200):** User object.
 
-**Errors:** 500 — `{ "error": "<message>" }`
+**Errors:** 500 - `{ "error": "<message>" }`
 
 ---
 
@@ -29,4 +29,4 @@ Update current user. Only provided fields are updated. If email is changed, a ve
 
 **Response (200):** Updated user object, or when email change triggers verification: `{ "message": "Email change requested...", "emailVerificationRequired": true, "currentEmail", "pendingEmail" }`.
 
-**Errors:** 400 — OIDC users cannot change email; validation; email already exists; no fields to update. 404 — user not found. 500 — server error.
+**Errors:** 400 - OIDC users cannot change email; validation; email already exists; no fields to update. 404 - user not found. 500 - server error.

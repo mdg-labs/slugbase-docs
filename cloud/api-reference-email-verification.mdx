@@ -17,7 +17,7 @@ Check whether an email change verification token is valid. Returns the new email
 
 **Response (200):** `{ "valid": true, "newEmail": "string" }`
 
-**Errors:** 400 — `{ "valid": false, "error": "..." }` (Token is required; Invalid or expired token; Token has expired; Invalid token).
+**Errors:** 400 - `{ "valid": false, "error": "..." }` (Token is required; Invalid or expired token; Token has expired; Invalid token).
 
 ---
 
@@ -29,4 +29,4 @@ Confirm the email change. Updates the user's email and marks the token as used.
 
 **Response (200):** `{ "message": "Email verified and updated successfully", "email": "string" }`
 
-**Errors:** 400 — Token required, invalid/expired token, or email already in use. 500 — `{ "error": "Failed to verify email" }`. 429 — rate limit.
+**Errors:** 400 - Token required, invalid/expired token, or email already in use. 500 - `{ "error": "Failed to verify email" }`. 429 - rate limit.

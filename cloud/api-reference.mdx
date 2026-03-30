@@ -11,14 +11,14 @@ This section documents the HTTP API for SlugBase Cloud. The base URL is your clo
 
 **Behavioral differences from self-hosted:**
 
-- **GET /api/auth/setup/status** — In Cloud this is overridden and always returns `{ "initialized": true }` (no Setup page).
-- **POST /api/auth/register** — Available in Cloud for signup; email verification is required. In self-hosted the route may 404.
-- **Admin OIDC and SMTP** — The API may still exist; in Cloud the UI often hides these because OIDC and system email (Postmark) are configured at the platform level.
-- **AI settings** — In Cloud, provider/model/API key are typically set via environment variables; Admin AI may only expose a per-org enable/disable toggle.
+- **GET /api/auth/setup/status** - In Cloud this is overridden and always returns `{ "initialized": true }` (no Setup page).
+- **POST /api/auth/register** - Available in Cloud for signup; email verification is required. In self-hosted the route may 404.
+- **Admin OIDC and SMTP** - The API may still exist; in Cloud the UI often hides these because OIDC and system email (Postmark) are configured at the platform level.
+- **AI settings** - In Cloud, provider/model/API key are typically set via environment variables; Admin AI may only expose a per-org enable/disable toggle.
 
 ## Table of contents
 
-- [Cloud-only endpoints](/cloud/api-reference-cloud-only) — Contact, session, organizations, invitations, billing
+- [Cloud-only endpoints](/cloud/api-reference-cloud-only) - Contact, session, organizations, invitations, billing
 - [CSRF & Health](/cloud/api-reference-csrf-health)
 - [Auth](/cloud/api-reference-auth)
 - [Password Reset](/cloud/api-reference-password-reset)
