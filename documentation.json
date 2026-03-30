@@ -4,12 +4,12 @@
   "template": "classic",
   "colors": {
     "light": {
-      "brand": "#2563eb",
+      "brand": "#5d6af2",
       "heading": "#1a1a1a",
       "text": "#374151"
     },
     "dark": {
-      "brand": "#60a5fa",
+      "brand": "#5d6af2",
       "heading": "#f2f2f2",
       "text": "#c1c1c1"
     }
@@ -396,5 +396,8 @@
         ]
       }
     ]
-  }
+  },
+  "logo-dark": "https://blob-cdn.documentation.ai/org-5655c5ac-dc7b-4226-bb31-9bfd580ebf03/doc-c7e01938-1e51-40f7-9359-afcf05d0c9d9/1774877717250-53cqr1q4gv-slugbase_icon_purple.png?q=85&fm=auto&auto=compress%2Cformat",
+  "logo-light": "https://blob-cdn.documentation.ai/org-5655c5ac-dc7b-4226-bb31-9bfd580ebf03/doc-c7e01938-1e51-40f7-9359-afcf05d0c9d9/1774877717250-53cqr1q4gv-slugbase_icon_purple.png?q=85&fm=auto&auto=compress%2Cformat",
+  "favicon": "https://blob-cdn.documentation.ai/org-5655c5ac-dc7b-4226-bb31-9bfd580ebf03/doc-c7e01938-1e51-40f7-9359-afcf05d0c9d9/1774877717250-53cqr1q4gv-slugbase_icon_purple.png?q=85&fm=auto&auto=compress%2Cformat"
 }
