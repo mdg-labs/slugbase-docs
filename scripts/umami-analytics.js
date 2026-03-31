@@ -1,4 +1,3 @@
-console.log('umami.js loaded');
 (function() {
   var script = document.createElement('script');
   script.src = 'https://umami.mdg-labs.dev/script.js';
