@@ -403,7 +403,7 @@
   "title": "SlugBase",
   "scripts": [
     {
-      "src": "scripts/-analytics.js"
+      "src": "scripts/umami-analytics.js"
     }
   ]
 }
