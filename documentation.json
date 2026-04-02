@@ -129,85 +129,9 @@
             "groups": [
               {
                 "group": "REST API",
-                "icon": "file-code",
-                "pages": [
-                  {
-                    "title": "API Reference",
-                    "path": "selfhosted/api-reference"
-                  },
-                  {
-                    "title": "CSRF & Health",
-                    "path": "selfhosted/api-reference-csrf-health"
-                  },
-                  {
-                    "title": "Auth",
-                    "path": "selfhosted/api-reference-auth"
-                  },
-                  {
-                    "title": "Password Reset",
-                    "path": "selfhosted/api-reference-password-reset"
-                  },
-                  {
-                    "title": "Email Verification",
-                    "path": "selfhosted/api-reference-email-verification"
-                  },
-                  {
-                    "title": "Bookmarks",
-                    "path": "selfhosted/api-reference-bookmarks"
-                  },
-                  {
-                    "title": "Folders",
-                    "path": "selfhosted/api-reference-folders"
-                  },
-                  {
-                    "title": "Tags",
-                    "path": "selfhosted/api-reference-tags"
-                  },
-                  {
-                    "title": "Users",
-                    "path": "selfhosted/api-reference-users"
-                  },
-                  {
-                    "title": "Teams",
-                    "path": "selfhosted/api-reference-teams"
-                  },
-                  {
-                    "title": "Tokens",
-                    "path": "selfhosted/api-reference-tokens"
-                  },
-                  {
-                    "title": "Config",
-                    "path": "selfhosted/api-reference-config"
-                  },
-                  {
-                    "title": "OIDC Providers",
-                    "path": "selfhosted/api-reference-oidc-providers"
-                  },
-                  {
-                    "title": "Admin Users",
-                    "path": "selfhosted/api-reference-admin-users"
-                  },
-                  {
-                    "title": "Admin Teams",
-                    "path": "selfhosted/api-reference-admin-teams"
-                  },
-                  {
-                    "title": "Admin Settings",
-                    "path": "selfhosted/api-reference-admin-settings"
-                  },
-                  {
-                    "title": "Admin Stats",
-                    "path": "selfhosted/api-reference-admin-stats"
-                  },
-                  {
-                    "title": "Dashboard",
-                    "path": "selfhosted/api-reference-dashboard"
-                  },
-                  {
-                    "title": "Go (Short Links)",
-                    "path": "selfhosted/api-reference-go"
-                  }
-                ]
+                "icon": "code2",
+                "pages": [],
+                "openapi": "api-reference/slugbase-api-self-hosted.json"
               }
             ]
           }
@@ -307,89 +231,9 @@
             "groups": [
               {
                 "group": "REST API",
-                "icon": "file-code",
-                "pages": [
-                  {
-                    "title": "API Reference",
-                    "path": "cloud/api-reference"
-                  },
-                  {
-                    "title": "Cloud-Only Endpoints",
-                    "path": "cloud/api-reference-cloud-only"
-                  },
-                  {
-                    "title": "CSRF & Health",
-                    "path": "cloud/api-reference-csrf-health"
-                  },
-                  {
-                    "title": "Auth",
-                    "path": "cloud/api-reference-auth"
-                  },
-                  {
-                    "title": "Password Reset",
-                    "path": "cloud/api-reference-password-reset"
-                  },
-                  {
-                    "title": "Email Verification",
-                    "path": "cloud/api-reference-email-verification"
-                  },
-                  {
-                    "title": "Bookmarks",
-                    "path": "cloud/api-reference-bookmarks"
-                  },
-                  {
-                    "title": "Folders",
-                    "path": "cloud/api-reference-folders"
-                  },
-                  {
-                    "title": "Tags",
-                    "path": "cloud/api-reference-tags"
-                  },
-                  {
-                    "title": "Users",
-                    "path": "cloud/api-reference-users"
-                  },
-                  {
-                    "title": "Teams",
-                    "path": "cloud/api-reference-teams"
-                  },
-                  {
-                    "title": "Tokens",
-                    "path": "cloud/api-reference-tokens"
-                  },
-                  {
-                    "title": "Config",
-                    "path": "cloud/api-reference-config"
-                  },
-                  {
-                    "title": "OIDC Providers",
-                    "path": "cloud/api-reference-oidc-providers"
-                  },
-                  {
-                    "title": "Admin Users",
-                    "path": "cloud/api-reference-admin-users"
-                  },
-                  {
-                    "title": "Admin Teams",
-                    "path": "cloud/api-reference-admin-teams"
-                  },
-                  {
-                    "title": "Admin Settings",
-                    "path": "cloud/api-reference-admin-settings"
-                  },
-                  {
-                    "title": "Admin Stats",
-                    "path": "cloud/api-reference-admin-stats"
-                  },
-                  {
-                    "title": "Dashboard",
-                    "path": "cloud/api-reference-dashboard"
-                  },
-                  {
-                    "title": "Go (Short Links)",
-                    "path": "cloud/api-reference-go"
-                  }
-                ]
+                "pages": [],
+                "icon": "code2",
+                "openapi": "api-reference/slugbase-api-cloud.json"
               }
             ]
           }
