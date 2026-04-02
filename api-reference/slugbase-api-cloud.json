@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "/",
+      "url": "https://slugbase.app",
       "description": "Cloud app base URL (e.g. https://app.slugbase.app)"
     }
   ],
