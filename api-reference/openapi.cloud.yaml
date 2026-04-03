@@ -16,8 +16,8 @@ info:
     Admin OIDC/SMTP may be limited compared to self-hosted.
   version: 1.0.0
 servers:
-  - url: https://app.slugbase.app
-    description: Cloud app base URL (e.g. https://app.slugbase.app)
+  - url: https://slugbase.app
+    description: Cloud app base URL (e.g. https://slugbase.app)
 tags:
   - name: CSRFHealth
   - name: Auth
