@@ -338,7 +338,8 @@
                 "group": "REST API",
                 "icon": "code",
                 "expandable": true,
-                "pages": []
+                "pages": [],
+                "openapi": "cloud/api-reference/openapi.cloud.yaml"
               }
             ]
           }
