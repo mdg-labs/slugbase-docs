@@ -1,6 +1,5 @@
 {
   "name": "SlugBase Documentation",
-  "initialRoute": "selfhosted/intro",
   "template": "classic",
   "colors": {
     "light": {
