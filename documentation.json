@@ -339,7 +339,7 @@
                 "icon": "code",
                 "expandable": true,
                 "pages": [],
-                "openapi": "cloud/api-reference/openapi.cloud.yaml"
+                "openapi": "cloud/api-reference/cloud-openapi.yaml"
               }
             ]
           }
