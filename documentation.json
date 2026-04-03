@@ -229,8 +229,7 @@
                 "group": "REST API",
                 "icon": "code",
                 "expandable": true,
-                "pages": [],
-                "openapi": "api-reference/openapi.selfhosted.yaml"
+                "pages": []
               }
             ]
           }
@@ -339,8 +338,7 @@
                 "group": "REST API",
                 "icon": "code",
                 "expandable": true,
-                "pages": [],
-                "openapi": "api-reference/openapi.cloud.yaml"
+                "pages": []
               }
             ]
           }
