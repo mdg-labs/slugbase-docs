@@ -20,7 +20,7 @@ A **slug** is a short keyword you attach to a bookmark. When **Enable Forwarding
 | Turn forwarding on | **Enable Forwarding** (a slug is required when forwarding is enabled) |
 | Uniqueness | **Slug already exists. Slugs must be unique across all bookmarks.** |
 
-Shared or team bookmarks can reuse the same slug text in different workspaces; when more than one bookmark matches, SlugBase asks you to pick one (see [Go preferences](/selfhosted/go-preferences)).
+The database enforces this as **one slug per tenant**: two bookmarks cannot share the same slug text within a single SlugBase tenant (self-hosted is one tenant for the whole instance—every workspace you use still counts as the same data set). **[SlugBase Cloud](/cloud/introduction)** is multi-tenant: each organization is its own tenant, so unrelated orgs can each use the same slug string without conflicting. A disambiguation page for “multiple matches” and **Remembered Slug Choices** in [Go preferences](/selfhosted/go-preferences) are defensive or legacy UI; with current enforcement you should not hit multiple bookmarks for one slug under normal use.
 
 ## Opening a bookmark by slug
 
@@ -43,6 +43,6 @@ To type a keyword (for example **`go`**), a space, and your slug—like a search
     Chromium-based browsers and Firefox: custom search engine URL template with **`%s`** for the slug.
   </Card>
   <Card title="Go preferences" href="/selfhosted/go-preferences" icon="sliders-horizontal">
-    **Remembered Slug Choices** when several bookmarks share the same slug.
+    **Remembered Slug Choices**—clear saved `/go/` picks if you used disambiguation or older flows.
   </Card>
 </Columns>

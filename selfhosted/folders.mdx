@@ -25,11 +25,11 @@ You manage which bookmarks sit in a folder from **Bookmarks**—edit a bookmark 
     Select **Create Folder** for a new row, or use **Edit Folder** on an existing folder.
   </Step>
   <Step title="Save" icon="save" titleType="p">
-    Enter **Folder Name** (and icon if your UI offers it), configure sharing if **Share folder** is available, then save.
+    Enter **Folder Name** and optional icon, then save. Sharing is not configured here—use the row action **Share folder** (see below).
   </Step>
 </Steps>
 
-Deleting uses **Delete Folder** with the confirmation **Are you sure you want to delete this folder?** (or the same sentence including the folder name when the dialog supports it).
+Deleting uses **Delete Folder**; the confirmation includes the folder name in quotes (`folders.deleteConfirmWithName` with `{{name}}`).
 
 ## Sort, scope, and pagination
 
@@ -45,7 +45,7 @@ Select the folder **Name** in the table—it links to **Bookmarks** with that fo
 
 ## Sharing
 
-When sharing UI is enabled, the row action **Share folder** opens a dialog to add people or teams (**Invite people or share with a team.**). Folder sharing options in the editor use **Share with Teams** and related copy from the folder modal.
+When sharing UI is enabled, the row action **Share folder** opens the share dialog to add people or teams (**Invite people or share with a team.**), including **Share with Teams** and related copy there—not in the create/edit folder modal (that modal is name and icon only).
 
 ## Related
 

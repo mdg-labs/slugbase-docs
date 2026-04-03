@@ -26,6 +26,9 @@ description: "Run SlugBase locally for development or get a minimal production i
         npm install
         ```
       </Step>
+      <Step title="Create a local `.env`" icon="settings" titleType="p">
+        Before the backend can start, copy the repository template to `.env` at the project root (this tree ships `.env.example`; some checkouts use `example.env` for the same role). The server runs environment validation on every startup: `JWT_SECRET` and `ENCRYPTION_KEY` are required in development and production, not only when `NODE_ENV=production`. See [Configuration](/selfhosted/configuration) for the full list and how to generate safe values.
+      </Step>
       <Step title="Start dev servers" icon="play" titleType="p">
         ```bash
         npm run dev
@@ -89,7 +92,7 @@ description: "Run SlugBase locally for development or get a minimal production i
 
 <ExpandableGroup>
   <Expandable title="Server exits immediately on start" default-open="false">
-    Read the error output: production startup requires strong `JWT_SECRET` and `ENCRYPTION_KEY`, and `SESSION_SECRET` must be set in production with sufficient length. See [Configuration](/selfhosted/configuration).
+    Read the error output: every environment requires strong `JWT_SECRET` and `ENCRYPTION_KEY` (minimum length and no insecure defaults). In production only, `SESSION_SECRET` must also be set with sufficient length. See [Configuration](/selfhosted/configuration).
   </Expandable>
   <Expandable title="I see a blank page or API errors in dev" default-open="false">
     Confirm both processes from `npm run dev` are running and that the browser is pointed at the Vite dev URL for the UI. Check the backend terminal log for failed requests.

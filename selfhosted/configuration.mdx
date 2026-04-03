@@ -62,7 +62,7 @@ The application runs migrations automatically on startup.
 
 ## Email (self-hosted)
 
-For self-hosted deployments, **SMTP is configured in the app** under **Admin → Settings**, not via Postmark env vars. Optional: **`CONTACT_FORM_RECIPIENT`** for contact form delivery (see the open-source README).
+For self-hosted deployments, **SMTP is configured in the app** under **Admin → Settings**, not via Postmark env vars. The open-source backend does not read **`CONTACT_FORM_RECIPIENT`** and does not ship a contact-form HTTP route (for example `/api/contact`); that variable is only relevant to SlugBase Cloud’s marketing contact flow, not to self-hosted installs.
 
 ## AI suggestions (self-hosted)
 

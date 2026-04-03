@@ -7,7 +7,7 @@ description: "What SlugBase is, how self-hosted differs from cloud, terminology,
 
 Self-hosted SlugBase is an open-source bookmark manager you run on your own infrastructure. You save and organize bookmarks (title, URL, optional folders and tags), search from anywhere with **Search (Ctrl+K)**, and optionally turn bookmarks into short links served at `/go/<slug>` for sharing and browser shortcuts.
 
-The first account you create during initial setup is an administrator. From **Admin** in the app you can manage members, teams, **OIDC Providers**, **Settings** (including SMTP), and **AI Suggestions** when you want OpenAI-powered title, tag, and slug hints while creating bookmarks.
+The first account you create during initial setup is an administrator. From **Admin** in the app you can manage **Users**, teams, **OIDC Providers**, **Settings** (including SMTP), and **AI Suggestions** when you want OpenAI-powered title, tag, and slug hints while creating bookmarks.
 
 <Callout kind="info">
   **Cloud vs self-hosted:** The hosted product at [slugbase.app](https://slugbase.app) adds organizations, plans, and billing on top of the same core app. Feature behavior that is the same in both editions is documented in these self-hosted guides unless a [Cloud guide](/cloud/introduction) says otherwise.
@@ -26,7 +26,7 @@ graph LR
 
 ## Main areas of the app
 
-After setup and login, the app is organized around routes such as the dashboard (`/`), **Bookmarks** (`/bookmarks`), **Folders** (`/folders`), **Tags** (`/tags`), and **Profile** (`/profile`). Slug forwarding uses `/go/<slug>`; **Go preferences** lives under `/go-preferences`, and the in-app browser search-engine guide is at `/search-engine-guide`. Workspace administration is under `/admin` (tabs include **Members**, **Teams**, **OIDC Providers**, **Settings**, and **AI Suggestions**).
+After setup and login, the app is organized around routes such as the dashboard (`/`), **Bookmarks** (`/bookmarks`), **Folders** (`/folders`), **Tags** (`/tags`), and **Profile** (`/profile`). Slug forwarding uses `/go/<slug>`; **Remembered Slug Choices** is at `/go-preferences` (from **Profile**, open **Manage remembered slug choices**), and the in-app browser search-engine guide is at `/search-engine-guide`. Workspace administration is under `/admin` (tabs include **Users**, **Teams**, **OIDC Providers**, **Settings**, and **AI Suggestions**).
 
 ## Terminology
 
