@@ -264,7 +264,7 @@ Refer to `docs-boundaries.mdc` for the exact schema and required fields.
   - `> **Tip:**` — helpful but optional
 - Numbered lists for sequential steps. Bullet lists for non-ordered items.
 - No nested lists beyond one level.
-- Internal links: relative paths — `[Plans →](/cloud/plans-billing)`.
+- Internal links: root-absolute paths — `[Plans and limits →](/cloud/plans-and-limits)`.
 - External links: standard markdown — documentation.ai handles `target="_blank"` automatically.
 
 ---

@@ -9,12 +9,13 @@ This matches how [Documentation.AI describes](https://documentation.ai/docs/writ
 ```
 slugbase-docs/
 ├── documentation.json    # Site name, theme, navbar, navigation (products → tabs → groups → pages)
-├── selfhosted/           # Self-hosted guides and API pages (.mdx)
-├── cloud/                # Cloud / SaaS guides and API pages (.mdx)
+├── api-reference/        # OpenAPI YAML for Documentation.AI (API tab); refresh from slugbase + slugbase-cloud when APIs change
+├── selfhosted/           # Self-hosted guides (.mdx)
+├── cloud/                # Cloud / SaaS guides (.mdx)
 └── assets/               # Images and static files; use /assets/… in MDX links
 ```
 
-Published URLs stay **`/selfhosted/...`** and **`/cloud/...`**; internal links in MDX should stay root-absolute (e.g. `[Setup](/selfhosted/setup)`, images `![…](/assets/…)`).
+Published URLs stay **`/selfhosted/...`** and **`/cloud/...`**; internal links in MDX should stay root-absolute (e.g. `[First run setup](/selfhosted/first-run-setup)`, images `![…](/assets/…)`).
 
 ## Authoring
 
