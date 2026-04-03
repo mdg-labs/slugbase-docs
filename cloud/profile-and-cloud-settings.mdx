@@ -1,0 +1,35 @@
+---
+title: "Profile and cloud settings"
+description: "Account profile, language, theme, API tokens, AI suggestions, and deleting your account on SlugBase Cloud."
+---
+
+<Callout kind="info">
+  **Cloud vs self-hosted:** This page describes the hosted product at **slugbase.app**. In-app behavior shared with core is documented in the [Self-hosted guides](/selfhosted/introduction) unless this page says otherwise.
+</Callout>
+
+## What this page covers
+
+Your **Profile** screen in the app (`/app/profile`) is where you manage personal settings: email, name, language, theme, API tokens, optional AI suggestion toggles when your plan allows them, and account deletion. The layout and labels follow the core UI strings (for example **Account**, **Email**, **Name**).
+
+## Cloud-specific behavior
+
+- **Email verification:** Cloud runs with **required email verification** before full login. Pending email changes show verification messaging on Profile consistent with the core **email verification** copy.
+- **OIDC:** The hosted product hides self-hosted **OIDC** admin configuration; email/password and profile flows are the norm for Cloud. If an account were linked to OIDC elsewhere, core copy such as email managed by the provider still applies.
+- **Delete account:** Cloud may block deletion when the server reports you cannot leave (for example when you are the billing owner of the current organization). The UI shows the server message when deletion is not allowed.
+
+For step-by-step detail on fields that are identical to self-hosted (tokens, theme options, language list), see [Profile and preferences](/selfhosted/profile-and-preferences) and [API tokens](/selfhosted/api-tokens).
+
+## Open workspace admin from Profile
+
+If your user can access workspace administration, Profile shows an **Admin** badge and you use the main navigation **Admin** entry. On Cloud, **OIDC** and **SMTP** admin tabs are not offered; you will see **Billing** as an extra tab for plan management. Which tabs appear for **Members**, **Teams**, and sharing depends on your [plan](/cloud/plans-and-limits).
+
+## Related
+
+<Columns cols="2">
+  <Card title="Organizations" href="/cloud/organizations" icon="building-2">
+    How the current organization relates to your session.
+  </Card>
+  <Card title="Delete account (self-hosted reference)" href="/selfhosted/delete-account" icon="user-x">
+    Core deletion flow; Cloud adds billing-owner checks.
+  </Card>
+</Columns>

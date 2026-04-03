@@ -1,0 +1,100 @@
+---
+title: "Install with Docker Compose"
+description: "Run SlugBase from docker-compose.example.yml: ports, env file, SQLite volume, and optional PostgreSQL."
+---
+
+## What you need
+
+- **Docker** and **Docker Compose** v2.
+- A copy of the SlugBase repository or at least its `Dockerfile` and `docker-compose.example.yml`.
+- An `.env` file with production secrets and URLs — see [Configuration](/selfhosted/configuration).
+
+The repository ships **`docker-compose.example.yml`** as the template. Copy it to **`docker-compose.yml`** and adjust values for your environment (the project README describes this pattern).
+
+## Steps
+
+<Steps>
+  <Step title="Copy the Compose template" icon="file-copy" titleType="p">
+    ```bash
+    cp docker-compose.example.yml docker-compose.yml
+    ```
+  </Step>
+  <Step title="Create .env and data directory" icon="file-key" titleType="p">
+    Add at least `JWT_SECRET`, `ENCRYPTION_KEY`, and `SESSION_SECRET` (production length requirements apply). Set `BASE_URL` and `FRONTEND_URL` to your public site URL when deploying behind a domain.
+
+    ```bash
+    mkdir -p ./data
+    ```
+
+    The example compose file mounts `./data` to `/app/data` so the SQLite file survives container restarts.
+  </Step>
+  <Step title="Start the stack" icon="play" titleType="p">
+    ```bash
+    docker compose up -d
+    ```
+
+    The example service:
+
+    - Builds from the root **`Dockerfile`** when you use `build: .` (or pulls `slugbase/slugbase:latest` if you point `image` there instead).
+    - Publishes **`${PORT:-5000}:5000`**.
+    - Loads **`env_file: .env`**.
+    - Sets **`DB_PATH=/app/data/slugbase.db`** inside the container.
+    - Defines a **healthcheck** against `/api/health` like the Dockerfile.
+  </Step>
+  <Step title="Open the app" icon="globe" titleType="p">
+    Visit `http://localhost:5000` (or your host and mapped port). Complete [First run setup](/selfhosted/first-run-setup) when the database is new.
+  </Step>
+</Steps>
+
+## Optional PostgreSQL
+
+The same example file contains a **commented** `slugbase-postgres` service and notes for switching the app service to `DB_TYPE=postgresql` with a dependency on Postgres health. Uncomment and wire credentials to match your `.env` when you outgrow SQLite or need a remote database.
+
+<CodeGroup show-lines="true" tabs="Uncomment service,App env hints">
+  ```yaml
+  # slugbase-postgres:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     - POSTGRES_DB=${DB_NAME:-slugbase}
+  #     - POSTGRES_USER=${DB_USER:-slugbase}
+  #     - POSTGRES_PASSWORD=${DB_PASSWORD:-change-this-password}
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  ```
+
+  ```bash
+  # In .env when using Postgres (conceptual; adjust to your compose network)
+  DB_TYPE=postgresql
+  DATABASE_URL=postgresql://user:pass@slugbase-postgres:5432/slugbase
+  ```
+</CodeGroup>
+
+## Verify
+
+| Check | Expected |
+| --- | --- |
+| `docker compose ps` | Service **healthy** after start period. |
+| Browser | **Initial Setup** or login at your base URL. |
+| Logs | No repeated crash loops; address validation errors if secrets are missing. |
+
+## Troubleshooting
+
+<ExpandableGroup>
+  <Expandable title="Port already in use" default-open="false">
+    Set `PORT` in `.env` to a free host port (the compose file maps `${PORT:-5000}:5000`).
+  </Expandable>
+  <Expandable title="Permission errors on ./data" default-open="false">
+    Ensure the host directory is writable by the container user. The image runs as user **`nodejs`** (uid **1001**).
+  </Expandable>
+</ExpandableGroup>
+
+## Related
+
+<Columns cols="2">
+  <Card title="Docker (single container)" href="/selfhosted/docker" icon="container">
+    Build arguments, health check, and backend-only image notes.
+  </Card>
+  <Card title="Reverse proxy" href="/selfhosted/reverse-proxy" icon="shield">
+    HTTPS and domain setup in front of Compose.
+  </Card>
+</Columns>
