@@ -8,6 +8,11 @@ This repository is the **source of truth for customer-facing documentation**. It
 
 **Conceptual map:** **Self-hosted** docs describe what ships from **slugbase** (the open-source / core app). **Cloud** docs describe what **slugbase-cloud** adds for the **multi-tenant SaaS** product.
 
+## Authority
+
+**slugbase** + **slugbase-cloud** code (`en.json`, routes, OpenAPI)—not other docs.
+Codebase is our only source of truth!
+
 ## Boundaries
 
 - **Self-hosted** (`selfhosted/`, URLs `/selfhosted/...`): Document features and flows available to **self-hosted** deployments only. Do **not** document SaaS-only topics here (plans, billing, orgs as a cloud product surface, cloud-only signup, hosted feature limits), except brief cross-links to cloud where helpful.
