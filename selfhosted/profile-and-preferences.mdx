@@ -5,7 +5,7 @@ description: "Update your account details, language and theme, optional AI sugge
 
 ## What this is for
 
-The **Profile** page is where you manage your own account: **Email** and **Name**, **Preferences** (language and theme, and **AI suggestions** when that feature is available for your workspace), a shortcut to **Go preferences**, and—on the same screen—personal API tokens and account deletion (those topics have dedicated guides).
+The **Profile** page is where you manage your own account: **Email** and **Name**, **Preferences** (language and theme, and **AI suggestions** when that feature is available for your workspace), a shortcut to **Go preferences**, optional [two-factor authentication](/selfhosted/two-factor-authentication), and—on the same screen—personal API tokens and account deletion (those topics have dedicated guides).
 
 ## Before you start
 
@@ -68,6 +68,9 @@ If you can access workspace administration, an **Admin** badge may appear next t
 <Columns cols="2">
   <Card title="API tokens" href="/selfhosted/api-tokens" icon="key-round">
     Create and revoke personal tokens for the REST API from the same Profile page.
+  </Card>
+  <Card title="Two-factor authentication" href="/selfhosted/two-factor-authentication" icon="shield">
+    TOTP and backup codes; API tokens do not require MFA on each request.
   </Card>
   <Card title="Delete account" href="/selfhosted/delete-account" icon="user-x">
     Permanently remove your account and data from the Danger zone on Profile.

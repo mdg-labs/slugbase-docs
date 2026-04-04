@@ -159,6 +159,11 @@
                     "icon": "key-round"
                   },
                   {
+                    "title": "Two-factor authentication",
+                    "path": "selfhosted/two-factor-authentication",
+                    "icon": "shield"
+                  },
+                  {
                     "title": "Delete account",
                     "path": "selfhosted/delete-account",
                     "icon": "user-x"
@@ -275,6 +280,11 @@
                     "title": "Profile and cloud settings",
                     "path": "cloud/profile-and-cloud-settings",
                     "icon": "user-cog"
+                  },
+                  {
+                    "title": "Two-factor authentication",
+                    "path": "cloud/two-factor-authentication",
+                    "icon": "shield"
                   }
                 ]
               },
