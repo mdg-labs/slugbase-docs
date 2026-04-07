@@ -1,6 +1,6 @@
 (function() {
   var script = document.createElement('script');
   script.src = 'https://umami.mdg-labs.dev/script.js';
-  script.setAttribute('data-website-id', '597a0be4-2a12-42c4-b926-fbd339fbf35f');
+  script.setAttribute('data-website-id', 'dfde8624-08cd-42bc-9732-8abb6a227c64');
   document.head.appendChild(script);
 })();
