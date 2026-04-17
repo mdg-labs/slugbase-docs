@@ -191,6 +191,11 @@
                     "icon": "users-round"
                   },
                   {
+                    "title": "Audit log",
+                    "path": "selfhosted/admin-audit-log",
+                    "icon": "scroll-text"
+                  },
+                  {
                     "title": "OIDC",
                     "path": "selfhosted/admin-oidc",
                     "icon": "key"
@@ -314,6 +319,11 @@
                     "title": "Collaboration",
                     "path": "cloud/collaboration",
                     "icon": "share-2"
+                  },
+                  {
+                    "title": "Audit log",
+                    "path": "cloud/admin-audit-log",
+                    "icon": "scroll-text"
                   }
                 ]
               },
