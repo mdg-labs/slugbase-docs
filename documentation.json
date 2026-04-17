@@ -375,5 +375,13 @@
     {
       "src": "scripts/umami-analytics.js"
     }
-  ]
+  ],
+  "integrations": {
+    "cookies": {
+      "analytics": {
+        "key": "",
+        "value": ""
+      }
+    }
+  }
 }
