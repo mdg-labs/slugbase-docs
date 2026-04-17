@@ -40,7 +40,6 @@ tags:
   - name: AdminUsers
   - name: AdminTeams
   - name: AdminSettings
-  - name: AdminStats
   - name: AdminAuditLog
   - name: Dashboard
   - name: GoPreferences
@@ -1210,24 +1209,6 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         "403":
           $ref: "#/components/responses/Error"
-  /api/admin/stats:
-    get:
-      tags:
-        - AdminStats
-      summary: System metrics
-      description: Requires `X-Stats-Secret` matching `STATS_ENDPOINT_SECRET`. Returns 404 if unset or invalid.
-      security: []
-      parameters:
-        - in: header
-          name: X-Stats-Secret
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Stats
-        "401":
-          $ref: "#/components/responses/Unauthorized"
   /api/dashboard/stats:
     get:
       tags:
@@ -1415,20 +1396,6 @@ paths:
       responses:
         "200":
           description: Overview
-  /api/billing/webhook:
-    post:
-      tags:
-        - Billing
-      summary: Stripe webhook
-      description: >
-        Raw JSON body (`express.raw`). Authenticate with `Stripe-Signature` header per Stripe documentation—not Bearer
-        or session cookie.
-      security: []
-      responses:
-        "200":
-          description: Acknowledged
-        "400":
-          description: Invalid signature or payload
   /api/invitations/accept:
     post:
       tags:
