@@ -373,14 +373,24 @@
   "favicon": "https://blob-cdn.documentation.ai/org-5655c5ac-dc7b-4226-bb31-9bfd580ebf03/doc-c7e01938-1e51-40f7-9359-afcf05d0c9d9/1774877717250-53cqr1q4gv-slugbase_icon_purple.png?q=85&fm=auto&auto=compress%2Cformat",
   "scripts": [
     {
-      "src": "scripts/umami-analytics.js"
+      "src": "scripts/vendor/cookieconsent.umd.js"
+    },
+    {
+      "src": "scripts/cookie-consent-init.js"
+    },
+    {
+      "src": "scripts/umami-analytics.js",
+      "category": "analytics"
     }
   ],
   "integrations": {
+    "telemetry": {
+      "enabled": "false"
+    },
     "cookies": {
       "analytics": {
-        "key": "",
-        "value": ""
+        "key": "slugbase-docs-analytics-consent",
+        "value": "granted"
       }
     }
   }
