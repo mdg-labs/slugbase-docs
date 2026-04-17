@@ -21,14 +21,22 @@ The primary **`Dockerfile`** at the repository root produces a **single containe
   <Step title="Prepare environment variables" icon="settings" titleType="p">
     Create a file (for example `.env`) or export variables in your shell. At minimum you need the secrets the server validates at startup. When the app is reachable on a public URL, also set **`BASE_URL`** and **`FRONTEND_URL`** to that HTTPS origin. See [Configuration](/selfhosted/configuration) for details.
   </Step>
-  <Step title="Build the image" icon="hammer" titleType="p">
-    From the repository root (where the `Dockerfile` lives):
+  <Step title="Get the image" icon="hammer" titleType="p">
+    **Published image (recommended):** pull from Docker Hub:
+
+    ```bash
+    docker pull mdglabs/slugbase:latest
+    ```
+
+    **Build from source:** from the repository root (where the `Dockerfile` lives):
 
     ```bash
     docker build -t slugbase:local .
     ```
 
-    Optional build arguments (defaults are for self-hosted):
+    Use **`mdglabs/slugbase:latest`** or **`slugbase:local`** as the image name in the next step.
+
+    When building locally, optional build arguments (defaults are for self-hosted):
 
     - `VITE_SLUGBASE_MODE` — defaults to `selfhosted` (use `cloud` only for SaaS-style builds).
     - `VITE_API_URL` — usually empty for same-origin self-hosted.
@@ -45,7 +53,7 @@ The primary **`Dockerfile`** at the repository root produces a **single containe
       -v "$(pwd)/data:/app/data" \
       --env-file .env \
       -e DB_PATH=/app/data/slugbase.db \
-      slugbase:local
+      mdglabs/slugbase:latest
     ```
 
     The image sets `NODE_ENV=production`, `PORT=5000`, and defaults `DB_TYPE=sqlite` with `DB_PATH=/app/data/slugbase.db`.

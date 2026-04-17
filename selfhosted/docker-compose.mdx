@@ -6,7 +6,7 @@ description: "Run SlugBase from docker-compose.example.yml: ports, env file, SQL
 ## What you need
 
 - **Docker** and **Docker Compose** v2.
-- A copy of the SlugBase repository or at least its `Dockerfile` and `docker-compose.example.yml`.
+- A copy of the SlugBase repository (for `docker-compose.example.yml`), or create a compose file that uses **`mdglabs/slugbase:latest`** and the same ports, env, and volumes.
 - An `.env` file with production secrets and URLs — see [Configuration](/selfhosted/configuration).
 
 The repository ships **`docker-compose.example.yml`** as the template. Copy it to **`docker-compose.yml`** and adjust values for your environment (the project README describes this pattern).
@@ -35,7 +35,7 @@ The repository ships **`docker-compose.example.yml`** as the template. Copy it t
 
     The example service:
 
-    - Builds from the root **`Dockerfile`** when you use `build: .` (or pulls `slugbase/slugbase:latest` if you point `image` there instead).
+    - Pulls **`mdglabs/slugbase:latest`** from Docker Hub by default. To build from the repo **`Dockerfile`** instead, add **`build: .`** to the service (see `docker-compose.example.yml` in the repository).
     - Publishes **`${PORT:-5000}:5000`**.
     - Loads **`env_file: .env`**.
     - Sets **`DB_PATH=/app/data/slugbase.db`** inside the container.

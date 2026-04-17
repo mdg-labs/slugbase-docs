@@ -71,7 +71,7 @@ description: "Run SlugBase locally for development or get a minimal production i
   <Tab title="Production (Docker)" icon="container">
     <Steps>
       <Step title="Use the shipped Docker workflow" icon="container" titleType="p">
-        Build or pull an image, map port **5000**, persist `/app/data` for SQLite, and pass environment variables (including secrets). The repository documents this in [Docker](/selfhosted/docker) and [Docker Compose](/selfhosted/docker-compose).
+        Pull **`mdglabs/slugbase`** from Docker Hub (or build from the repo `Dockerfile`), map port **5000**, persist `/app/data` for SQLite, and pass environment variables (including secrets). The repository documents this in [Docker](/selfhosted/docker) and [Docker Compose](/selfhosted/docker-compose).
       </Step>
       <Step title="Verify health" icon="heart-pulse" titleType="p">
         The container health check expects HTTP **200** from `/api/health` inside the container.
