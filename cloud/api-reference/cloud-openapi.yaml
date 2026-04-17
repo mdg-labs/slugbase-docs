@@ -6,7 +6,10 @@ info:
     organization, billing, and session routes.
 
 
-    **Authentication:** Session cookie or `Authorization: Bearer` API token, as in self-hosted.
+    **Authentication:** Same as self-hosted: HttpOnly **`token`** cookie after login (access JWT), or **`Authorization:
+    Bearer sb_…`** personal API tokens from `/api/tokens`. The **`slugbase.sid`** cookie is express-session (e.g. OIDC);
+    it is not the access JWT. For API clients and documentation playgrounds, prefer **`Authorization: Bearer sb_…`**;
+    cookies are not required when the API token is valid.
 
 
     **CSRF:** Same rules as self-hosted for cookie sessions.
@@ -16,8 +19,10 @@ info:
     Admin OIDC/SMTP may be limited compared to self-hosted.
   version: 1.0.0
 servers:
-  - url: /
-    description: Cloud app base URL (e.g. https://app.slugbase.app)
+  - url: https://slugbase.app
+    description: |
+      SlugBase Cloud site origin. REST endpoints are under `/api/...` on this host.
+      The signed-in web app (SPA) is under `/app/...`; API paths in this spec do not include `/app`.
 tags:
   - name: CSRFHealth
   - name: Auth
@@ -36,6 +41,7 @@ tags:
   - name: AdminTeams
   - name: AdminSettings
   - name: AdminStats
+  - name: AdminAuditLog
   - name: Dashboard
   - name: GoPreferences
   - name: Contact
@@ -121,8 +127,8 @@ paths:
       tags:
         - Auth
       summary: Current session user
-      description: Requires a valid access JWT (not the MFA pending cookie alone). Includes `mfa_enabled` when the user row is
-        loaded.
+      description: Requires a valid access JWT (not the MFA pending cookie alone). Includes `mfa_enabled`, `has_password`, and
+        OIDC linkage fields when the user row is loaded.
       responses:
         "200":
           description: User
@@ -504,12 +510,16 @@ paths:
       tags:
         - Auth
       summary: OIDC callback
+      description: >
+        On success, issues the access JWT and redirects to the app. SlugBase does **not** run an additional TOTP step-up
+        after OIDC; MFA is expected to be enforced by the identity provider. Email/password logins still use SlugBase
+        MFA when enabled on the account.
       security: []
       parameters:
         - $ref: "#/components/parameters/ProviderKey"
       responses:
         "302":
-          description: Redirect to app
+          description: Redirect to app (access JWT cookie set; not the MFA-pending flow)
   /api/auth/setup:
     post:
       tags:
@@ -806,7 +816,11 @@ paths:
       summary: Current user profile
       responses:
         "200":
-          description: User
+          description: User (includes `has_password`; password hash is never returned)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsersMeResponse"
     put:
       tags:
         - Users
@@ -861,9 +875,14 @@ paths:
       tags:
         - Config
       summary: Plan / limits for current context
+      description: Returns 404 when not running in cloud mode.
       responses:
         "200":
           description: Plan info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfigPlanResponse"
   /api/config/ai-suggestions:
     get:
       tags:
@@ -923,6 +942,12 @@ paths:
       responses:
         "200":
           description: Users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdminUserListItem"
     post:
       tags:
         - AdminUsers
@@ -930,6 +955,32 @@ paths:
       responses:
         "201":
           description: Created
+        "502":
+          $ref: "#/components/responses/Error"
+  /api/admin/users/{id}/resend-invite:
+    post:
+      tags:
+        - AdminUsers
+      summary: Resend invite email (pending signup, expired link)
+      parameters:
+        - $ref: "#/components/parameters/IdPath"
+      responses:
+        "200":
+          description: Invite sent; new expiry returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invite_expires_at:
+                    type: string
+                    format: date-time
+        "400":
+          $ref: "#/components/responses/Error"
+        "404":
+          $ref: "#/components/responses/Error"
+        "502":
+          $ref: "#/components/responses/Error"
   /api/admin/users/{id}:
     get:
       tags:
@@ -1124,6 +1175,41 @@ paths:
       responses:
         "200":
           description: Deleted
+  /api/admin/audit-log:
+    get:
+      tags:
+        - AdminAuditLog
+      summary: List audit events for current tenant
+      description: Requires admin. On cloud, returns 403 unless the organization is on the Team plan.
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+        - in: query
+          name: before_created_at
+          schema:
+            type: string
+        - in: query
+          name: before_id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Audit events page
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditLogListResponse"
+        "400":
+          $ref: "#/components/responses/Error"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Error"
   /api/admin/stats:
     get:
       tags:
@@ -1365,6 +1451,38 @@ paths:
             Body may include `code`, `error`, `seats_total`, `seats_used`.
 components:
   schemas:
+    AdminUserListItem:
+      type: object
+      description: User row returned from GET /api/admin/users (invite fields omitted when not applicable)
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        user_key:
+          type: string
+        is_admin:
+          type: boolean
+        oidc_provider:
+          type: string
+          nullable: true
+        language:
+          type: string
+        theme:
+          type: string
+        created_at:
+          type: string
+        invite_pending:
+          type: boolean
+        invite_expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        invite_expired:
+          type: boolean
     AuthLoginMfaRequired:
       type: object
       required:
@@ -1405,6 +1523,48 @@ components:
               type: boolean
             mfa_enabled:
               type: boolean
+            has_password:
+              type: boolean
+              description: False when the account has no local password (e.g. OIDC-only).
+            oidc_provider:
+              type: string
+              nullable: true
+            oidc_sub:
+              type: string
+              nullable: true
+    UsersMeResponse:
+      type: object
+      description: Profile row for PUT /api/users/me context; excludes password_hash
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        user_key:
+          type: string
+        is_admin:
+          type: boolean
+        language:
+          type: string
+        theme:
+          type: string
+        ai_suggestions_enabled:
+          type: boolean
+        email_pending:
+          type: string
+          nullable: true
+        oidc_provider:
+          type: string
+          nullable: true
+        oidc_sub:
+          type: string
+          nullable: true
+        has_password:
+          type: boolean
+          description: True if the account has a non-empty local password hash.
     AuthErrorWithCode:
       type: object
       properties:
@@ -1412,6 +1572,63 @@ components:
           type: string
         code:
           type: string
+    ConfigPlanResponse:
+      type: object
+      properties:
+        plan:
+          type: string
+        bookmarkLimit:
+          type: integer
+          nullable: true
+        canShareWithTeams:
+          type: boolean
+        ai_available:
+          type: boolean
+        audit_log_available:
+          type: boolean
+        email_invites_available:
+          type: boolean
+    AuditLogEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+        action:
+          type: string
+        entity_type:
+          type: string
+        entity_id:
+          type: string
+          nullable: true
+        metadata:
+          type: object
+          additionalProperties: true
+        actor_user_id:
+          type: string
+          nullable: true
+        actor_email:
+          type: string
+          nullable: true
+        actor_name:
+          type: string
+          nullable: true
+    AuditLogListResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuditLogEvent"
+        next_cursor:
+          type: object
+          nullable: true
+          properties:
+            before_created_at:
+              type: string
+            before_id:
+              type: string
     MfaStatus:
       type: object
       properties:
@@ -1469,12 +1686,17 @@ components:
     cookieAuth:
       type: apiKey
       in: cookie
-      name: slugbase.sid
-      description: Session cookie after login
+      name: token
+      description: |
+        HttpOnly access JWT cookie set after login (same credential as `Authorization: Bearer` for the access token).
+        Not to be confused with `slugbase.sid`, which is the express-session cookie for OIDC/session state.
     bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: API token
+      bearerFormat: JWT or sb_ API token
+      description: |
+        Use `Authorization: Bearer <token>`. Personal API tokens from Profile use the `sb_` prefix.
+        You may also send the access JWT as Bearer (same value as the `token` cookie after login).
   parameters:
     IdPath:
       in: path
@@ -1509,5 +1731,4 @@ components:
               error:
                 type: string
 security:
-  - cookieAuth: []
   - bearerAuth: []
