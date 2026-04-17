@@ -21,6 +21,10 @@
         {
           "title": "GitHub",
           "link": "https://github.com/mdg-labs/slugbase"
+        },
+        {
+          "title": "SlugBase Cloud",
+          "link": "https://slugbase.app"
         }
       ]
     }
