@@ -80,7 +80,7 @@ For API-only deployments (no bundled SPA), the repository ships **`Dockerfile.ba
     Ensure the bind mount targets `/app/data` and that `DB_PATH` remains `/app/data/slugbase.db` (as in the example compose file). Permissions should allow the non-root `nodejs` user in the image to write the file.
   </Expandable>
   <Expandable title="I need PostgreSQL instead of SQLite" default-open="false">
-    Set `DB_TYPE=postgresql` and provide either `DATABASE_URL` or `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD`. A commented PostgreSQL service is included in `docker-compose.example.yml` in the repository. See [Docker Compose](/selfhosted/docker-compose) and [Configuration](/selfhosted/configuration).
+    Set `DB_TYPE=postgresql` and provide either `DATABASE_URL` or `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD`. A commented PostgreSQL service is included in the compose template on [Docker Compose](/selfhosted/docker-compose) (and in the repository’s `docker-compose.example.yml`). See [Configuration](/selfhosted/configuration).
   </Expandable>
 </ExpandableGroup>
 

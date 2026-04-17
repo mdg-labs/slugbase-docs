@@ -1,57 +1,44 @@
 ---
 title: "Install with Docker Compose"
-description: "Run SlugBase from docker-compose.example.yml: ports, env file, SQLite volume, and optional PostgreSQL."
+description: "Run SlugBase with Docker Compose using the published image: copy a compose file, set .env, persist data, optional PostgreSQL."
 ---
 
 ## What you need
 
 - **Docker** and **Docker Compose** v2.
-- A copy of the SlugBase repository (for `docker-compose.example.yml`), or create a compose file that uses **`mdglabs/slugbase:latest`** and the same ports, env, and volumes.
-- An `.env` file with production secrets and URLs — see [Configuration](/selfhosted/configuration).
+- An **`.env`** file with production secrets and URLs — see [Configuration](/selfhosted/configuration).
 
-The repository ships **`docker-compose.example.yml`** as the template. Copy it to **`docker-compose.yml`** and adjust values for your environment (the project README describes this pattern).
+You do **not** need to clone the SlugBase GitHub repository to run the pre-built image. Save the compose file below as **`docker-compose.yml`** next to your `.env`. Clone the repo only if you want to **build the image from source** instead of pulling **`mdglabs/slugbase:latest`**.
 
-## Steps
+## Docker Compose file
 
-<Steps>
-  <Step title="Copy the Compose template" icon="file-copy" titleType="p">
-    ```bash
-    cp docker-compose.example.yml docker-compose.yml
-    ```
-  </Step>
-  <Step title="Create .env and data directory" icon="file-key" titleType="p">
-    Add at least `JWT_SECRET`, `ENCRYPTION_KEY`, and `SESSION_SECRET` (production length requirements apply). Set `BASE_URL` and `FRONTEND_URL` to your public site URL when deploying behind a domain.
+Save this as **`docker-compose.yml`** in an empty directory (for example `slugbase/`). It matches the **`docker-compose.example.yml`** shipped in the [SlugBase repository](https://github.com/mdg-labs/slugbase) if you prefer to copy from git later.
 
-    ```bash
-    mkdir -p ./data
-    ```
+```yaml title="docker-compose.yml"
+services:
+  slugbase:
+    image: mdglabs/slugbase:latest
+    container_name: slugbase
+    # To build from a local clone instead of pulling: add `build: .` (Compose builds and tags as the image above).
+    ports:
+      - "${PORT:-5000}:5000"
+    env_file:
+      - .env
+    environment:
+      # Override DB_PATH to use container path (required for SQLite)
+      - DB_PATH=/app/data/slugbase.db
+    volumes:
+      # Mount data directory to persist SQLite database
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:5000/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
 
-    The example compose file mounts `./data` to `/app/data` so the SQLite file survives container restarts.
-  </Step>
-  <Step title="Start the stack" icon="play" titleType="p">
-    ```bash
-    docker compose up -d
-    ```
-
-    The example service:
-
-    - Pulls **`mdglabs/slugbase:latest`** from Docker Hub by default. To build from the repo **`Dockerfile`** instead, add **`build: .`** to the service (see `docker-compose.example.yml` in the repository).
-    - Publishes **`${PORT:-5000}:5000`**.
-    - Loads **`env_file: .env`**.
-    - Sets **`DB_PATH=/app/data/slugbase.db`** inside the container.
-    - Defines a **healthcheck** against `/api/health` like the Dockerfile.
-  </Step>
-  <Step title="Open the app" icon="globe" titleType="p">
-    Visit `http://localhost:5000` (or your host and mapped port). Complete [First run setup](/selfhosted/first-run-setup) when the database is new.
-  </Step>
-</Steps>
-
-## Optional PostgreSQL
-
-The same example file contains a **commented** `slugbase-postgres` service and notes for switching the app service to `DB_TYPE=postgresql` with a dependency on Postgres health. Uncomment and wire credentials to match your `.env` when you outgrow SQLite or need a remote database.
-
-<CodeGroup show-lines="true" tabs="Uncomment service,App env hints">
-  ```yaml
+  # Optional PostgreSQL service (uncomment if using PostgreSQL instead of SQLite)
   # slugbase-postgres:
   #   image: postgres:16-alpine
   #   environment:
@@ -60,14 +47,63 @@ The same example file contains a **commented** `slugbase-postgres` service and n
   #     - POSTGRES_PASSWORD=${DB_PASSWORD:-change-this-password}
   #   volumes:
   #     - postgres-data:/var/lib/postgresql/data
-  ```
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-slugbase}"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #
+  # If using PostgreSQL, update the slugbase service:
+  # slugbase:
+  #   ...
+  #   depends_on:
+  #     slugbase-postgres:
+  #       condition: service_healthy
 
-  ```bash
-  # In .env when using Postgres (conceptual; adjust to your compose network)
-  DB_TYPE=postgresql
-  DATABASE_URL=postgresql://user:pass@slugbase-postgres:5432/slugbase
-  ```
-</CodeGroup>
+# volumes:
+#   postgres-data:
+```
+
+## Steps
+
+<Steps>
+  <Step title="Create the project directory and files" icon="folder" titleType="p">
+    Create a folder for this deployment, add **`docker-compose.yml`** (from the block above), and create **`.env`** with at least `JWT_SECRET`, `ENCRYPTION_KEY`, and `SESSION_SECRET` (production length requirements apply). Set `BASE_URL` and `FRONTEND_URL` to your public site URL when deploying behind a domain.
+
+    ```bash
+    mkdir -p ./data
+    ```
+
+    The compose file mounts **`./data`** to **`/app/data`** so the SQLite file survives container restarts.
+  </Step>
+  <Step title="Start the stack" icon="play" titleType="p">
+    From the directory that contains **`docker-compose.yml`** and **`.env`**:
+
+    ```bash
+    docker compose up -d
+    ```
+
+    The service pulls **`mdglabs/slugbase:latest`** from Docker Hub by default, publishes **`${PORT:-5000}:5000`**, loads **`env_file: .env`**, sets **`DB_PATH=/app/data/slugbase.db`** inside the container, and defines a **healthcheck** against `/api/health`.
+  </Step>
+  <Step title="Open the app" icon="globe" titleType="p">
+    Visit `http://localhost:5000` (or your host and mapped port). Complete [First run setup](/selfhosted/first-run-setup) when the database is new.
+  </Step>
+</Steps>
+
+## Optional PostgreSQL
+
+Uncomment the **`slugbase-postgres`** service and bottom **`volumes`** in your **`docker-compose.yml`**, then set PostgreSQL-related variables in **`.env`**. Wire the app service with **`depends_on`** and health as shown in the comments above.
+
+```bash
+# In .env when using Postgres (adjust user, password, and db name to match compose)
+DB_TYPE=postgresql
+DATABASE_URL=postgresql://slugbase:your-password@slugbase-postgres:5432/slugbase
+```
+
+## Build from source instead of Docker Hub
+
+If you have a local clone of the repository, you can build the image from the **`Dockerfile`** at the repo root: add **`build: .`** to the **`slugbase`** service (and optionally comment out or align **`image:`** with your build tag). Use the same **`docker-compose.example.yml`** in the repo, or start from the file on this page.
 
 ## Verify
 
