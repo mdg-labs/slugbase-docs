@@ -1,17 +1,20 @@
 /**
  * SlugBase docs: vanilla-cookieconsent (orestbida) + Documentation.AI consent bridge.
- * Library files: scripts/vendor/cookieconsent.umd.js + cookieconsent.css (vanilla-cookieconsent@3.1.0).
+ * Build the file Documentation.AI loads: `cat scripts/vendor/cookieconsent.umd.js scripts/cookie-consent-init.js > scripts/cookie-consent.bundle.js`
+ * (single bundle avoids async ordering where init runs before CookieConsent exists).
  */
 (function () {
   var LS_KEY = 'slugbase-docs-analytics-consent';
   var LS_VAL = 'granted';
+  var CSS_URL =
+    'https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3.1.0/dist/cookieconsent.css';
 
   function injectStylesheet() {
-    var base = document.currentScript && document.currentScript.src;
-    if (!base) return;
+    if (document.querySelector('link[data-slugbase-cc="1"]')) return;
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = new URL('vendor/cookieconsent.css', base).href;
+    link.href = CSS_URL;
+    link.setAttribute('data-slugbase-cc', '1');
     document.head.appendChild(link);
   }
 
@@ -30,8 +33,13 @@
 
   injectStylesheet();
 
+  if (typeof CookieConsent === 'undefined') {
+    return;
+  }
+
   CookieConsent.run({
     mode: 'opt-in',
+    hideFromBots: false,
     cookie: {
       name: 'cc_slugbase_docs',
       expiresAfterDays: 182,
