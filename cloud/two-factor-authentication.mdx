@@ -9,9 +9,11 @@ description: "TOTP and backup codes on SlugBase Cloud: setup on Profile, sign-in
 
 ## Where it applies
 
-On **SlugBase Cloud**, the web app lives under **`/app`** (for example **`https://slugbase.app/app/profile`** for Profile and **`https://slugbase.app/app/mfa`** for the MFA challenge after login). OIDC and email/password flows both respect MFA when it is enabled on your user.
+On **SlugBase Cloud**, the web app lives under **`/app`** (for example **`https://slugbase.app/app/profile`** for Profile and **`https://slugbase.app/app/mfa`** for the MFA challenge after **password** login when MFA is enabled).
 
-**Email verification** still runs **before** you get a full session: Cloud requires a verified email where that policy applies; MFA is the **second step** after a successful first factor.
+**OIDC (SSO) sign-in** does not add a second SlugBase TOTP step; your **identity provider** is expected to handle MFA. **Email/password** sign-in still uses SlugBase TOTP when MFA is enabled on the account (including hybrid accounts that have both password and SSO).
+
+**Email verification** still runs **before** you get a full session: Cloud requires a verified email where that policy applies. For password login with MFA, verification comes first, then the MFA step.
 
 ## Setup, backup codes, API tokens
 
