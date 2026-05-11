@@ -5,10 +5,12 @@ description: "Environment variables and secrets for self-hosted SlugBase: databa
 
 ## What you need
 
-- Access to the environment where the Node process runs (`.env`, systemd, Kubernetes secrets, or Compose `env_file`).
-- Cryptographically strong random values for secrets (the server enforces minimum lengths for several of them).
+- A way to set environment variables for the process — typically a `.env` file, a Docker Compose `env_file`, or your server/orchestrator's secrets manager.
+- Strong random values for secrets (the server checks minimum lengths at startup and refuses to start if they are missing or too short).
 
-The backend reads configuration from the process environment. Defaults apply for development; **security validation** runs at startup and exits the process if requirements are not met.
+<Callout kind="tip">
+  For a quick start, copy `.env.example` from the repository to `.env` and fill in the required secrets before your first run.
+</Callout>
 
 ## Security and session variables
 
@@ -53,26 +55,25 @@ Session cookies use **`secure: true`** when **`NODE_ENV=production`** and **`BAS
 
 The application runs migrations automatically on startup.
 
-## Self-hosted mode and registrations
+## Registrations
 
 | Variable | Role |
 | --- | --- |
-| **`SLUGBASE_MODE`** | Omit or set to `selfhosted` for normal self-hosted behavior. (`cloud` is for the hosted product stack only.) |
-| **`REGISTRATIONS_ENABLED`** | If set to the string `false`, new user registration is disabled. Otherwise registrations remain enabled (default). |
+| **`REGISTRATIONS_ENABLED`** | Set to `false` to disable new user sign-ups. Leave unset (or set to anything else) to keep registration open (default). |
 
-## Email (self-hosted)
+## Email
 
-For self-hosted deployments, **SMTP is configured in the app** under **Admin → Settings**, not via Postmark env vars. The open-source backend does not read **`CONTACT_FORM_RECIPIENT`** and does not ship a contact-form HTTP route (for example `/api/contact`); that variable is only relevant to SlugBase Cloud’s marketing contact flow, not to self-hosted installs.
+SMTP is configured inside the app under **Admin → Settings**, not via environment variables. See [Admin: SMTP email](/selfhosted/admin-smtp).
 
-## AI suggestions (self-hosted)
+## AI suggestions
 
-Self-hosted installs configure OpenAI for bookmark suggestions in **Admin → AI Suggestions** in the UI (not via `AI_OPENAI_*` env vars, which are documented for cloud-style deployments in the README).
+AI suggestions are configured inside the app under **Admin → AI Suggestions**. See [Admin: AI suggestions](/selfhosted/admin-ai).
 
-## API documentation toggle
+## API documentation
 
 | Variable | Effect |
 | --- | --- |
-| **`SLUGBASE_API_DOCS`** | Set to `false` to **disable the Swagger UI** at `/api-docs`. OpenAPI JSON/YAML routes remain available unless separately restricted. |
+| **`SLUGBASE_API_DOCS`** | Set to `false` to hide the Swagger UI at `/api-docs`. |
 
 ## Troubleshooting
 

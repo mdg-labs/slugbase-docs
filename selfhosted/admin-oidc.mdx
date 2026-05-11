@@ -28,7 +28,7 @@ description: "Configure OpenID Connect sign-in for self-hosted SlugBase: issuer,
     **Auto Create Users** controls whether successful IdP sign-in can create a new SlugBase user automatically. **Default Role** sets the role for auto-created users.
   </Step>
   <Step title="Custom endpoints (optional)" icon="link" titleType="p">
-    **Custom OIDC Endpoints** let you override **Authorization URL**, **Token URL**, and **UserInfo URL** when your provider does not follow standard paths from the issuer. Leave them empty to use defaults derived from the issuer URL.
+    Most providers work with just the issuer URL and you can leave **Custom OIDC Endpoints** empty. Only fill them in if your provider requires specific **Authorization URL**, **Token URL**, or **UserInfo URL** values that differ from the standard discovery paths.
   </Step>
   <Step title="Save and register the callback" icon="check" titleType="p">
     After saving, open the provider card and copy **Callback URL**. Register that exact URL as an allowed redirect URI in your IdP application settings.

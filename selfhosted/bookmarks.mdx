@@ -5,15 +5,13 @@ description: "Create and edit bookmarks, filter and sort the list, bulk actions,
 
 ## What this page is for
 
-**Bookmarks** (`/bookmarks`) is where you manage saved links: title, URL, optional **Slug** (for forwarding), **Folders**, and **Tags**. You can filter by folder and tag, search the library, switch **Card View** or **List View**, run bulk actions, and open **Import** or **Export** from the toolbar **More** menu.
+**Bookmarks** is where you manage all your saved links. Each bookmark has a title and URL; you can also add a **Slug** (for short links), assign **Folders** and **Tags**, and control whether the link is forwarded via `/go/<slug>`.
 
-<Callout kind="info">
-  Self-hosted deployments use this page as-is. Cloud-only plan limits or upgrade messaging are not part of self-hosted core; see [Cloud introduction](/cloud/introduction) if you use the hosted product.
-</Callout>
+From the toolbar you can filter by folder or tag, switch between **Card View** and **List View**, and access **Import** and **Export** under **More**.
 
 ## Before you start
 
-Create at least one folder or tag if you want those fields populated when editing bookmarks—they are optional. For browser shortcuts and `/go/<slug>`, see [Slugs overview](/selfhosted/slugs-overview) and [Browser setup](/selfhosted/browser-setup).
+Folders and tags are optional — you can add them to bookmarks at any time. To set up browser shortcuts using slugs, see [Slugs overview](/selfhosted/slugs-overview) and [Browser setup](/selfhosted/browser-setup).
 
 ## How to create or edit a bookmark
 
@@ -43,29 +41,7 @@ Use the toolbar below the title:
 - **Per page** — page size (for example 50, 100, 200, 500).
 - **More** — opens a menu with **Import**, **Export**, **Pinned** toggle, **View Mode** (**Card View** / **List View**), **Select Multiple**, and **Per page** when space is tight.
 
-Scope tabs (when shown): **All**, **Mine**, **Shared with me**, **Shared by me**. Active filters appear as chips; use **Clear all** to reset.
-
-## Bookmark URL parameters
-
-The bookmarks page reads optional query parameters from the address bar. **Sort order** is controlled on the page (not via the URL).
-
-| Parameter | Meaning |
-|-----------|---------|
-| `folder_id` | Filter to a single folder (folder UUID). |
-| `tag_id` | Filter to a single tag (tag UUID). |
-| `scope` | Library scope: `mine`, `shared_with_me`, `shared_by_me`, or `shared` (treated like `shared_with_me`). Invalid or missing values behave like **All**. |
-| `pinned` | When `pinned=true`, only pinned bookmarks are listed. |
-| `q` | Search text applied to the list (same idea as submitting the toolbar search). |
-| `view` | Layout: `cards` or `table`. A valid value is also saved as the default view in the browser. |
-| `limit` | Page size: **50**, **100**, **200**, or **500** (other values fall back to **50**). |
-| `create` | If `create=true`, opens the create-bookmark flow once, then the parameter is removed from the URL. |
-| `import` | If `import=true`, opens import once, then removed. |
-| `export` | If `export=true`, runs export once, then removed. |
-| `edit` | If set to a bookmark id, loads that bookmark into the editor once (shows an error if you cannot access it), then removed. |
-
-**Scope tabs** in the UI (All / Mine / Shared with me / Shared by me) are shown when the app enables that scope UI. On Cloud, that requires the **Team** plan after plan info has loaded; otherwise the scope query parameter is cleared. Self-hosted uses the core app behavior where those tabs are available without that Cloud plan gate.
-
-Pagination uses the **Previous** / **Next** controls on the page; the current page is **not** stored in the URL.
+Scope tabs (when available): **All**, **Mine**, **Shared with me**, **Shared by me**. Active filters appear as chips; select **Clear all** to reset everything.
 
 ## Bulk actions
 

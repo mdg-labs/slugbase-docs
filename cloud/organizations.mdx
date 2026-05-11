@@ -13,9 +13,7 @@ On Cloud, bookmarks and related data are scoped to an **organization** (your bil
 
 ## Your first workspace
 
-When you first use the service with a new account, the backend ensures you belong to at least one organization. If you had none, it creates one (a **Free** plan organization with a default name derived from your email) and attaches you as **owner**. The session then uses that organization as the **current** workspace so API calls and the UI see the right data.
-
-If your session has no current organization but you already belong to orgs, the client can select the first membership returned by the API so you land in a valid workspace.
+When you sign up, SlugBase automatically creates an organization for you on the **Free** plan and makes you the **owner**. This becomes your default workspace. If you're later invited to another organization, you can switch between them in the app.
 
 ## Members and roles
 
@@ -47,7 +45,7 @@ If something goes wrong, typical cases include: **invitation not found**, **alre
 
 ## Multiple organizations
 
-The server supports **listing** organizations you belong to and **creating** additional named organizations. Plan and billing are per organization. Day-to-day product flows assume a **current** organization in your session; the client and server keep that selection in sync when you use the app.
+You can belong to more than one organization — for example your personal workspace and a team workspace. Plan and billing are managed separately per organization.
 
 ## Related
 

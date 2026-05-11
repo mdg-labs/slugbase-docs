@@ -5,9 +5,8 @@ description: "Run SlugBase locally for development or get a minimal production i
 
 ## What you need
 
-- **Node.js** compatible with the project (the production container images use **Node 20**).
-- **npm** (workspace install at the repository root).
-- For the fastest production tryout: **Docker** (see [Docker](/selfhosted/docker) or [Docker Compose](/selfhosted/docker-compose)).
+- **Node.js 20** or later, with **npm**.
+- For the fastest production setup: **Docker** (see [Docker](/selfhosted/docker) or [Docker Compose](/selfhosted/docker-compose)).
 
 <Callout kind="tip">
   New to deployment? After this page, follow [Docker Compose](/selfhosted/docker-compose), [Configuration](/selfhosted/configuration), and [First run setup](/selfhosted/first-run-setup) for a complete path.
@@ -27,7 +26,7 @@ description: "Run SlugBase locally for development or get a minimal production i
         ```
       </Step>
       <Step title="Create a local `.env`" icon="settings" titleType="p">
-        Before the backend can start, copy the repository template to `.env` at the project root (this tree ships `.env.example`; some checkouts use `example.env` for the same role). The server runs environment validation on every startup: `JWT_SECRET` and `ENCRYPTION_KEY` are required in development and production, not only when `NODE_ENV=production`. See [Configuration](/selfhosted/configuration) for the full list and how to generate safe values.
+        Copy `.env.example` (or `example.env`) to `.env` in the project root and fill in at least `JWT_SECRET` and `ENCRYPTION_KEY`. These are required for the server to start. See [Configuration](/selfhosted/configuration) for the full list and how to generate secure values.
       </Step>
       <Step title="Start dev servers" icon="play" titleType="p">
         ```bash
@@ -71,7 +70,7 @@ description: "Run SlugBase locally for development or get a minimal production i
   <Tab title="Production (Docker)" icon="container">
     <Steps>
       <Step title="Use Docker Compose with the published image" icon="container" titleType="p">
-        You do not need to clone the repository: [Docker Compose](/selfhosted/docker-compose) gives you a **`docker-compose.yml`** to copy, **`mdglabs/slugbase:latest`** from Docker Hub, port **5000**, a **`./data`** volume for SQLite, and required **`.env`** secrets. Clone the repo only if you want to build from the **`Dockerfile`** instead. See also [Docker](/selfhosted/docker) for single-container options.
+        You don't need to clone the repository. Follow [Docker Compose](/selfhosted/docker-compose) to get a ready-made `docker-compose.yml`, the published `mdglabs/slugbase:latest` image, and a `./data` folder for your database. You only need to clone the repo if you want to build the image yourself.
       </Step>
       <Step title="Verify health" icon="heart-pulse" titleType="p">
         The container health check expects HTTP **200** from `/api/health` inside the container.

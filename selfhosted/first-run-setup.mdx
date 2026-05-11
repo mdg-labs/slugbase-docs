@@ -21,20 +21,24 @@ When the system has not been initialized yet, you see the **Initial Setup** scre
 
     - **Email**
     - **Name**
-    - **Password** and **Confirm Password** — must match. Server-side rules (also applied on submit): at least **8** characters and at most **128**, plus at least one **uppercase** letter, one **lowercase** letter, one **digit**, and one **special character** (common punctuation and symbols such as `!@#$%`; the API error text names the exact requirement if one is missing). If the UI only checks length until you submit, a password that is long enough but too simple can still be rejected.
+    - **Password** and **Confirm Password** — must match and meet these rules: 8–128 characters, with at least one uppercase letter, one lowercase letter, one digit, and one special character (e.g. `!@#$%`).
 
-    Submit **Create Admin User**. The page notes that this user is an administrator and that you can configure OIDC later in admin settings.
-
-    On success you should see **Setup completed successfully!** and **Redirecting to dashboard...**, then land on the dashboard (`/`).
+    Select **Create Admin User**. On success you'll see **Setup completed successfully!** and land on the dashboard.
   </Step>
   <Step title="Sign in for future visits" icon="log-in" titleType="p">
-    After setup, use **Login** at `/login` with the email and password you created. The **`/signup`** route exists for additional users when registration remains enabled (the default is on — see [Configuration](/selfhosted/configuration)). Sign-up typically sends a **verification email**, so **SMTP** must be configured and working; lack of email delivery is a separate issue from **`REGISTRATIONS_ENABLED=false`**, which only blocks new registration entirely.
+    After setup, use **Login** with the email and password you just created. Additional users can sign up at `/signup` as long as registration is enabled (the default). Note that sign-up sends a **verification email**, so SMTP must be configured first — see [Admin: SMTP email](/selfhosted/admin-smtp).
   </Step>
   <Step title="Optional: configure the workspace" icon="shield" titleType="p">
-    Open **Admin** (`/admin`) to reach tabs such as **Users** (`/admin/members`), **Teams**, **OIDC Providers**, **Settings** (SMTP and related options), and **AI Suggestions**. You can add OIDC providers, configure outbound email for password reset, and enable AI assistance when you have an OpenAI key.
+    Open **Admin** to set up your instance further:
+
+    - **Users** — add more accounts or invite people by email.
+    - **Teams** — group users for shared bookmarks and folders.
+    - **OIDC Providers** — let users sign in with Google, GitHub, or your company SSO.
+    - **Settings** — configure SMTP so the app can send password reset and verification emails.
+    - **AI Suggestions** — enable AI-powered title, tag, and slug hints (requires an OpenAI API key).
 
     <Callout kind="tip">
-      To disable open registration after onboarding, set **`REGISTRATIONS_ENABLED=false`** in the server environment (see [Configuration](/selfhosted/configuration)).
+      To close registration after you've invited everyone, set **`REGISTRATIONS_ENABLED=false`** in your environment — see [Configuration](/selfhosted/configuration).
     </Callout>
   </Step>
 </Steps>

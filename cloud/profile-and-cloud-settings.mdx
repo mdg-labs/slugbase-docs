@@ -13,9 +13,8 @@ Your **Profile** screen in the app (`/app/profile`) is where you manage personal
 
 ## Cloud-specific behavior
 
-- **Email verification:** Cloud runs with **required email verification** before full login. Pending email changes show verification messaging on Profile consistent with the core **email verification** copy.
-- **OIDC:** The hosted product hides self-hosted **OIDC** admin configuration; email/password and profile flows are the norm for Cloud. If an account were linked to OIDC elsewhere, core copy such as email managed by the provider still applies.
-- **Delete account:** Cloud may block deletion when the server reports you cannot leave (for example when you are the billing owner of the current organization). The UI shows the server message when deletion is not allowed.
+- **Email verification:** Cloud requires email verification before you can log in. If you change your email on Profile, you'll get a new verification link to confirm the change.
+- **Delete account:** Cloud may block deletion if you're the billing owner of an organization. The app will explain what you need to do first (for example transferring ownership) before deletion is allowed.
 
 For step-by-step detail on fields that are identical to self-hosted (tokens, theme options, language list), see [Profile and preferences](/selfhosted/profile-and-preferences) and [API tokens](/selfhosted/api-tokens).
 

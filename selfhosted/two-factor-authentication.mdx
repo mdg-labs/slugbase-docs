@@ -5,9 +5,9 @@ description: "Protect your SlugBase account with TOTP authenticator codes and on
 
 ## What this is for
 
-**Two-factor authentication (MFA)** in SlugBase is **TOTP and backup codes** tied to **email/password sign-in**. You turn it on from **Profile** (when your account has a password) and manage backup codes there while you are signed in.
+**Two-factor authentication (MFA)** adds a second step to your email/password login using a code from an authenticator app. You set it up from **Profile** and can also generate backup codes there in case you lose access to your authenticator.
 
-If you use **SSO (OIDC)** only, multi-factor authentication is handled by your **identity provider**, not by SlugBase’s TOTP—see [MFA and SSO (OIDC)](#mfa-and-sso-oidc) below.
+If you sign in via **SSO (OIDC)**, MFA is handled by your identity provider — SlugBase does not add an extra code step after SSO login. See [MFA and SSO (OIDC)](#mfa-and-sso-oidc) below.
 
 <Callout kind="tip">
   Your deployment can set **`MFA_ISSUER_NAME`** so the account label in your authenticator app matches your instance (for example your organization name). If it is unset, entries typically show **SlugBase**.
@@ -70,7 +70,7 @@ Wrong passwords behave like today: you do **not** get a hint that the account ha
 
 ## API tokens and MFA
 
-Personal **API tokens** (the `sb_…` secrets you create under **Developer / API Access** on Profile) authenticate **REST API** requests as you. They follow a **personal access token** model: **possession of the token is sufficient**. **Interactive MFA is not required** when using a valid API token, even if your account has MFA enabled for browser login.
+Personal API tokens (created under **Profile → Developer / API Access**) do not require an MFA code — the token itself is the authentication. This is intentional for scripts and tools that can't complete interactive prompts. Keep your tokens secret and revoke them if compromised.
 
 For creating and revoking tokens, see [API tokens](/selfhosted/api-tokens).
 
