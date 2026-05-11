@@ -36,11 +36,7 @@ The primary **`Dockerfile`** at the repository root produces a **single containe
 
     Use **`mdglabs/slugbase:latest`** or **`slugbase:local`** as the image name in the next step.
 
-    When building locally, optional build arguments (defaults are for self-hosted):
-
-    - `VITE_SLUGBASE_MODE` — defaults to `selfhosted` (use `cloud` only for SaaS-style builds).
-    - `VITE_API_URL` — usually empty for same-origin self-hosted.
-    - `VITE_SENTRY_DSN` / `VITE_SENTRY_DEBUG` — optional error reporting.
+    When building from source, you can pass optional build arguments — but the defaults are correct for self-hosted use, so you normally don't need to change them.
   </Step>
   <Step title="Run the container" icon="play" titleType="p">
     Map port **5000**, persist `/app/data`, and pass environment variables (example uses `--env-file`):
@@ -62,13 +58,13 @@ The primary **`Dockerfile`** at the repository root produces a **single containe
 
 ## Verify
 
-- **Health:** The Dockerfile defines a health check that expects HTTP **200** from `http://localhost:5000/api/health` inside the container.
-- **UI:** Open `http://localhost:5000` (or your mapped host/port). On a fresh database you should see **Initial Setup** — see [First run setup](/selfhosted/first-run-setup).
-- **API docs:** OpenAPI is served at `/openapi.json` and `/openapi.yaml`; Swagger UI is at `/api-docs` unless you set `SLUGBASE_API_DOCS=false` (disables the UI only).
+- **Health:** Open `http://localhost:5000/api/health` — a successful response means the container is running.
+- **UI:** Open `http://localhost:5000`. On a fresh database you'll see **Initial Setup** — follow [First run setup](/selfhosted/first-run-setup).
+- **API docs:** Browse to `/api-docs` for the interactive API reference (disable with `SLUGBASE_API_DOCS=false`).
 
 ## Backend-only image
 
-For API-only deployments (no bundled SPA), the repository ships **`Dockerfile.backend`**. It builds only the backend workspace, exposes **`PORT`** defaulting to **8080** in the image environment, and uses the same `/api/health` check pattern. Typical users who want the full bookmark UI should use the main **`Dockerfile`** instead.
+The repository also includes `Dockerfile.backend` for deployments that only need the API (no web UI). Most users should use the main `Dockerfile`, which includes everything.
 
 ## Troubleshooting
 

@@ -13,7 +13,7 @@ On **SlugBase Cloud**, the web app lives under **`/app`** (for example **`https:
 
 **OIDC (SSO) sign-in** does not add a second SlugBase TOTP step; your **identity provider** is expected to handle MFA. **Email/password** sign-in still uses SlugBase TOTP when MFA is enabled on the account (including hybrid accounts that have both password and SSO).
 
-**Email verification** still runs **before** you get a full session: Cloud requires a verified email where that policy applies. For password login with MFA, verification comes first, then the MFA step.
+On Cloud, email verification happens first, then the MFA code step — so make sure your email is verified before you enable MFA.
 
 ## Setup, backup codes, API tokens
 

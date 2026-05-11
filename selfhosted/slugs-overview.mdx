@@ -20,7 +20,11 @@ A **slug** is a short keyword you attach to a bookmark. When **Enable Forwarding
 | Turn forwarding on | **Enable Forwarding** (a slug is required when forwarding is enabled) |
 | Uniqueness | **Slug already exists. Slugs must be unique across all bookmarks.** |
 
-The database enforces this as **one slug per tenant**: two bookmarks cannot share the same slug text within a single SlugBase tenant (self-hosted is one tenant for the whole instance—every workspace you use still counts as the same data set). **[SlugBase Cloud](/cloud/introduction)** is multi-tenant: each organization is its own tenant, so unrelated orgs can each use the same slug string without conflicting. A disambiguation page for “multiple matches” and **Remembered Slug Choices** in [Go preferences](/selfhosted/go-preferences) are defensive or legacy UI; with current enforcement you should not hit multiple bookmarks for one slug under normal use.
+Each slug must be unique across the whole self-hosted instance. If you try to save a slug that is already in use, you'll see the message **Slug already exists. Slugs must be unique across all bookmarks.**
+
+On SlugBase Cloud, each organization has its own slug space, so different organizations can use the same slug without conflict.
+
+If you ever see a page asking you to choose between multiple matching bookmarks, use [Go preferences](/selfhosted/go-preferences) to save your preferred choice.
 
 ## Opening a bookmark by slug
 

@@ -27,24 +27,17 @@ You can also open **Import** via **Quick Actions** in the command palette (**Ctr
     Select **Select File** and pick a `.json` or `.html` file (accepted types are restricted to those extensions).
   </Step>
   <Step title="Confirm results" icon="check" titleType="p">
-    The app shows a toast summarizing success and failures, for example **Imported {{success}} bookmark(s), {{failed}} failed** (wording comes from the UI strings). Close the dialog with **Cancel** if you only dismiss without another file.
+    The app shows a summary of how many bookmarks were imported and how many failed. Close the dialog when you are done.
   </Step>
 </Steps>
 
-### Supported formats (in-app copy)
+### Supported formats
 
-The dialog explains:
-
-- **Import bookmarks from a JSON or HTML file. JSON files should contain an array of bookmark objects with title and url fields.**
-- **Supported formats: JSON, HTML (Netscape bookmark format)**
-
-Implementation details you should know:
-
-- **JSON** — may be a top-level array of objects, an object with a `bookmarks` array, or a single bookmark object; entries need usable `title` and `url` fields.
-- **HTML** — Netscape-style bookmark exports; very large files (over 10MB) are rejected by the client with an error message.
+- **JSON** — an array of bookmark objects, each with `title` and `url` fields.
+- **HTML** — Netscape bookmark format, as exported by most browsers. Files larger than **10 MB** are rejected.
 
 <Callout kind="alert">
-  Only import files you trust. The app validates URLs to block dangerous schemes (such as `javascript:`) during HTML parsing.
+  Only import files from sources you trust.
 </Callout>
 
 ## Export
@@ -58,7 +51,7 @@ Implementation details you should know:
   </Step>
 </Steps>
 
-The live **Export** action downloads **JSON** only. The in-app locale also defines **Export as JSON** and **Export as HTML** strings, but the current toolbar **Export** control triggers the JSON download path. For HTML interchange, use **Import** with an HTML file from another source, or convert exports yourself if you need a different format.
+**Export** downloads a **JSON** file. If you need HTML format for another tool, import the JSON into that tool directly or convert it yourself.
 
 <Callout kind="tip">
   **Export** from **Quick Actions** in the command palette runs the same flow—it navigates to **Bookmarks** with export triggered.

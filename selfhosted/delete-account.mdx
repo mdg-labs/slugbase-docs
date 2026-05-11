@@ -33,14 +33,10 @@ You can **permanently delete your account** from the **Profile** page. That remo
   </Step>
 </Steps>
 
-After a successful deletion, the app shows **Your account has been deleted.**, signs you out, and sends you to the login screen.
-
-## What happens on the server
-
-The client calls **`DELETE /api/users/me`** while you are authenticated. The server deletes your user row and clears the auth cookie in the response so the browser session ends. Related rows (for example API tokens, team memberships, and other data tied to your user) are removed according to the database’s foreign-key rules for that installation.
+After deletion the app confirms **Your account has been deleted.**, signs you out, and takes you to the login screen. Your bookmarks, folders, tags, API tokens, and team memberships are all removed.
 
 <Callout kind="info">
-  Exact retention or backups depend on **your** hosting and database practices. The app does not replace your own backup or recovery policy.
+  Whether deleted data is recoverable depends on your hosting and backup setup — the app itself does not keep a copy.
 </Callout>
 
 ## If you cannot delete

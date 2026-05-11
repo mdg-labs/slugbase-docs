@@ -9,7 +9,7 @@ description: "Put SlugBase behind nginx, Caddy, or Traefik: set public URLs, pre
 - A reverse proxy that can forward HTTP to the SlugBase container or process (default upstream port **5000**).
 - Environment variables **`BASE_URL`** and **`FRONTEND_URL`** set to the **public HTTPS URL** users type in the browser.
 
-The Express app sets **`trust proxy`** to **1** hop so `X-Forwarded-*` headers from your proxy are honored for IP and protocol-aware behavior. Session cookies are marked **secure** when **`NODE_ENV=production`** and **`BASE_URL`** starts with **`https://`**.
+SlugBase trusts one proxy hop, so it correctly reads the client's real IP and protocol from the headers your proxy sends. Session cookies are automatically marked **Secure** when `NODE_ENV=production` and `BASE_URL` starts with `https://`.
 
 <Callout kind="alert">
   If **`BASE_URL`** stays `http://` while users reach the site over HTTPS, secure cookies may not match how browsers treat the session. Set both **`BASE_URL`** and **`FRONTEND_URL`** to the canonical `https://` origin.
@@ -72,9 +72,9 @@ The Express app sets **`trust proxy`** to **1** hop so `X-Forwarded-*` headers f
 
 ## Verify
 
-- Load `https://your-domain/api/health` and confirm **200** (or your health JSON) through the proxy.
-- Sign in, refresh, and confirm you stay signed in: the HttpOnly **`token`** cookie (JWT) should persist with **Secure** when **`NODE_ENV=production`** and **`BASE_URL`** starts with **`https://`**. With OIDC, **`slugbase.sid`** may appear during the callback (express-session); **`token`** is what keeps you signed in afterward.
-- If OIDC login is configured, complete a round trip; callback URLs must match the public **`BASE_URL`**.
+- Open `https://your-domain/api/health` and confirm you get a successful response.
+- Sign in and refresh the page — you should stay signed in.
+- If OIDC login is configured, complete a full login cycle to confirm the callback URL works correctly.
 
 ## Troubleshooting
 

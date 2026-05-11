@@ -5,12 +5,12 @@ description: "Create and revoke personal API tokens for the SlugBase REST API, a
 
 ## What this is for
 
-Personal **API tokens** let scripts, CLIs, or other tools call the SlugBase **REST API** as you, using an `Authorization` header instead of a browser session. You create and revoke them from the **Profile** page under **Developer / API Access**.
+Personal **API tokens** let you access the SlugBase API from scripts, CLI tools, or other integrations — without needing to log in through the browser each time. You create and revoke them from **Profile → Developer / API Access**.
 
 ## Before you start
 
 - You must be signed in.
-- Treat tokens like passwords: anyone with a valid token can act as your user within the API’s permissions.
+- Treat tokens like passwords: anyone who has your token can use the API as you.
 
 <Callout kind="alert">
   The in-app warning states: **API tokens grant full access to your account. Store them securely and never share them.**
@@ -43,7 +43,7 @@ Optional: use **View API documentation** in that section to open the published A
   </Step>
 </Steps>
 
-New tokens use the `sb_` prefix (SlugBase API token format).
+New tokens start with `sb_`.
 
 ## List and revoke tokens
 
@@ -57,16 +57,14 @@ Under **Your tokens**, each row shows the token **name**, a masked secret (`sb_`
 
 ## Use a token in API requests
 
-Send the token in the `Authorization` header as a Bearer token:
+Add the token to every request as a Bearer token in the `Authorization` header:
 
 ```http
 Authorization: Bearer sb_your_token_here
 ```
 
-The API accepts either a normal session (browser cookie after login) or this Bearer form for API tokens, as described in the self-hosted OpenAPI overview.
-
 <Callout kind="tip">
-  Point your HTTP client at your instance’s **API base URL** (typically the `/api` prefix on the same host you use for the app, depending on how you deployed SlugBase).
+  The API lives at the `/api` path on the same host as the app — for example `https://bookmarks.example.com/api`. Your self-hosted instance also serves the full API reference at `/api-docs`.
 </Callout>
 
 ## Limits and behavior
