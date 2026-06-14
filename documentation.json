@@ -20,11 +20,11 @@
       "links": [
         {
           "title": "GitHub",
-          "href": "https://github.com/mdg-labs/slugbase"
+          "link": "https://github.com/mdg-labs/slugbase"
         },
         {
           "title": "SlugBase Cloud",
-          "href": "https://cloud.slugbase.app"
+          "link": "https://cloud.slugbase.app"
         }
       ]
     }
