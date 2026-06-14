@@ -29,12 +29,6 @@
       ]
     }
   },
-  "scripts": [
-    {
-      "src": "scripts/umami-analytics.js",
-      "category": "analytics"
-    }
-  ],
   "navigation": {
     "products": [
       {
