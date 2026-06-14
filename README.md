@@ -15,12 +15,15 @@ Engineering spec and agent skills live in the sibling **`slugbase`** monorepo (`
 ## Structure
 
 ```text
-documentation.json    # Site nav, branding, scripts
+documentation.json    # Site nav, branding, theme colors, custom CSS
+styles/               # Custom stylesheets (registered in documentation.json css)
 selfhosted/           # Self-hosted guides + api-reference/
 cloud/                # Cloud guides + api-reference/
 assets/               # Optional local copies; live images use DA CDN URLs
 scripts/              # Site scripts (e.g. umami-analytics.js)
 ```
+
+Site-wide SlugBase styling lives in `styles/slugbase.css` (IBM Plex type, periwinkle accent, dark-first surfaces). Override DA layout via `dai-*` class names and `--brand` / `--sidebar-bg` CSS variables — see [Custom CSS](https://documentation.ai/docs/customize/custom-css).
 
 Published URLs mirror paths: `selfhosted/quick-start.mdx` → `/selfhosted/quick-start`.
 

@@ -1,0 +1,340 @@
+/* SlugBase Documentation.AI theme — maps V1 design tokens onto DA layout.
+   Loads after built-in theme; overrides via CSS variables + dai-* selectors. */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+/* ------------------------------------------------------------------ */
+/* SlugBase token aliases (prototype colors_and_type.css)               */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --sb-font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --sb-font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --sb-accent: #5b66e8;
+  --sb-accent-text: #4d58df;
+  --sb-accent-subtle: rgba(91, 102, 232, 0.1);
+  --sb-accent-border: rgba(91, 102, 232, 0.32);
+
+  --sb-canvas: #f4f5f9;
+  --sb-base: #ffffff;
+  --sb-raised: #ffffff;
+  --sb-raised-2: #f1f2f7;
+
+  --sb-border: rgba(16, 18, 32, 0.11);
+  --sb-border-subtle: rgba(16, 18, 32, 0.06);
+
+  --sb-fg: #14161f;
+  --sb-fg-muted: #4a4f63;
+  --sb-fg-subtle: #71768a;
+
+  --sb-radius-sm: 4px;
+  --sb-radius-md: 6px;
+  --sb-radius-lg: 8px;
+
+  /* Documentation.AI theme variables */
+  --brand: var(--sb-accent);
+  --brand-text: #ffffff;
+  --heading: var(--sb-fg);
+  --body: var(--sb-fg-muted);
+  --navbar-bg: var(--sb-base);
+  --sidebar-bg: var(--sb-canvas);
+  --content-bg: var(--sb-canvas);
+  --footer-border: var(--sb-border);
+  --toc-text: var(--sb-fg-subtle);
+  --toc-active-text: var(--sb-accent);
+}
+
+.dark {
+  --sb-accent: #7782f7;
+  --sb-accent-text: #9aa2fa;
+  --sb-accent-subtle: rgba(119, 130, 247, 0.13);
+  --sb-accent-border: rgba(119, 130, 247, 0.4);
+
+  --sb-canvas: #0a0b10;
+  --sb-base: #101220;
+  --sb-raised: #171a2b;
+  --sb-raised-2: #1e2236;
+
+  --sb-border: rgba(255, 255, 255, 0.1);
+  --sb-border-subtle: rgba(255, 255, 255, 0.055);
+
+  --sb-fg: #eceef6;
+  --sb-fg-muted: #a7adc2;
+  --sb-fg-subtle: #6e7489;
+
+  --brand: var(--sb-accent);
+  --brand-text: #0b0c14;
+  --heading: var(--sb-fg);
+  --body: var(--sb-fg-muted);
+  --navbar-bg: var(--sb-base);
+  --sidebar-bg: var(--sb-canvas);
+  --content-bg: var(--sb-canvas);
+  --footer-border: var(--sb-border);
+  --toc-text: var(--sb-fg-subtle);
+  --toc-active-text: var(--sb-accent-text);
+}
+
+/* ------------------------------------------------------------------ */
+/* Global typography                                                  */
+/* ------------------------------------------------------------------ */
+
+.dai-layout,
+.dai-layout-classic {
+  font-family: var(--sb-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dai-article {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+.dai-article h1,
+.dai-article h2,
+.dai-article h3,
+.dai-article h4 {
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.dai-article h2 {
+  font-size: 1.125rem;
+  line-height: 1.35;
+  margin-top: 2rem;
+}
+
+.dai-article h3 {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.dai-article code,
+.dai-article pre,
+.dai-article kbd,
+.dai-param-name,
+.dai-param-type {
+  font-family: var(--sb-font-mono);
+  font-size: 0.8125rem;
+}
+
+.dai-article a:not([class]) {
+  color: var(--sb-accent-text);
+  text-decoration-color: var(--sb-accent-border);
+  text-underline-offset: 2px;
+}
+
+.dai-article a:not([class]):hover {
+  color: var(--brand);
+}
+
+/* ------------------------------------------------------------------ */
+/* Navbar                                                             */
+/* ------------------------------------------------------------------ */
+
+.dai-navbar,
+.dai-navbar-classic {
+  border-bottom: 1px solid var(--sb-border);
+  background-color: var(--navbar-bg) !important;
+}
+
+.dai-navbar-buttons a,
+.dai-navbar-actions-mobile a {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: var(--sb-radius-sm);
+  transition: background-color 170ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.dai-navbar-buttons a:hover,
+.dai-navbar-actions-mobile a:hover {
+  background-color: var(--sb-accent-subtle);
+}
+
+.dai-navbar-products,
+.dai-navbar-tabs {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------------ */
+/* Sidebar                                                            */
+/* ------------------------------------------------------------------ */
+
+.dai-sidebar,
+.dai-sidebar-classic {
+  border-right: 1px solid var(--sb-border-subtle);
+  background-color: var(--sidebar-bg) !important;
+}
+
+.dai-sidebar-group-title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sb-fg-subtle);
+}
+
+.dai-sidebar-page {
+  font-size: 0.8125rem;
+  border-radius: var(--sb-radius-sm);
+  transition:
+    background-color 170ms cubic-bezier(0.2, 0, 0, 1),
+    color 170ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.dai-sidebar-page-active {
+  background-color: var(--sb-accent-subtle) !important;
+  color: var(--sb-accent-text) !important;
+  font-weight: 500;
+}
+
+.dai-sidebar-page:hover:not(.dai-sidebar-page-active) {
+  background-color: var(--sb-raised-2);
+}
+
+/* ------------------------------------------------------------------ */
+/* Main content panel                                                 */
+/* ------------------------------------------------------------------ */
+
+.dai-page-main,
+.dai-content-area {
+  background-color: var(--content-bg);
+}
+
+.dai-article {
+  background-color: var(--sb-base);
+  border: 1px solid var(--sb-border-subtle);
+  border-radius: var(--sb-radius-lg);
+  padding: 1.5rem 1.75rem;
+}
+
+.dark .dai-article {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------------------------------------------------ */
+/* Table of contents                                                  */
+/* ------------------------------------------------------------------ */
+
+.dai-toc-item {
+  font-size: 0.8125rem;
+  border-left: 2px solid transparent;
+  padding-left: 0.5rem;
+  transition: border-color 170ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.dai-toc-item-active {
+  font-weight: 600;
+  border-left-color: var(--brand);
+  color: var(--toc-active-text) !important;
+}
+
+/* ------------------------------------------------------------------ */
+/* MDX components                                                     */
+/* ------------------------------------------------------------------ */
+
+.dai-callout-body {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+[class*="dai-card"],
+.dai-card-title {
+  border-radius: var(--sb-radius-md);
+}
+
+.dai-card-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.dai-card-description {
+  font-size: 0.8125rem;
+  color: var(--sb-fg-muted);
+}
+
+.dai-step-number {
+  background-color: var(--sb-accent-subtle);
+  color: var(--sb-accent-text);
+  border: 1px solid var(--sb-accent-border);
+  font-family: var(--sb-font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.dai-step-content {
+  font-size: 0.9375rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Search                                                             */
+/* ------------------------------------------------------------------ */
+
+.dai-search,
+.dai-search-classic {
+  font-size: 0.8125rem;
+}
+
+.dai-search input,
+.dai-search-classic input {
+  border-radius: var(--sb-radius-md);
+  border-color: var(--sb-border);
+  font-family: var(--sb-font-sans);
+}
+
+/* ------------------------------------------------------------------ */
+/* Footer + page nav                                                  */
+/* ------------------------------------------------------------------ */
+
+.dai-footer {
+  border-top: 1px solid var(--footer-border);
+  font-size: 0.8125rem;
+  color: var(--sb-fg-subtle);
+}
+
+.dai-page-nav {
+  border-top: 1px solid var(--sb-border-subtle);
+  font-size: 0.8125rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Code blocks                                                        */
+/* ------------------------------------------------------------------ */
+
+.dai-article pre {
+  border: 1px solid var(--sb-border);
+  border-radius: var(--sb-radius-md);
+  background-color: var(--sb-raised) !important;
+}
+
+.dark .dai-article pre {
+  background-color: var(--sb-raised) !important;
+}
+
+.dai-code-copy {
+  font-family: var(--sb-font-sans);
+  font-size: 0.75rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tables                                                             */
+/* ------------------------------------------------------------------ */
+
+.dai-article table {
+  font-size: 0.8125rem;
+  border-collapse: collapse;
+}
+
+.dai-article th {
+  font-weight: 600;
+  background-color: var(--sb-raised-2);
+}
+
+.dai-article th,
+.dai-article td {
+  border: 1px solid var(--sb-border-subtle);
+  padding: 0.5rem 0.75rem;
+}
