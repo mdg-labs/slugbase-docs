@@ -5,16 +5,19 @@
   "initialRoute": "selfhosted/introduction",
   "colors": {
     "light": {
-      "brand": "#5d6af2",
-      "heading": "#1a1a2e",
-      "text": "#3d3d56"
+      "brand": "#5b66e8",
+      "heading": "#14161f",
+      "text": "#4a4f63"
     },
     "dark": {
       "brand": "#7782f7",
-      "heading": "#f0f0f5",
-      "text": "#c8c8d4"
+      "heading": "#eceef6",
+      "text": "#a7adc2"
     }
   },
+  "css": [
+    { "src": "styles/slugbase.css" }
+  ],
   "navbar": {
     "actions": {
       "links": [

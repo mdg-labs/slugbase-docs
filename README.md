@@ -8,17 +8,22 @@ The SlugBase application monorepo ([`mdg-labs/slugbase`](https://github.com/mdg-
 
 - **Documentation.AI web editor** — screenshots upload to `blob-cdn.documentation.ai` automatically; commits land on this repo.
 - **Code editor / Cursor** — edit `.mdx` files locally; push to `main` to publish.
-- Open both repos via `slugbase.code-workspace` in the monorepo.
+- Open both repos via **`slugbase/slugbase.code-workspace`** in the monorepo checkout (workspace folders: `slugbase/` + `slugbase-docs/`).
+
+Engineering spec and agent skills live in the sibling **`slugbase`** monorepo (`slugbase/docs/internal/`, `slugbase/.cursor/skills/`). MDX format rules live here: **`.cursor/rules/documentation.ai.mdc`** (applies when editing `**/*.mdx` and `documentation.json`).
 
 ## Structure
 
 ```text
-documentation.json    # Site nav, branding, scripts
+documentation.json    # Site nav, branding, theme colors, custom CSS
+styles/               # Custom stylesheets (registered in documentation.json css)
 selfhosted/           # Self-hosted guides + api-reference/
 cloud/                # Cloud guides + api-reference/
 assets/               # Optional local copies; live images use DA CDN URLs
 scripts/              # Site scripts (e.g. umami-analytics.js)
 ```
+
+Site-wide SlugBase styling lives in `styles/slugbase.css` (IBM Plex type, periwinkle accent, dark-first surfaces). Override DA layout via `dai-*` class names and `--brand` / `--sidebar-bg` CSS variables — see [Custom CSS](https://documentation.ai/docs/customize/custom-css).
 
 Published URLs mirror paths: `selfhosted/quick-start.mdx` → `/selfhosted/quick-start`.
 
@@ -43,6 +48,4 @@ Use **workspace**, **folder**, **pinned**, **slug**, **forwarding** / **go** —
 
 ## Engineering references
 
-Spec, roadmap, and agent rules: `mdg-labs/slugbase` → `docs/internal/`.
-
-test
+Spec, roadmap, and agent skills: **`slugbase`** monorepo → `slugbase/docs/internal/`, `slugbase/.cursor/skills/`.

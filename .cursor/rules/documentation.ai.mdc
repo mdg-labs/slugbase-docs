@@ -63,8 +63,36 @@ Lives at `documentation.json` (repo root). Controls branding, navbar, sidebar, a
 - `path` is relative to repo root, **no** `.mdx` suffix
 - `title` in JSON is sidebar label (can differ from frontmatter `title`)
 - `icon` optional — Lucide name (e.g. `"zap"`, `"book-open"`)
-- `href` instead of `path` for **external** links only
+- `href` instead of `path` for **external** nav page links only
+- Navbar action links use **`link`**, not `href` — an invalid key crashes the entire site at prerender with no build warning:
+
+```json
+"navbar": {
+  "actions": {
+    "links": [
+      { "title": "GitHub", "link": "https://github.com/mdg-labs/slugbase" }
+    ]
+  }
+}
+```
+
 - Each nav container uses **one** child type: `groups` OR `pages` OR `dropdowns`, not a mix
+
+## Custom CSS (`styles/slugbase.css`)
+
+SlugBase branding beyond `documentation.json` `colors` is in `styles/slugbase.css`, registered via:
+
+```json
+"css": [{ "src": "styles/slugbase.css" }]
+```
+
+Rules:
+
+- Paths are **relative to repo root** — no leading `/`, `./`, or `../`
+- File must exist before referencing; max 5 MB; `.css` only
+- Styles load **after** built-in theme — override DA CSS variables (`--brand`, `--navbar-bg`, `--sidebar-bg`, …) and stable `dai-*` selectors (see [Custom CSS](https://documentation.ai/docs/customize/custom-css))
+- Dark mode: scope overrides under `.dark`
+- Publish required for live site changes (push to `main` or Editor **Publish**)
 
 **OpenAPI API tabs:** specs live beside product guides:
 
