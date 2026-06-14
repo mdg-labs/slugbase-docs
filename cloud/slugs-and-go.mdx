@@ -5,7 +5,7 @@ description: "Assign short slugs to bookmarks and jump to destinations with /go 
 
 ## Overview
 
-A **slug** is a short keyword on a bookmark. When **forwarding** is enabled, signed-in workspace members can open `/go/<slug>` to jump to the bookmark's destination URL.
+A **slug** is a short keyword on a bookmark. When **forwarding** is enabled, signed-in workspace members can open `/go/&lt;slug&gt;` to jump to the bookmark's destination URL.
 
 Slugs are SlugBase's signature feature — they power address-bar shortcuts, the command palette's `go` mode, and the dashboard quick-access section.
 
@@ -19,26 +19,30 @@ Slugs are SlugBase's signature feature — they power address-bar shortcuts, the
     The modal shows your forwarding address (for example, `/go/docs`). Slugs are unique per owner within a workspace — two members can each use `docs` on their own bookmarks.
   </Step>
   <Step title="Open the destination">
-    Visit `/go/<slug>` while signed in, type `go <slug>` in the command palette, or use your browser search shortcut.
+    Visit `/go/&lt;slug&gt;` while signed in, type `go &lt;slug&gt;` in the command palette, or use your browser search shortcut.
   </Step>
 </Steps>
 
-{/* screenshot:go-forwarding-settings */}
+<Callout kind="info" title="Screenshot placeholder">
+**Suggested capture:** pending — `go-forwarding-settings`
+</Callout>
 
-<Callout kind="info">
+<Callout kind="info" title="Note">
 Slugs are **private to your workspace**. Forwarding requires an authenticated session — there are no public short links or anonymous slug resolution in v1.
 </Callout>
 
 ## The /go redirect flow
 
-When you open `/go/<slug>`:
+When you open `/go/&lt;slug&gt;`:
 
 1. **Not signed in** — SlugBase sends you to sign in, then returns you to the redirect.
 2. **No match** — No accessible bookmark with forwarding enabled matches the slug.
 3. **One match** — Immediate forward to the destination; usage stats update in the background.
 4. **Multiple matches** — A disambiguation page lists matching bookmarks. Pick one, or choose **Always open with this bookmark** to remember your preference.
 
-{/* screenshot:go-disambiguation */}
+<Callout kind="info" title="Screenshot placeholder">
+**Suggested capture:** pending — `go-disambiguation`
+</Callout>
 
 ## Remembered slug preferences
 
@@ -70,7 +74,7 @@ Press `⌘K` / `Ctrl+K` and type `go ` followed by a slug to forward without lea
 
 ## Verify it worked
 
-Open `/go/<your-slug>` in a signed-in browser tab. You arrive at the bookmark's destination URL. Check **Quick access** on the dashboard — frequently used slugs appear there.
+Open `/go/&lt;your-slug&gt;` in a signed-in browser tab. You arrive at the bookmark's destination URL. Check **Quick access** on the dashboard — frequently used slugs appear there.
 
 ## Common questions
 
@@ -80,7 +84,7 @@ No. Slugs resolve only for signed-in members of the workspace with access to the
 
 ### What happens if I disable forwarding?
 
-The slug can remain on the bookmark, but `/go/<slug>` will not forward until forwarding is enabled again.
+The slug can remain on the bookmark, but `/go/&lt;slug&gt;` will not forward until forwarding is enabled again.
 
 ### Can two members use the same slug?
 

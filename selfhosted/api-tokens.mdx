@@ -39,7 +39,7 @@ API tokens are **not plan-gated** — every account can create tokens on self-ho
   </Step>
 </Steps>
 
-<Callout kind="danger">
+<Callout kind="danger" title="Important">
 Treat API tokens like passwords. Anyone with a token can act as you until it is revoked. Never commit tokens to source control or paste them into chat.
 </Callout>
 
@@ -53,7 +53,7 @@ Host: your-instance.example.com
 Authorization: Bearer YOUR_TOKEN_HERE
 ```
 
-Use your instance's public API base URL. See the [self-hosted API reference](/selfhosted/api-reference/selfhosted-openapi.yaml) for available endpoints.
+Use your instance's public API base URL. See the self-hosted API reference (API reference — coming soon) for available endpoints.
 
 API tokens authenticate as your user account. Requests use your permissions in the **active workspace** — set the workspace context the same way as browser sessions (workspace switch via API where applicable).
 

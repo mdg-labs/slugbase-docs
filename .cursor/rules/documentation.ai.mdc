@@ -42,6 +42,9 @@ description: "Concise description explaining page purpose and value"
 - Filenames: **lowercase-with-hyphens** (`quick-start.mdx`, not `QuickStart.mdx`)
 - Internal links: **root-absolute** — `[Quick start](/selfhosted/quick-start)`, not relative `../`
 - Never commit secrets, API keys, or real credentials in examples
+- **Escape angle-bracket placeholders** — MDX treats `<slug>`, `<token>`, and similar as JSX tags. Write `/go/&lt;slug&gt;`, `go &lt;slug&gt;`, and `Bearer &lt;token&gt;`. Never use `{/* screenshot:… */}` comments; use `<Callout kind="info" title="Screenshot placeholder">` instead
+- **Every `<Callout>` needs a `title`** attribute
+- **Escape `&` in JSX attributes** — e.g. `title="Members &amp; teams"`
 
 ## documentation.json (navigation)
 

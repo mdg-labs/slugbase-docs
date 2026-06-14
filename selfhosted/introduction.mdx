@@ -9,7 +9,7 @@ After reading this page, you will understand what SlugBase does on your own infr
 
 ## What is SlugBase?
 
-SlugBase is a bookmark manager with built-in URL shortening and keyboard-driven navigation. You save links in a **workspace**, assign short **slugs** to bookmarks, and jump to any destination from the address bar or command palette using **forwarding** (`/go/<slug>`).
+SlugBase is a bookmark manager with built-in URL shortening and keyboard-driven navigation. You save links in a **workspace**, assign short **slugs** to bookmarks, and jump to any destination from the address bar or command palette using **forwarding** (`/go/&lt;slug&gt;`).
 
 On a self-hosted instance you run the same product as SlugBase Cloud — one codebase, configured for your deployment. Your data stays on infrastructure you control.
 
@@ -51,7 +51,7 @@ A **workspace** is the top-level container for bookmarks, folders, tags, members
 
 ### Slug and forwarding
 
-A **slug** is a short keyword on a bookmark (for example `docs`). When **forwarding** is enabled, signed-in workspace members can open `/go/<slug>` to jump to the bookmark's URL. Slugs are private to your workspace; they are not anonymous public short links.
+A **slug** is a short keyword on a bookmark (for example `docs`). When **forwarding** is enabled, signed-in workspace members can open `/go/&lt;slug&gt;` to jump to the bookmark's URL. Slugs are private to your workspace; they are not anonymous public short links.
 
 ### Folders and tags
 
@@ -69,7 +69,7 @@ A **slug** is a short keyword on a bookmark (for example `docs`). When **forward
 
 ## What to read next
 
-<Columns>
+<Columns cols={2}>
   <Card title="Quick start" href="/selfhosted/quick-start">
     Install the container image, connect PostgreSQL, and reach the setup screen.
   </Card>

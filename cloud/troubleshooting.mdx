@@ -14,7 +14,9 @@ Before diving into specific symptoms, try these steps:
 
 ## Sign-in and account access
 
-{/* screenshot:cloud-login-error */}
+<Callout kind="info" title="Screenshot placeholder">
+**Suggested capture:** pending — `cloud-login-error`
+</Callout>
 
 | Symptom | Likely cause | What to do |
 |---------|--------------|------------|
@@ -68,14 +70,14 @@ See [Plans and billing](/cloud/plans-and-billing) for downgrade and archive beha
 
 | Symptom | Likely cause | What to do |
 |---------|--------------|------------|
-| 401 Unauthorized | Revoked or wrong token | Create a new token. Send `Authorization: Bearer <token>`. |
+| 401 Unauthorized | Revoked or wrong token | Create a new token. Send `Authorization: Bearer &lt;token&gt;`. |
 | Token limit reached | Maximum tokens per account | Revoke unused tokens from **Settings → Account → API tokens**. |
 
 ## Slugs and forwarding
 
 | Symptom | Likely cause | What to do |
 |---------|--------------|------------|
-| `/go/<slug>` does not resolve | Wrong workspace, slug disabled, or archived bookmark | Switch workspace. Confirm forwarding is enabled on the bookmark. |
+| `/go/&lt;slug&gt;` does not resolve | Wrong workspace, slug disabled, or archived bookmark | Switch workspace. Confirm forwarding is enabled on the bookmark. |
 | Slug conflict | Another member uses the same slug | Slugs are unique per owner within a workspace — choose a different slug or use disambiguation. |
 
 See [Slugs and go](/cloud/slugs-and-go) for forwarding details.
