@@ -44,3 +44,5 @@ Use **workspace**, **folder**, **pinned**, **slug**, **forwarding** / **go** —
 ## Engineering references
 
 Spec, roadmap, and agent rules: `mdg-labs/slugbase` → `docs/internal/`.
+
+test
