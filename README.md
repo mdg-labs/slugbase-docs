@@ -8,7 +8,9 @@ The SlugBase application monorepo ([`mdg-labs/slugbase`](https://github.com/mdg-
 
 - **Documentation.AI web editor** — screenshots upload to `blob-cdn.documentation.ai` automatically; commits land on this repo.
 - **Code editor / Cursor** — edit `.mdx` files locally; push to `main` to publish.
-- Open both repos via `slugbase.code-workspace` in the monorepo.
+- Open both repos via **`slugbase/slugbase.code-workspace`** in the monorepo checkout (workspace folders: `slugbase/` + `slugbase-docs/`).
+
+Engineering spec and agent skills live in the sibling **`slugbase`** monorepo (`slugbase/docs/internal/`, `slugbase/.cursor/skills/`). MDX format rules live here: **`.cursor/rules/documentation.ai.mdc`** (applies when editing `**/*.mdx` and `documentation.json`).
 
 ## Structure
 
@@ -43,4 +45,4 @@ Use **workspace**, **folder**, **pinned**, **slug**, **forwarding** / **go** —
 
 ## Engineering references
 
-Spec, roadmap, and agent rules: `mdg-labs/slugbase` → `docs/internal/`.
+Spec, roadmap, and agent skills: **`slugbase`** monorepo → `slugbase/docs/internal/`, `slugbase/.cursor/skills/`.
