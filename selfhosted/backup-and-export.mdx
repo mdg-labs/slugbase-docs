@@ -25,7 +25,7 @@ curl -sS -H "Authorization: Bearer YOUR_TOKEN" \
 
 Replace the URL with your instance's API base (`APP_BASE_URL`). The response is a JSON array suitable for import via `POST /import/json`.
 
-See the [self-hosted API reference](/selfhosted/api-reference/selfhosted-openapi.yaml) for import endpoints and request formats.
+See the self-hosted API reference (API reference — coming soon) for import endpoints and request formats.
 
 <Callout kind="info" title="Screenshot placeholder">
 **Suggested capture:** Terminal showing successful curl export and file size, or API client with export response preview.
@@ -64,7 +64,7 @@ For PostgreSQL deployments, snapshot the database volume or use your provider's 
 
 Encourage workspace admins to schedule exports for critical content. JSON export is the documented, round-trip-complete path for bookmark data.
 
-<Callout kind="tip">
+<Callout kind="tip" title="Tip">
 Test restore periodically: export from a workspace, import into a test workspace, and verify bookmarks, folders, and tags match.
 </Callout>
 

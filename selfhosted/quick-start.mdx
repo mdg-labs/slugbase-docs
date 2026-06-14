@@ -15,7 +15,7 @@ After this guide, you will have a running self-hosted SlugBase instance reachabl
 - A domain name (or local hostname) for HTTPS in production
 - Secrets ready to generate: `SESSION_SECRET` and `ENCRYPTION_KEY` (each at least 32 bytes — for example `openssl rand -hex 32`)
 
-<Callout kind="danger">
+<Callout kind="danger" title="Important">
 Never commit real secrets to version control or paste them into documentation. Use a secrets manager or an `env` file with restricted permissions on the host.
 </Callout>
 
@@ -53,7 +53,7 @@ Create an environment file on the host (for example `slugbase.env`). Minimum run
 | `PUBLIC_REGISTRATION` | `false` for invite-only (recommended default) |
 | `EMAIL_VERIFICATION_REQUIRED` | `false` unless you configure SMTP first |
 
-<Callout kind="tip">
+<Callout kind="tip" title="Tip">
 On self-hosted, workspace administrators can configure **SMTP** and **OIDC** from **Settings → Workspace** after setup. Leave Stripe, Turnstile, and hosted analytics keys empty — those interfaces are no-ops on self-hosted.
 </Callout>
 

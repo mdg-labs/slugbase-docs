@@ -9,7 +9,7 @@ After this guide, you understand how slugs work in your workspace, how to enable
 
 ## Overview
 
-A **slug** is a short keyword on a bookmark (for example `docs` or `standup`). When **forwarding** is enabled, signed-in workspace members can open the bookmark by visiting `/go/<slug>` or typing `go <slug>` in the [command palette](/selfhosted/command-palette).
+A **slug** is a short keyword on a bookmark (for example `docs` or `standup`). When **forwarding** is enabled, signed-in workspace members can open the bookmark by visiting `/go/&lt;slug&gt;` or typing `go &lt;slug&gt;` in the [command palette](/selfhosted/command-palette).
 
 Slugs are **private to your workspace**. They are not public anonymous short links — forwarding requires authentication.
 
@@ -40,7 +40,7 @@ When you enable **Enable forwarding**, the editor shows **Forwarding address: /g
     Type a keyword in the **Slug** field (shown with the `/go/` prefix in the UI).
   </Step>
   <Step title="Enable forwarding">
-    Turn on **Enable forwarding** so `/go/<slug>` and palette `go` mode can reach this bookmark.
+    Turn on **Enable forwarding** so `/go/&lt;slug&gt;` and palette `go` mode can reach this bookmark.
   </Step>
   <Step title="Save">
     Click **Save bookmark** or **Save changes**.
@@ -95,8 +95,8 @@ Open **Go / Slugs** from the sidebar. The **Remembered preferences** page lists 
 
 ## Verify it worked
 
-- Visiting `/go/<your-slug>` opens the correct destination while signed in
-- Palette `go <slug>` forwards to the same URL
+- Visiting `/go/&lt;your-slug&gt;` opens the correct destination while signed in
+- Palette `go &lt;slug&gt;` forwards to the same URL
 - After saving a preference, repeat visits skip disambiguation
 
 ## Troubleshooting
