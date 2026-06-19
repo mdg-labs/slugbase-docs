@@ -1,8 +1,9 @@
 ---
-title: "Configure outbound email (SMTP)"
-description: "Set SMTP settings on a self-hosted SlugBase instance so verification, invitation, and password-reset email can be delivered."
+title: Configure outbound email (SMTP)
+description: >-
+  Set SMTP settings on a self-hosted SlugBase instance so verification,
+  invitation, and password-reset email can be delivered.
 ---
-
 ## When you need this
 
 Configure SMTP when your self-hosted instance sends its own email. Without SMTP, flows that depend on email — member invitations, signup verification, password reset, and email-change confirmation — cannot deliver messages.
@@ -10,36 +11,41 @@ Configure SMTP when your self-hosted instance sends its own email. Without SMTP,
 ## Prerequisites
 
 - Signed in as a workspace **owner** or **admin**
+
 - SMTP server hostname, port, username, and password from your mail provider
-- **Settings → Workspace → Email / SMTP** visible in the UI (not operator-managed)
 
-<Callout kind="info" title="Screenshot placeholder">
-**Suggested capture:** Workspace Email / SMTP settings with host, port, and test email fields.
+- **Settings → Workspace → Email / SMTP** visible in the UI (not operator-managed).
 
-**Suggested filename:** `/assets/selfhosted/settings-workspace-smtp.png`
+<Callout kind="info" collapsed="false">
+  **Suggested capture:** Workspace Email / SMTP settings with host, port, and test email fields.
 
-**Alt text:** SMTP configuration form with host, port, security, and send test email button.
+  **Suggested filename:** `/assets/selfhosted/settings-workspace-smtp.png`
+
+  **Alt text:** SMTP configuration form with host, port, security, and send test email button.
 </Callout>
 
 ## Configure SMTP
 
 <Steps>
-  <Step title="Open Email / SMTP">
+  <Step title="Open Email / SMTP" title-type="p">
     Go to **Settings → Workspace → Email / SMTP**.
   </Step>
-  <Step title="Enter server details">
+
+  <Step title="Enter server details" title-type="p">
     Fill in **SMTP host**, **Port**, **Security** (None, STARTTLS, or TLS), **SMTP username**, and **SMTP password**. Set **From name** and **From address** for the sender header.
   </Step>
-  <Step title="Send a test email">
+
+  <Step title="Send a test email" title-type="p">
     Enter a **Test recipient** address and click **Send test email**. Fix credentials if delivery fails.
   </Step>
-  <Step title="Save settings">
+
+  <Step title="Save settings" title-type="p">
     Click **Save changes** when the test succeeds.
   </Step>
 </Steps>
 
-<Callout kind="danger" title="Important">
-Never paste real SMTP passwords into documentation or commit them to source control. Use your provider's console to rotate credentials if they are exposed.
+<Callout kind="danger" collapsed="false">
+  Never paste real SMTP passwords into documentation or commit them to source control. Use your provider's console to rotate credentials if they are exposed.
 </Callout>
 
 ## Operator-managed email
@@ -48,11 +54,11 @@ If your deployment sets `VITE_MAIL_ADMIN_UI=false`, the **Email / SMTP** section
 
 ## What SMTP enables
 
-| Message type | When it is sent |
-|--------------|-----------------|
-| Member invitation | Admin invites someone to a workspace |
-| Email verification | New account or email address change |
-| Password reset | User requests a reset link |
+| Message type       | When it is sent                      |
+| ------------------ | ------------------------------------ |
+| Member invitation  | Admin invites someone to a workspace |
+| Email verification | New account or email address change  |
+| Password reset     | User requests a reset link           |
 
 When SMTP is not configured, the application still runs — email-dependent flows degrade gracefully and indicate that mail is unavailable.
 
@@ -62,14 +68,17 @@ A **Test email sent** confirmation appears after a successful test. Trigger a pa
 
 ## Troubleshooting
 
-| Symptom | What to do |
-|---------|------------|
-| Test email fails | Verify host, port, security mode, and credentials. Check firewall rules for outbound SMTP. |
-| Messages land in spam | Configure SPF, DKIM, and DMARC for your **From address** domain. |
-| Settings page is read-only | Email is operator-managed — adjust deployment configuration instead. |
+| Symptom                    | What to do                                                                                 |
+| -------------------------- | ------------------------------------------------------------------------------------------ |
+| Test email fails           | Verify host, port, security mode, and credentials. Check firewall rules for outbound SMTP. |
+| Messages land in spam      | Configure SPF, DKIM, and DMARC for your **From address** domain.                           |
+| Settings page is read-only | Email is operator-managed — adjust deployment configuration instead.                       |
 
 ## Related topics
 
 - [Members and teams](/selfhosted/members-and-teams) — invitations require working email
+
 - [Troubleshooting](/selfhosted/troubleshooting) — broader self-hosted issues
+
 - [Instance admin](/selfhosted/instance-admin) — deployment-level configuration
+
