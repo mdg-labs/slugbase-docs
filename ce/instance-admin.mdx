@@ -1,11 +1,11 @@
 ---
 title: "Instance administration"
-description: "Understand instance-wide administrator responsibilities on a self-hosted SlugBase deployment."
+description: "Understand instance-wide administrator responsibilities on a SlugBase CE deployment."
 ---
 
 ## What you'll learn
 
-After reading this guide, you will know what an instance administrator can do, how the role differs from workspace admin, and how to run a self-hosted deployment without a separate operator console.
+After reading this guide, you will know what an instance administrator can do, how the role differs from workspace admin, and how to run a CE deployment without a separate operator console.
 
 ## Instance administrator role
 
@@ -16,15 +16,15 @@ An **instance-wide administrator** is a user account flagged to govern the entir
 | Create workspaces | Yes | No (unless also instance admin) |
 | Invite users into workspaces | Via workspace admin flows | Yes, within their workspace |
 | Configure SMTP / OIDC / AI in UI | Yes, when admin UI is enabled | Yes, for their workspace |
-| Reset user MFA | Yes (self-hosted recovery path) | No |
-| Manage billing | N/A on self-hosted | N/A on self-hosted |
+| Reset user MFA | Yes (CE recovery path) | No |
+| Manage billing | N/A on CE | N/A on CE |
 
 There is **no separate operator console in v1**. Instance administrators use the same SlugBase web application as everyone else, plus deployment-level configuration through environment variables and infrastructure tools.
 
 <Callout kind="info" title="Screenshot placeholder">
 **Suggested capture:** First-run setup screen creating the initial admin account and first workspace.
 
-**Suggested filename:** `/assets/selfhosted/setup-admin-account.png`
+**Suggested filename:** `/assets/ce/setup-admin-account.png`
 
 **Alt text:** Initial setup form for admin account and first workspace name.
 </Callout>
@@ -48,7 +48,7 @@ After setup, the setup flow is no longer available.
 
 ### Create workspaces and onboard users
 
-Self-hosted SlugBase is an **admin-curated multi-workspace** product:
+Community Edition SlugBase is an **admin-curated multi-workspace** product:
 
 1. Create workspaces from the **New workspace** action in the workspace switcher.
 2. Invite members from **Settings → Administration → Members & teams**.
@@ -58,8 +58,8 @@ Self-hosted SlugBase is an **admin-curated multi-workspace** product:
 
 When the admin UI is enabled (`VITE_MAIL_ADMIN_UI=true`, `VITE_OIDC_ADMIN_UI=true`), configure:
 
-- [SMTP](/selfhosted/smtp) for outbound email
-- [OIDC](/selfhosted/oidc) for federated sign-in
+- [SMTP](/ce/smtp) for outbound email
+- [OIDC](/ce/oidc) for federated sign-in
 
 Alternatively, set transport and identity via deployment environment variables and disable the admin UI panels.
 
@@ -69,7 +69,7 @@ Instance admin promotion is performed at the deployment level (database flag on 
 
 ### Recover locked-out users
 
-If a user loses access to MFA and backup codes, an instance administrator can reset MFA directly — the self-hosted recovery path documented in the product spec.
+If a user loses access to MFA and backup codes, an instance administrator can reset MFA directly — the CE recovery path documented in the product spec.
 
 ## Deployment configuration
 
@@ -80,20 +80,20 @@ Operators also manage infrastructure settings outside the web UI:
 | URLs | `APP_BASE_URL`, `FRONTEND_ORIGIN` |
 | Secrets | `SESSION_SECRET`, `ENCRYPTION_KEY` |
 | Database | `DATABASE_URL` |
-| Registration | `PUBLIC_REGISTRATION` (default `false` on self-hosted) |
+| Registration | `PUBLIC_REGISTRATION` (default `false` on CE) |
 | Admin UI visibility | `VITE_MAIL_ADMIN_UI`, `VITE_OIDC_ADMIN_UI` |
 
-See your operator runbook and [Quick start](/selfhosted/quick-start) for install and upgrade procedures.
+See your operator runbook and [Quick start](/ce/quick-start) for install and upgrade procedures.
 
 ## What instance admins do not have in v1
 
 - A dedicated super-admin dashboard or account directory UI
-- First-class backup/restore beyond [export](/selfhosted/backup-and-export) and database volume copy
-- Hosted-style billing or plan management
+- First-class backup/restore beyond [export](/ce/backup-and-export) and database volume copy
+- Cloud-style billing or plan management
 
 ## Related topics
 
-- [Quick start](/selfhosted/quick-start) — install and first run
-- [Workspaces overview](/selfhosted/workspaces-overview) — multi-workspace model
-- [Members and teams](/selfhosted/members-and-teams) — invitations
-- [Troubleshooting](/selfhosted/troubleshooting) — common operator issues
+- [Quick start](/ce/quick-start) — install and first run
+- [Workspaces overview](/ce/workspaces-overview) — multi-workspace model
+- [Members and teams](/ce/members-and-teams) — invitations
+- [Troubleshooting](/ce/troubleshooting) — common operator issues

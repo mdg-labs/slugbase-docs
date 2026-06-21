@@ -1,6 +1,6 @@
 ---
 title: "Members and teams"
-description: "Invite members, assign roles, and organize teams in a self-hosted workspace."
+description: "Invite members, assign roles, and organize teams in a CE workspace."
 ---
 
 ## What you'll accomplish
@@ -10,12 +10,12 @@ After this guide, you can invite members to a workspace, assign roles, and creat
 ## Prerequisites
 
 - Signed in as a workspace **owner** or **admin**
-- On self-hosted instances, member management is always available — there is no plan gate
+- On CE instances, member management is always available — there is no plan gate
 
 <Callout kind="info" title="Screenshot placeholder">
 **Suggested capture:** Settings → Administration → Members & teams with the Members tab showing role dropdowns.
 
-**Suggested filename:** `/assets/selfhosted/settings-members-list.png`
+**Suggested filename:** `/assets/ce/settings-members-list.png`
 
 **Alt text:** Members list with names, emails, and role selectors.
 </Callout>
@@ -45,7 +45,7 @@ After this guide, you can invite members to a workspace, assign roles, and creat
 Pending invitations appear in the **Pending invitations** section. You can **Resend** or **Revoke** an invitation before it is accepted.
 
 <Callout kind="tip" title="Tip">
-Configure [SMTP](/selfhosted/smtp) before sending invitations. Without outbound email, invitation links cannot be delivered.
+Configure [SMTP](/ce/smtp) before sending invitations. Without outbound email, invitation links cannot be delivered.
 </Callout>
 
 ## Member roles
@@ -108,7 +108,7 @@ The new member appears in the **Members** list after accepting an invitation. Te
 
 ### Invitation email never arrives
 
-Check [SMTP settings](/selfhosted/smtp) and send a test message. Verify the recipient's spam folder.
+Check [SMTP settings](/ce/smtp) and send a test message. Verify the recipient's spam folder.
 
 ### I don't see Members & teams
 
@@ -116,5 +116,5 @@ You need owner or admin role in the active workspace. Members without admin righ
 
 ## Related topics
 
-- [Sharing](/selfhosted/sharing) — share bookmarks and folders with members and teams
-- [SMTP](/selfhosted/smtp) — configure outbound email for invitations
+- [Sharing](/ce/sharing) — share bookmarks and folders with members and teams
+- [SMTP](/ce/smtp) — configure outbound email for invitations

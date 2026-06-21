@@ -1,6 +1,6 @@
 ---
 title: "API tokens"
-description: "Create and manage personal API tokens for programmatic access to your self-hosted SlugBase instance."
+description: "Create and manage personal API tokens for programmatic access to your SlugBase CE instance."
 ---
 
 ## What you'll accomplish
@@ -12,12 +12,12 @@ After this guide, you can create a personal API token, use it to authenticate AP
 - Signed in to your account
 - Basic familiarity with HTTP APIs and Bearer authentication
 
-API tokens are **not plan-gated** — every account can create tokens on self-hosted instances.
+API tokens are **not plan-gated** — every account can create tokens on CE instances.
 
 <Callout kind="info" title="Screenshot placeholder">
 **Suggested capture:** Account API tokens list with create dialog and shown-once token warning.
 
-**Suggested filename:** `/assets/selfhosted/settings-account-api-tokens.png`
+**Suggested filename:** `/assets/ce/settings-account-api-tokens.png`
 
 **Alt text:** API tokens settings showing token list and copy-once warning after creation.
 </Callout>
@@ -53,7 +53,7 @@ Host: your-instance.example.com
 Authorization: Bearer YOUR_TOKEN_HERE
 ```
 
-Use your instance's public API base URL. See the self-hosted API reference (API reference — coming soon) for available endpoints.
+Use your instance's public API base URL. See the CE API reference (API reference — coming soon) for available endpoints.
 
 API tokens authenticate as your user account. Requests use your permissions in the **active workspace** — set the workspace context the same way as browser sessions (workspace switch via API where applicable).
 
@@ -93,6 +93,6 @@ Call a read endpoint (for example `GET /bookmarks`) with the token. A `200` resp
 
 ## Related topics
 
-- [Account settings](/selfhosted/account-settings) — profile and security
-- [Backup and export](/selfhosted/backup-and-export) — export via API
+- [Account settings](/ce/account-settings) — profile and security
+- [Backup and export](/ce/backup-and-export) — export via API
 - API reference — OpenAPI spec under **API reference** in the docs sidebar

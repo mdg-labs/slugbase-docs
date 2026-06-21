@@ -1,11 +1,11 @@
 ---
 title: "Backup and export"
-description: "Back up bookmark data and export workspace content on a self-hosted SlugBase instance."
+description: "Back up bookmark data and export workspace content on a SlugBase CE instance."
 ---
 
 ## What you'll accomplish
 
-After this guide, you can export your bookmarks for backup or migration and understand the full-instance backup options for self-hosted operators.
+After this guide, you can export your bookmarks for backup or migration and understand the full-instance backup options for CE operators.
 
 ## Export your bookmarks
 
@@ -15,7 +15,7 @@ Sharing grants and other workspace-level relationships are not included in a per
 
 ### Export via API
 
-Use a [personal API token](/selfhosted/api-tokens) to download a JSON export:
+Use a [personal API token](/ce/api-tokens) to download a JSON export:
 
 ```bash
 curl -sS -H "Authorization: Bearer YOUR_TOKEN" \
@@ -25,12 +25,12 @@ curl -sS -H "Authorization: Bearer YOUR_TOKEN" \
 
 Replace the URL with your instance's API base (`APP_BASE_URL`). The response is a JSON array suitable for import via `POST /import/json`.
 
-See the self-hosted API reference (API reference — coming soon) for import endpoints and request formats.
+See the CE API reference (API reference — coming soon) for import endpoints and request formats.
 
 <Callout kind="info" title="Screenshot placeholder">
 **Suggested capture:** Terminal showing successful curl export and file size, or API client with export response preview.
 
-**Suggested filename:** `/assets/selfhosted/export-json-terminal.png`
+**Suggested filename:** `/assets/ce/export-json-terminal.png`
 
 **Alt text:** Command-line export downloading a JSON file from the export endpoint.
 </Callout>
@@ -88,6 +88,6 @@ Import a sample into a test workspace before relying on an export for disaster r
 
 ## Related topics
 
-- [API tokens](/selfhosted/api-tokens) — authenticate export requests
-- [Search and import](/selfhosted/search-and-import) — browser import flows
-- [Instance admin](/selfhosted/instance-admin) — operator responsibilities
+- [API tokens](/ce/api-tokens) — authenticate export requests
+- [Search and import](/ce/search-and-import) — browser import flows
+- [Instance admin](/ce/instance-admin) — operator responsibilities

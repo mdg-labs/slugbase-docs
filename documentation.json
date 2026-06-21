@@ -2,7 +2,7 @@
   "name": "SlugBase Documentation",
   "title": "SlugBase",
   "template": "classic",
-  "initialRoute": "selfhosted/introduction",
+  "initialRoute": "ce/introduction",
   "colors": {
     "light": {
       "brand": "#5b66e8",
@@ -35,7 +35,7 @@
   "navigation": {
     "products": [
       {
-        "product": "Self-hosted",
+        "product": "Community Edition",
         "icon": "server",
         "tabs": [
           {
@@ -48,17 +48,17 @@
                 "pages": [
                   {
                     "title": "Introduction",
-                    "path": "selfhosted/introduction",
+                    "path": "ce/introduction",
                     "icon": "book-open"
                   },
                   {
                     "title": "Quick start",
-                    "path": "selfhosted/quick-start",
+                    "path": "ce/quick-start",
                     "icon": "zap"
                   },
                   {
                     "title": "First workspace setup",
-                    "path": "selfhosted/first-workspace-setup",
+                    "path": "ce/first-workspace-setup",
                     "icon": "layout-grid"
                   }
                 ]
@@ -69,32 +69,32 @@
                 "pages": [
                   {
                     "title": "Bookmarks",
-                    "path": "selfhosted/bookmarks",
+                    "path": "ce/bookmarks",
                     "icon": "bookmark"
                   },
                   {
                     "title": "Slugs and go",
-                    "path": "selfhosted/slugs-and-go",
+                    "path": "ce/slugs-and-go",
                     "icon": "link"
                   },
                   {
                     "title": "Folders",
-                    "path": "selfhosted/folders",
+                    "path": "ce/folders",
                     "icon": "folder"
                   },
                   {
                     "title": "Tags",
-                    "path": "selfhosted/tags",
+                    "path": "ce/tags",
                     "icon": "tag"
                   },
                   {
                     "title": "Command palette",
-                    "path": "selfhosted/command-palette",
+                    "path": "ce/command-palette",
                     "icon": "command"
                   },
                   {
                     "title": "Search and import",
-                    "path": "selfhosted/search-and-import",
+                    "path": "ce/search-and-import",
                     "icon": "search"
                   }
                 ]
@@ -105,17 +105,17 @@
                 "pages": [
                   {
                     "title": "Workspaces overview",
-                    "path": "selfhosted/workspaces-overview",
+                    "path": "ce/workspaces-overview",
                     "icon": "layout-grid"
                   },
                   {
                     "title": "Members and teams",
-                    "path": "selfhosted/members-and-teams",
+                    "path": "ce/members-and-teams",
                     "icon": "users"
                   },
                   {
                     "title": "Sharing",
-                    "path": "selfhosted/sharing",
+                    "path": "ce/sharing",
                     "icon": "share-2"
                   }
                 ]
@@ -126,32 +126,32 @@
                 "pages": [
                   {
                     "title": "Account settings",
-                    "path": "selfhosted/account-settings",
+                    "path": "ce/account-settings",
                     "icon": "user"
                   },
                   {
                     "title": "Workspace settings",
-                    "path": "selfhosted/workspace-settings",
+                    "path": "ce/workspace-settings",
                     "icon": "settings-2"
                   },
                   {
                     "title": "SMTP",
-                    "path": "selfhosted/smtp",
+                    "path": "ce/smtp",
                     "icon": "mail"
                   },
                   {
                     "title": "OIDC",
-                    "path": "selfhosted/oidc",
+                    "path": "ce/oidc",
                     "icon": "key-round"
                   },
                   {
                     "title": "AI suggestions",
-                    "path": "selfhosted/ai-suggestions",
+                    "path": "ce/ai-suggestions",
                     "icon": "sparkles"
                   },
                   {
                     "title": "API tokens",
-                    "path": "selfhosted/api-tokens",
+                    "path": "ce/api-tokens",
                     "icon": "key"
                   }
                 ]
@@ -162,17 +162,17 @@
                 "pages": [
                   {
                     "title": "Instance admin",
-                    "path": "selfhosted/instance-admin",
+                    "path": "ce/instance-admin",
                     "icon": "server-cog"
                   },
                   {
                     "title": "Audit log",
-                    "path": "selfhosted/audit-log",
+                    "path": "ce/audit-log",
                     "icon": "scroll-text"
                   },
                   {
                     "title": "Backup and export",
-                    "path": "selfhosted/backup-and-export",
+                    "path": "ce/backup-and-export",
                     "icon": "database-backup"
                   }
                 ]
@@ -183,12 +183,12 @@
                 "pages": [
                   {
                     "title": "Troubleshooting",
-                    "path": "selfhosted/troubleshooting",
+                    "path": "ce/troubleshooting",
                     "icon": "wrench"
                   },
                   {
                     "title": "FAQ",
-                    "path": "selfhosted/faq",
+                    "path": "ce/faq",
                     "icon": "circle-help"
                   }
                 ]

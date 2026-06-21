@@ -40,7 +40,7 @@ description: "Concise description explaining page purpose and value"
 
 - H1 comes from frontmatter `title` — start body content with `##` (H2)
 - Filenames: **lowercase-with-hyphens** (`quick-start.mdx`, not `QuickStart.mdx`)
-- Internal links: **root-absolute** — `[Quick start](/selfhosted/quick-start)`, not relative `../`
+- Internal links: **root-absolute** — `[Quick start](/ce/quick-start)`, not relative `../`
 - Never commit secrets, API keys, or real credentials in examples
 - **Escape angle-bracket placeholders** — MDX treats `<slug>`, `<token>`, and similar as JSX tags. Write `/go/&lt;slug&gt;`, `go &lt;slug&gt;`, and `Bearer &lt;token&gt;`. Never use `{/* screenshot:… */}` comments; use `<Callout kind="info" title="Screenshot placeholder">` instead
 - **Every `<Callout>` needs a `title`** attribute
@@ -52,12 +52,12 @@ Lives at `documentation.json` (repo root). Controls branding, navbar, sidebar, a
 
 **Adding a page requires both:**
 
-1. Create `{product}/{page}.mdx` with frontmatter (e.g. `selfhosted/quick-start.mdx`)
+1. Create `{product}/{page}.mdx` with frontmatter (e.g. `ce/quick-start.mdx`)
 2. Add a `path` entry in `documentation.json` under the correct `navigation.products → tabs → groups → pages` chain
 
 | `documentation.json` | File on disk |
 |----------------------|--------------|
-| `"path": "selfhosted/quick-start"` | `selfhosted/quick-start.mdx` |
+| `"path": "ce/quick-start"` | `ce/quick-start.mdx` |
 | `"path": "cloud/billing"` | `cloud/billing.mdx` |
 
 - `path` is relative to repo root, **no** `.mdx` suffix
@@ -96,7 +96,7 @@ Rules:
 
 **OpenAPI API tabs:** specs live beside product guides:
 
-- `selfhosted/api-reference/selfhosted-openapi.yaml`
+- `ce/api-reference/ce-openapi.yaml`
 - `cloud/api-reference/cloud-openapi.yaml`
 
 Reference from a nav **group** via `"openapi": "…"`. Documentation.AI generates API pages from the spec.
@@ -129,7 +129,7 @@ Reference from a nav **group** via `"openapi": "…"`. Documentation.AI generate
 
 ## Screenshots and images
 
-Documentation.AI does **not** serve arbitrary repo files at `/assets/…` on the live site. Use the **web editor** to upload screenshots — images are optimized and hosted on `blob-cdn.documentation.ai`.
+Documentation.AI does **not** serve arbitrary repo files at `/assets/…` on the live site. Use the **web editor** to upload screenshots — images are optimized and published on `blob-cdn.documentation.ai`.
 
 **Preferred workflow:**
 

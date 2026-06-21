@@ -1,11 +1,11 @@
 ---
 title: "Workspace settings"
-description: "Configure workspace name, general options, and deletion for workspace admins on self-hosted instances."
+description: "Configure workspace name, general options, and deletion for workspace admins on CE instances."
 ---
 
 ## What you'll accomplish
 
-After this guide, you can update general workspace settings and understand which configuration sections are available to workspace admins on self-hosted instances.
+After this guide, you can update general workspace settings and understand which configuration sections are available to workspace admins on CE instances.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ After this guide, you can update general workspace settings and understand which
 <Callout kind="info" title="Screenshot placeholder">
 **Suggested capture:** Settings → Workspace → General with workspace name field.
 
-**Suggested filename:** `/assets/selfhosted/settings-workspace-general.png`
+**Suggested filename:** `/assets/ce/settings-workspace-general.png`
 
 **Alt text:** Workspace general settings with name field and save button.
 </Callout>
@@ -37,20 +37,20 @@ Members without admin rights see a notice that workspace settings are restricted
 
 On the **General** section, update the **Workspace name** and click **Save changes**. The name appears in the workspace switcher and member-facing screens.
 
-## Workspace settings sections (self-hosted)
+## Workspace settings sections (CE)
 
-On a typical self-hosted instance with admin UI enabled, workspace admins see these sections under **Workspace**:
+On a typical CE instance with admin UI enabled, workspace admins see these sections under **Workspace**:
 
 | Section | Purpose |
 |---------|---------|
 | **General** | Workspace name and deletion |
-| **Email / SMTP** | Outbound email transport — see [SMTP](/selfhosted/smtp) |
-| **AI suggestions** | Enable AI and configure credentials — see [AI suggestions](/selfhosted/ai-suggestions) |
-| **Identity providers** | OIDC federated sign-in — see [OIDC](/selfhosted/oidc) |
+| **Email / SMTP** | Outbound email transport — see [SMTP](/ce/smtp) |
+| **AI suggestions** | Enable AI and configure credentials — see [AI suggestions](/ce/ai-suggestions) |
+| **Identity providers** | OIDC federated sign-in — see [OIDC](/ce/oidc) |
 
 If your operator manages email or identity centrally, the **Email / SMTP** or **Identity providers** sections may show a read-only notice instead of editable fields.
 
-The **Billing** group does not appear on self-hosted instances.
+The **Billing** group does not appear on CE instances.
 
 ## Delete a workspace
 
@@ -78,7 +78,7 @@ After saving general settings, the updated workspace name appears in the sidebar
 
 ## Related topics
 
-- [SMTP](/selfhosted/smtp) — outbound email
-- [OIDC](/selfhosted/oidc) — federated sign-in
-- [AI suggestions](/selfhosted/ai-suggestions) — AI configuration
-- [Members and teams](/selfhosted/members-and-teams) — workspace membership
+- [SMTP](/ce/smtp) — outbound email
+- [OIDC](/ce/oidc) — federated sign-in
+- [AI suggestions](/ce/ai-suggestions) — AI configuration
+- [Members and teams](/ce/members-and-teams) — workspace membership

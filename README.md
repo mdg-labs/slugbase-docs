@@ -17,7 +17,7 @@ Engineering spec and agent skills live in the sibling **`slugbase`** monorepo (`
 ```text
 documentation.json    # Site nav, branding, theme colors, custom CSS
 styles/               # Custom stylesheets (registered in documentation.json css)
-selfhosted/           # Self-hosted guides + api-reference/
+ce/           # Community Edition guides + api-reference/
 cloud/                # Cloud guides + api-reference/
 assets/               # Optional local copies; live images use DA CDN URLs
 scripts/              # Site scripts (e.g. umami-analytics.js)
@@ -25,7 +25,7 @@ scripts/              # Site scripts (e.g. umami-analytics.js)
 
 Site-wide SlugBase styling lives in `styles/slugbase.css` (IBM Plex type, periwinkle accent, dark-first surfaces). Override DA layout via `dai-*` class names and `--brand` / `--sidebar-bg` CSS variables — see [Custom CSS](https://documentation.ai/docs/customize/custom-css).
 
-Published URLs mirror paths: `selfhosted/quick-start.mdx` → `/selfhosted/quick-start`.
+Published URLs mirror paths: `ce/quick-start.mdx` → `/ce/quick-start`.
 
 ## MDX pages
 
@@ -39,12 +39,14 @@ description: "SEO / preview description"
 ```
 
 - Body headings start at `##` (H1 comes from frontmatter).
-- Internal links: root-absolute — `[Quick start](/selfhosted/quick-start)`.
+- Internal links: root-absolute — `[Quick start](/ce/quick-start)`.
 - Images: use Documentation.AI `<Image>` with **absolute CDN URLs** (web editor upload). Repo paths like `/assets/…` are **not** served on the live site.
 
 ## Product vocabulary (spec §3)
 
 Use **workspace**, **folder**, **pinned**, **slug**, **forwarding** / **go** — not organization, collection, favorites, redirect.
+
+**Editions:** **SlugBase Cloud** (managed service at [cloud.slugbase.app](https://cloud.slugbase.app)) and **Community Edition (CE)** (operator-run combined image). Doc paths are `/cloud/…` and `/ce/…`. CE operators set `SLUGBASE_EDITION=ce`; Cloud customers do not configure edition env vars.
 
 ## Engineering references
 

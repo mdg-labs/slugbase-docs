@@ -1,11 +1,11 @@
 ---
 title: "Quick start"
-description: "Install and run a self-hosted SlugBase instance with Docker and PostgreSQL."
+description: "Install and run a SlugBase CE instance with Docker and PostgreSQL."
 ---
 
 ## What you'll accomplish
 
-After this guide, you will have a running self-hosted SlugBase instance reachable over HTTPS, ready for [first workspace setup](/selfhosted/first-workspace-setup).
+After this guide, you will have a running SlugBase CE instance reachable over HTTPS, ready for [first workspace setup](/ce/first-workspace-setup).
 
 ## Prerequisites
 
@@ -21,12 +21,12 @@ Never commit real secrets to version control or paste them into documentation. U
 
 ## Architecture overview
 
-SlugBase self-hosted uses one **combined image** that serves the API and web client on a single port (default `3000`). PostgreSQL stores all workspace data. A reverse proxy in front of the container terminates TLS and forwards traffic.
+SlugBase CE uses one **combined image** that serves the API and web client on a single port (default `3000`). PostgreSQL stores all workspace data. A reverse proxy in front of the container terminates TLS and forwards traffic.
 
 <Callout kind="info" title="Screenshot placeholder">
 **Suggested capture:** Docker Compose or `docker run` terminal output showing the container healthy, beside a browser tab on the `/setup` screen.
-**Suggested filename:** `/assets/selfhosted/quick-start-install.png`
-**Alt text:** Terminal and browser showing a successful self-hosted SlugBase install.
+**Suggested filename:** `/assets/ce/quick-start-install.png`
+**Alt text:** Terminal and browser showing a successful SlugBase CE install.
 </Callout>
 
 ## Step 1 — Prepare PostgreSQL
@@ -45,6 +45,7 @@ Create an environment file on the host (for example `slugbase.env`). Minimum run
 
 | Variable | Purpose |
 |----------|---------|
+| `SLUGBASE_EDITION` | Edition selector — set to `ce` for Community Edition (required in production; baked into the GHCR image by default) |
 | `SESSION_SECRET` | Signs server-side sessions |
 | `ENCRYPTION_KEY` | Encrypts sensitive settings at rest |
 | `DATABASE_URL` | PostgreSQL connection string |
@@ -54,7 +55,7 @@ Create an environment file on the host (for example `slugbase.env`). Minimum run
 | `EMAIL_VERIFICATION_REQUIRED` | `false` unless you configure SMTP first |
 
 <Callout kind="tip" title="Tip">
-On self-hosted, workspace administrators can configure **SMTP** and **OIDC** from **Settings → Workspace** after setup. Leave Stripe, Turnstile, and hosted analytics keys empty — those interfaces are no-ops on self-hosted.
+On CE, workspace administrators can configure **SMTP** and **OIDC** from **Settings → Workspace** after setup. Leave Stripe, Turnstile, and Cloud analytics keys empty — those interfaces are no-ops on CE.
 </Callout>
 
 ## Step 3 — Pull and run the image
@@ -121,7 +122,7 @@ Both endpoints should return success. If the database is unreachable, check `DAT
 
 Open your public URL in a browser. On a fresh instance you are redirected to **Set up your instance** (`/setup`).
 
-Follow [First workspace setup](/selfhosted/first-workspace-setup) to create the instance administrator and your first workspace.
+Follow [First workspace setup](/ce/first-workspace-setup) to create the instance administrator and your first workspace.
 
 ## Verify it worked
 
@@ -149,6 +150,6 @@ Setup runs once per deployment. Sign in with the administrator account created d
 
 ## Next steps
 
-- [First workspace setup](/selfhosted/first-workspace-setup) — admin account and workspace
-- [Instance administration](/selfhosted/instance-admin) — invites, workspaces, and operator tasks
-- [SMTP](/selfhosted/smtp) — outbound email for password reset and invitations
+- [First workspace setup](/ce/first-workspace-setup) — admin account and workspace
+- [Instance administration](/ce/instance-admin) — invites, workspaces, and operator tasks
+- [SMTP](/ce/smtp) — outbound email for password reset and invitations
