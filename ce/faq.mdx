@@ -43,17 +43,17 @@ Yes. Every account can enroll TOTP two-factor authentication from **Settings →
 
 ### How are secrets stored?
 
-SMTP passwords, OIDC client secrets, AI API keys, and MFA secrets are encrypted at rest. Session signing uses `SESSION_SECRET`; field encryption uses `ENCRYPTION_KEY`.
+SMTP passwords, OIDC client secrets, and AI API keys are supplied by the operator through deployment environment variables — they are **not** stored in the database. MFA secrets and other sensitive at-rest values in the database are encrypted via `ENCRYPTION_KEY`. Session signing uses `SESSION_SECRET`.
 
 ### Can I use SSO?
 
-Yes. Configure OIDC identity providers in **Settings → Workspace → Identity providers** when the admin UI is enabled. See [OIDC](/ce/oidc).
+Yes. Instance operators configure OIDC identity providers via `OIDC_{SLUG}_*` deployment environment variables. Workspace admins cannot add providers in the UI. See [OIDC](/ce/oidc).
 
 ## Email and invitations
 
 ### Why are invitation emails not sending?
 
-Outbound email requires SMTP configuration. See [SMTP](/ce/smtp) and send a test message before inviting members.
+Outbound email requires SMTP configuration by the instance operator (`SMTP_*` environment variables). See [SMTP](/ce/smtp). After configuring SMTP, trigger a password reset or invitation to verify delivery.
 
 ### Can I disable email verification?
 
@@ -75,7 +75,7 @@ No. Any account can create personal API tokens. See [API tokens](/ce/api-tokens)
 
 ### What AI provider does SlugBase use?
 
-v1 uses OpenAI behind a vendor-neutral contract. You supply your own API key on CE instances. See [AI suggestions](/ce/ai-suggestions).
+v1 uses OpenAI behind a vendor-neutral contract. The instance operator supplies `OPENAI_API_KEY` via deployment configuration; workspace admins enable suggestions per workspace. See [AI suggestions](/ce/ai-suggestions).
 
 ## Operations
 
@@ -90,6 +90,10 @@ Use per-user JSON [export](/ce/backup-and-export) for bookmark content and datab
 ### How do I upgrade?
 
 Deploy a newer container image and restart. Database migrations apply automatically on startup. Snapshot the database before upgrading production.
+
+### Did workspace credential UI go away?
+
+Yes. SMTP, OIDC, and AI API key forms were removed from **Settings → Workspace**. Operators configure `SMTP_*`, `OIDC_{SLUG}_*`, and `OPENAI_*` environment variables instead. See [SMTP](/ce/smtp), [OIDC](/ce/oidc), and [AI suggestions](/ce/ai-suggestions).
 
 ## Related topics
 

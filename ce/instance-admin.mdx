@@ -15,7 +15,8 @@ An **instance-wide administrator** is a user account flagged to govern the entir
 |-------|---------------------|-----------------|
 | Create workspaces | Yes | No (unless also instance admin) |
 | Invite users into workspaces | Via workspace admin flows | Yes, within their workspace |
-| Configure SMTP / OIDC / AI in UI | Yes, when admin UI is enabled | Yes, for their workspace |
+| Configure SMTP / OIDC / AI credentials | Yes — via deployment env vars | No — operator-managed |
+| Enable AI suggestions per workspace | No | Yes — enable toggle only |
 | Reset user MFA | Yes (CE recovery path) | No |
 | Manage billing | N/A on CE | N/A on CE |
 
@@ -51,17 +52,24 @@ After setup, the setup flow is no longer available.
 Community Edition SlugBase is an **admin-curated multi-workspace** product:
 
 1. Create workspaces from the **New workspace** action in the workspace switcher.
-2. Invite members from **Settings → Administration → Members & teams**.
+2. Invite members from **Settings → Administration → Members &amp; teams**.
 3. Keep **public registration** disabled unless you intentionally want open signup.
 
-### Configure email and identity
+### Configure email, identity, and AI
 
-When the admin UI is enabled (`VITE_MAIL_ADMIN_UI=true`, `VITE_OIDC_ADMIN_UI=true`), configure:
+SMTP transport, OIDC identity providers, and the OpenAI credential are **operator-managed on both CE and Cloud**. Configure them through deployment environment variables — not through the workspace settings UI.
 
-- [SMTP](/ce/smtp) for outbound email
-- [OIDC](/ce/oidc) for federated sign-in
+| Integration | Environment variables | Guide |
+|-------------|----------------------|-------|
+| Outbound email | `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` | [SMTP](/ce/smtp) |
+| Federated sign-in | `OIDC_{SLUG}_CLIENT_ID`, `OIDC_{SLUG}_CLIENT_SECRET`, `OIDC_{SLUG}_ISSUER_URL`, plus optional `NAME`, `SCOPES`, `ENABLED` | [OIDC](/ce/oidc) |
+| AI suggestions | `OPENAI_API_KEY`, `OPENAI_MODEL` | [AI suggestions](/ce/ai-suggestions) |
 
-Alternatively, set transport and identity via deployment environment variables and disable the admin UI panels.
+Restart the SlugBase service after changing credential variables. Workspace admins can then enable AI suggestions per workspace from **Settings → Workspace → AI suggestions**.
+
+<Callout kind="alert" title="Breaking change">
+Workspace admin UI for entering SMTP passwords, OIDC client secrets, and AI API keys has been removed. Credentials are no longer stored in the database.
+</Callout>
 
 ### Promote additional instance administrators
 
@@ -73,7 +81,7 @@ If a user loses access to MFA and backup codes, an instance administrator can re
 
 ## Deployment configuration
 
-Operators also manage infrastructure settings outside the web UI:
+Operators manage infrastructure settings outside the web UI:
 
 | Area | Examples |
 |------|----------|
@@ -81,19 +89,25 @@ Operators also manage infrastructure settings outside the web UI:
 | Secrets | `SESSION_SECRET`, `ENCRYPTION_KEY` |
 | Database | `DATABASE_URL` |
 | Registration | `PUBLIC_REGISTRATION` (default `false` on CE) |
-| Admin UI visibility | `VITE_MAIL_ADMIN_UI`, `VITE_OIDC_ADMIN_UI` |
+| Email | `SMTP_*` — see [SMTP](/ce/smtp) |
+| Identity | `OIDC_{SLUG}_*` — see [OIDC](/ce/oidc) |
+| AI | `OPENAI_API_KEY`, `OPENAI_MODEL` — see [AI suggestions](/ce/ai-suggestions) |
 
 See your operator runbook and [Quick start](/ce/quick-start) for install and upgrade procedures.
 
 ## What instance admins do not have in v1
 
 - A dedicated super-admin dashboard or account directory UI
+- Workspace UI for SMTP, OIDC, or AI credentials
 - First-class backup/restore beyond [export](/ce/backup-and-export) and database volume copy
 - Cloud-style billing or plan management
 
 ## Related topics
 
 - [Quick start](/ce/quick-start) — install and first run
+- [SMTP](/ce/smtp) — outbound email configuration
+- [OIDC](/ce/oidc) — federated sign-in configuration
+- [AI suggestions](/ce/ai-suggestions) — AI credential and workspace toggle
 - [Workspaces overview](/ce/workspaces-overview) — multi-workspace model
 - [Members and teams](/ce/members-and-teams) — invitations
 - [Troubleshooting](/ce/troubleshooting) — common operator issues

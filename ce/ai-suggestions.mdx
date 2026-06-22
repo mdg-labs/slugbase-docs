@@ -1,33 +1,61 @@
 ---
 title: "AI suggestions"
-description: "Enable and configure AI-powered title, slug, and tag suggestions on a SlugBase CE instance."
+description: "Enable AI-powered title, slug, and tag suggestions on a SlugBase CE instance — operator supplies the credential, workspace admins control availability."
 ---
 
 ## What you'll accomplish
 
-After this guide, you can enable AI suggestions for your workspace, supply an API credential, and understand how members can opt out individually.
+After this guide, you understand how AI suggestions work on CE: the instance operator supplies the API credential via deployment configuration, and workspace admins choose whether suggestions are enabled for their workspace. Members can opt out individually.
 
 ## What AI suggestions do
 
-When enabled, SlugBase can suggest bookmark **titles**, **slugs**, and **tags** based on a destination URL (and fetched page metadata). Suggestions appear when you create or edit a bookmark.
+When enabled for a workspace, SlugBase can suggest bookmark **titles**, **slugs**, and **tags** based on a destination URL (and fetched page metadata). Suggestions appear when you create or edit a bookmark.
 
-AI is optional. Until you configure a credential and enable suggestions, the feature remains off.
+AI is optional. Until the operator configures a credential **and** a workspace admin enables suggestions, the feature remains off.
 
-## Prerequisites
+## Operator vs workspace admin responsibilities
 
-- Signed in as a workspace **owner** or **admin**
-- An API key from your AI provider (OpenAI in v1)
-- Outbound HTTPS from your instance to the provider
+| Role | Responsibility |
+|------|----------------|
+| **Instance operator** | Set `OPENAI_API_KEY` and optional `OPENAI_MODEL` on the deployment |
+| **Workspace admin** | Toggle **Enable AI suggestions** in **Settings → Workspace → AI suggestions** |
+| **Member** | Optionally opt out in **Settings → Account → Preferences** |
 
-<Callout kind="info" title="Screenshot placeholder">
-**Suggested capture:** Workspace AI suggestions settings with enable toggle, model selector, and API key field.
+The workspace settings UI does **not** include an API key or model selector. Credentials are operator-managed and are not stored in the database.
 
-**Suggested filename:** `/assets/ce/settings-workspace-ai.png`
-
-**Alt text:** AI suggestions settings with enable toggle and model dropdown.
+<Callout kind="alert" title="Breaking change">
+Earlier SlugBase releases allowed workspace admins to enter an OpenAI API key in the workspace settings UI. That credential form has been removed. Set `OPENAI_API_KEY` and `OPENAI_MODEL` on your deployment instead.
 </Callout>
 
-## Configure AI suggestions
+## Prerequisites (operator)
+
+- Access to your CE deployment configuration
+- An OpenAI API key (v1 uses OpenAI behind a vendor-neutral contract)
+- Outbound HTTPS from the SlugBase container to the OpenAI API
+
+### Configure the operator credential
+
+| Variable | Purpose | Example |
+|----------|---------|---------|
+| `OPENAI_API_KEY` | Deployment-level OpenAI credential | `sk-…` |
+| `OPENAI_MODEL` | Chat model for suggestions (optional) | `gpt-4o-mini` |
+
+```yaml title="docker-compose.yml"
+services:
+  slugbase:
+    image: ghcr.io/mdg-labs/slugbase:latest
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL: gpt-4o-mini
+```
+
+Restart the SlugBase service after changing these values. Omit `OPENAI_API_KEY` to disable AI entirely.
+
+<Callout kind="danger" title="Important">
+Never commit API keys to source control. Inject `OPENAI_API_KEY` via your secrets manager or a local `.env` file excluded from version control.
+</Callout>
+
+## Enable suggestions (workspace admin)
 
 <Steps>
   <Step title="Open AI suggestions">
@@ -36,39 +64,43 @@ AI is optional. Until you configure a credential and enable suggestions, the fea
   <Step title="Enable suggestions">
     Turn on **Enable AI suggestions**. This applies workspace-wide.
   </Step>
-  <Step title="Enter API key">
-    Paste your **API key** in the credential field. The key is stored encrypted and is never logged or exposed after save. Leave the field blank on later edits to keep the current key.
-  </Step>
-  <Step title="Choose a model">
-    Select a **Model** (for example GPT-4o mini for faster responses or GPT-4o for higher quality).
-  </Step>
   <Step title="Save">
     Click **Save changes**.
   </Step>
 </Steps>
 
+If the operator has not configured `OPENAI_API_KEY`, the toggle may be unavailable or suggestions will not appear even when enabled.
+
+<Callout kind="info" title="Screenshot placeholder">
+**Suggested capture:** Workspace AI suggestions settings with enable toggle only (no credential fields).
+
+**Alt text:** AI suggestions settings with enable toggle and operator-managed notice.
+</Callout>
+
 ## Member opt-out
 
 Individual members can disable AI on their own content from **Settings → Account → Preferences → AI suggestions opt-out**, even when the workspace has AI enabled.
 
-## Operator-supplied credentials
-
-Some deployments configure AI credentials at the operator level. In that case, the workspace form may show a notice that AI uses the operator-configured credential, and members can still opt out in preferences.
-
 ## Verify it worked
 
-Create or edit a bookmark with a public URL. Suggestion fields should populate after a short delay when AI is available.
+1. Confirm the operator has set `OPENAI_API_KEY` and restarted the service.
+2. As a workspace admin, enable **Enable AI suggestions** and save.
+3. Create or edit a bookmark with a public URL. Suggestion fields should populate after a short delay.
 
 ## Troubleshooting
 
 | Symptom | What to do |
 |---------|------------|
-| No suggestions appear | Confirm AI is enabled, a valid API key is saved, and outbound HTTPS is allowed |
+| No suggestions appear | Confirm the operator has set `OPENAI_API_KEY`, the workspace toggle is on, and outbound HTTPS is allowed |
+| Toggle unavailable | Operator has not configured `OPENAI_API_KEY` — see [Instance admin](/ce/instance-admin) |
 | Suggestions in wrong language | SlugBase uses the member's language preference for output |
 | Member sees no AI | Check whether they enabled **AI suggestions opt-out** in account preferences |
 
 ## Related topics
 
+- [SMTP](/ce/smtp) — outbound email (operator-managed)
+- [OIDC](/ce/oidc) — federated sign-in (operator-managed)
 - [Account settings](/ce/account-settings) — personal AI opt-out
 - [Bookmarks](/ce/bookmarks) — where suggestions appear
 - [Workspace settings](/ce/workspace-settings) — other admin configuration
+- [Instance admin](/ce/instance-admin) — operator responsibilities
