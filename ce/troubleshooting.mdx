@@ -24,7 +24,7 @@ Before diving into specific symptoms, confirm the basics:
 
 | Symptom | Likely cause | What to do |
 |---------|--------------|------------|
-| Container exits immediately | Missing required secrets or invalid `DATABASE_URL` | Check logs; set `SESSION_SECRET`, `ENCRYPTION_KEY`, and database URL |
+| Container exits immediately | Missing required secrets or invalid `DATABASE_URL` on **api** | Check `docker compose logs api`; set `SESSION_SECRET`, `ENCRYPTION_KEY`, and database URL on the api service |
 | Setup page loops | Database not empty but no valid admin | Restore from backup or inspect database state |
 | "Already configured" on setup | Setup already completed | Sign in normally; setup runs only once |
 
@@ -71,7 +71,16 @@ See [Quick start](/ce/quick-start) for install steps.
 
 ## Upgrades
 
-Deploy a newer container image and restart. Migrations run forward automatically on startup. Take a database snapshot before upgrading production instances.
+SlugBase CE ships as **two images** — `slugbase-api` and `slugbase-web` — with **independent version pins**. To upgrade:
+
+1. Snapshot the PostgreSQL database.
+2. Update the pinned tag(s) in `docker-compose.yml` (api only, web only, or both).
+3. Run `docker compose pull` and `docker compose up -d`.
+4. Confirm **both** `api` and `web` report healthy (`docker compose ps`, `/health` on the user-facing web port, api logs for migration success).
+
+Migrations run on api startup. Pin explicit semver tags (for example `slugbase-api:1.0.2` and `slugbase-web:1.0.0`) rather than `:latest` in production.
+
+If you still run the legacy combined `ghcr.io/mdg-labs/slugbase` image, migrate to split images — see the **Migrating from the legacy combined image** tab in [Quick start](/ce/quick-start).
 
 ## Still stuck?
 

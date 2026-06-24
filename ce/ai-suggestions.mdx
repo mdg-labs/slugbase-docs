@@ -42,14 +42,14 @@ Earlier SlugBase releases allowed workspace admins to enter an OpenAI API key in
 
 ```yaml title="docker-compose.yml"
 services:
-  slugbase:
-    image: ghcr.io/mdg-labs/slugbase:latest
+  api:
+    image: ghcr.io/mdg-labs/slugbase-api:1.0.0
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       OPENAI_MODEL: gpt-4o-mini
 ```
 
-Restart the SlugBase service after changing these values. Omit `OPENAI_API_KEY` to disable AI entirely.
+Restart the **api** service after changing these values. Omit `OPENAI_API_KEY` to disable AI entirely.
 
 <Callout kind="danger" title="Important">
 Never commit API keys to source control. Inject `OPENAI_API_KEY` via your secrets manager or a local `.env` file excluded from version control.

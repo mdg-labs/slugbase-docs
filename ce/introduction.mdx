@@ -8,7 +8,7 @@ description: "What SlugBase is, how CE deployment works, and how these guides he
 After reading this page, you will understand what SlugBase does on your own infrastructure, how it differs from SlugBase Cloud, and which guides to read next.
 
 <Callout kind="tip" title="Ready to install?">
-Use [Quick start](/ce/quick-start) for the recommended **Docker Compose** path with `ghcr.io/mdg-labs/slugbase:latest`, PostgreSQL, and a copy-pasteable `docker-compose.yml`.
+Use [Quick start](/ce/quick-start) for the recommended **Docker Compose** path with `ghcr.io/mdg-labs/slugbase-api` and `slugbase-web`, PostgreSQL, and a copy-pasteable `docker-compose.yml`.
 </Callout>
 
 ## What is SlugBase?
@@ -33,14 +33,16 @@ Advanced operator topics — SMTP, OIDC, backups, and instance administration �
 
 ## How CE works
 
-A SlugBase CE instance ships as a **combined container image** (API and web client on one port). You provide **PostgreSQL** for persistence and set environment variables for secrets, public URLs, and optional integrations.
+A SlugBase CE instance runs as **two containers** — `slugbase-api` (API, migrations, operator integrations) and `slugbase-web` (SSR web client). You provide **PostgreSQL** for persistence and set environment variables for secrets, public URLs, and optional integrations.
 
 Typical shape:
 
 ```text
 Your reverse proxy (HTTPS)
         ↓
-SlugBase container (port 3000)
+slugbase-web (user-facing)
+        ↓
+slugbase-api
         ↓
 PostgreSQL
 ```
@@ -72,9 +74,9 @@ A **slug** is a short keyword on a bookmark (for example `docs`). When **forward
 | Hosting | Your infrastructure | Managed by SlugBase |
 | Billing | Not applicable — full entitlements on your instance | Free, Personal, and Team plans |
 | User onboarding | Setup + invite by default | Public registration with email verification |
-| SMTP, OIDC, and AI credentials | Configure via deployment environment variables | Operator-managed — not in workspace settings |
+| SMTP, OIDC, and AI credentials | Configure via deployment environment variables on the **api** container | Operator-managed — not in workspace settings |
 | Workspace settings UI | General settings and AI enable toggle only | General settings and AI enable toggle only |
-| Marketing site | Separate deployment (not in the container image) | Operated separately |
+| Marketing site | Separate deployment (not in CE images) | Operated separately |
 
 ## License
 
@@ -84,7 +86,7 @@ Community Edition is **source available** under the [Elastic License 2.0 (ELv2)]
 
 <Columns cols={2}>
   <Card title="Quick start" href="/ce/quick-start">
-    Install the container image, connect PostgreSQL, and reach the setup screen.
+    Install the api and web images, connect PostgreSQL, and reach the setup screen.
   </Card>
   <Card title="First workspace setup" href="/ce/first-workspace-setup">
     Create the admin account and first workspace after installation.
