@@ -1,17 +1,16 @@
 ---
 title: "Quick start"
-description: "Install and run a SlugBase CE instance with Docker and PostgreSQL."
+description: "Install and run a SlugBase CE instance with Docker Compose, PostgreSQL, and the GHCR image."
 ---
 
 ## What you'll accomplish
 
-After this guide, you will have a running SlugBase CE instance reachable over HTTPS, ready for [first workspace setup](/ce/first-workspace-setup).
+After this guide, you will have a running SlugBase CE instance reachable on port `3000`, ready for [first workspace setup](/ce/first-workspace-setup).
 
 ## Prerequisites
 
 - A Linux or macOS host (or any environment that runs Docker)
-- **Docker** installed and running
-- **PostgreSQL** reachable from the host — a container or managed service is fine
+- **Docker** and **Docker Compose** installed and running
 - A domain name (or local hostname) for HTTPS in production
 - Secrets ready to generate: `SESSION_SECRET` and `ENCRYPTION_KEY` (each at least 32 bytes — for example `openssl rand -hex 32`)
 
@@ -21,104 +20,145 @@ Never commit real secrets to version control or paste them into documentation. U
 
 ## Architecture overview
 
-SlugBase CE uses one **combined image** that serves the API and web client on a single port (default `3000`). PostgreSQL stores all workspace data. A reverse proxy in front of the container terminates TLS and forwards traffic.
+SlugBase CE uses one **combined image** that serves the API and web client on a single port (default `3000`). PostgreSQL stores all workspace data. A reverse proxy in front of the container terminates TLS and forwards traffic in production.
 
 <Callout kind="info" title="Screenshot placeholder">
-**Suggested capture:** Docker Compose or `docker run` terminal output showing the container healthy, beside a browser tab on the `/setup` screen.
+**Suggested capture:** `docker compose up` terminal output showing both services healthy, beside a browser tab on the `/setup` screen.
 **Suggested filename:** `/assets/ce/quick-start-install.png`
 **Alt text:** Terminal and browser showing a successful SlugBase CE install.
 </Callout>
 
-## Step 1 — Prepare PostgreSQL
+## Step 1 — Create your environment file
 
-Create a database and role for SlugBase. Example connection string shape:
-
-```bash
-DATABASE_URL=postgresql://slugbase:YOUR_PASSWORD@postgres:5432/slugbase
-```
-
-The API applies schema migrations automatically on startup.
-
-## Step 2 — Configure environment variables
-
-Create an environment file on the host (for example `slugbase.env`). Minimum runtime keys:
+Create `slugbase.env` in your deployment directory. Minimum runtime keys:
 
 | Variable | Purpose |
 |----------|---------|
 | `SLUGBASE_EDITION` | Edition selector — set to `ce` for Community Edition (required in production; baked into the GHCR image by default) |
 | `SESSION_SECRET` | Signs server-side sessions |
 | `ENCRYPTION_KEY` | Encrypts sensitive settings at rest |
-| `DATABASE_URL` | PostgreSQL connection string |
+| `DATABASE_URL` | PostgreSQL connection string — use the Compose service hostname `postgres` |
 | `APP_BASE_URL` | Public HTTPS URL users open in the browser |
 | `FRONTEND_ORIGIN` | Same origin as `APP_BASE_URL` on the combined image |
 | `PUBLIC_REGISTRATION` | `false` for invite-only (recommended default) |
 | `EMAIL_VERIFICATION_REQUIRED` | `false` unless you configure SMTP first |
 
+Example `slugbase.env` for a local smoke test (replace secrets and URLs before production):
+
+```bash
+SLUGBASE_EDITION=ce
+SESSION_SECRET=replace-with-openssl-rand-hex-32
+ENCRYPTION_KEY=replace-with-openssl-rand-hex-32
+DATABASE_URL=postgresql://slugbase:CHANGE_ME@postgres:5432/slugbase
+APP_BASE_URL=http://localhost:3000
+FRONTEND_ORIGIN=http://localhost:3000
+PUBLIC_REGISTRATION=false
+EMAIL_VERIFICATION_REQUIRED=false
+```
+
 <Callout kind="tip" title="Optional integrations">
 Configure outbound email and federated sign-in through **deployment environment variables** — not the workspace settings UI. See [SMTP](/ce/smtp) and [OIDC](/ce/oidc) when you need invitations, password reset, or SSO. Leave Stripe, Turnstile, and Cloud analytics keys empty — those interfaces are no-ops on CE.
 </Callout>
 
-## Step 3 — Pull and run the image
+## Step 2 — Run with Docker Compose (recommended)
 
-Pull the published image from GitHub Container Registry and start the container:
+**Docker Compose is the recommended install path.** It runs PostgreSQL alongside SlugBase with health checks, persistent database storage, and a copy-pasteable stack you can version in your infrastructure repo.
 
-```bash
-docker pull ghcr.io/mdg-labs/slugbase:latest
+Create `docker-compose.yml` next to `slugbase.env`:
 
-docker run -d \
-  --name slugbase \
-  --env-file /path/to/slugbase.env \
-  -p 3000:3000 \
-  --restart unless-stopped \
-  ghcr.io/mdg-labs/slugbase:latest
+```yaml
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: slugbase
+      POSTGRES_PASSWORD: CHANGE_ME
+      POSTGRES_DB: slugbase
+    volumes:
+      - slugbase_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U slugbase -d slugbase"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  slugbase:
+    image: ghcr.io/mdg-labs/slugbase:latest
+    restart: unless-stopped
+    env_file: ./slugbase.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 45s
+
+volumes:
+  slugbase_pg:
 ```
 
-Replace the image reference with a specific version tag (for example `v1.0.0`) in production instead of `latest`.
+Pull the image and start the stack:
+
+```bash
+docker compose pull
+docker compose up -d
+docker compose ps
+```
+
+<Callout kind="tip" title="Pin a release tag in production">
+The example uses `ghcr.io/mdg-labs/slugbase:latest` for convenience. In production, pin a specific release tag (for example `ghcr.io/mdg-labs/slugbase:v1.0.0`) so upgrades are deliberate. Snapshot your database before upgrading.
+</Callout>
 
 <Tabs>
-  <Tab title="Docker Compose">
-    A typical Compose stack runs PostgreSQL alongside SlugBase. Point `DATABASE_URL` at the `postgres` service hostname, mount your `env` file, and publish port `3000` (or only expose it to your reverse proxy).
+  <Tab title="docker run">
+    For a single-container trial without Compose, provide PostgreSQL separately and point `DATABASE_URL` at it:
 
-    ```yaml
-    services:
-      postgres:
-        image: postgres:16
-        environment:
-          POSTGRES_USER: slugbase
-          POSTGRES_PASSWORD: CHANGE_ME
-          POSTGRES_DB: slugbase
-        volumes:
-          - slugbase_pg:/var/lib/postgresql/data
+    ```bash
+    docker pull ghcr.io/mdg-labs/slugbase:latest
 
-      slugbase:
-        image: ghcr.io/mdg-labs/slugbase:latest
-        env_file: ./slugbase.env
-        ports:
-          - "3000:3000"
-        depends_on:
-          - postgres
-
-    volumes:
-      slugbase_pg:
+    docker run -d \
+      --name slugbase \
+      --env-file /path/to/slugbase.env \
+      -p 3000:3000 \
+      --restart unless-stopped \
+      ghcr.io/mdg-labs/slugbase:latest
     ```
+
+    Pin a release tag instead of `latest` in production.
   </Tab>
   <Tab title="Behind a reverse proxy">
-    Terminate TLS at nginx, Caddy, or Traefik. Proxy HTTPS traffic to `http://127.0.0.1:3000`. Set `APP_BASE_URL` and `FRONTEND_ORIGIN` to your public `https://` URL so cookies and CORS match what users see.
+    Terminate TLS at nginx, Caddy, or Traefik. Proxy HTTPS traffic to `http://127.0.0.1:3000`. Set `APP_BASE_URL` and `FRONTEND_ORIGIN` in `slugbase.env` to your public `https://` URL so cookies and CORS match what users see. You can remove the published `3000:3000` port mapping and expose the container only on the Docker network.
   </Tab>
 </Tabs>
 
-## Step 4 — Verify health
+The API applies schema migrations automatically on startup.
 
-Confirm the container is responding:
+## Step 3 — Verify health
+
+Confirm the stack is responding:
 
 ```bash
 curl -sS http://127.0.0.1:3000/health
 curl -sS http://127.0.0.1:3000/version
+docker compose ps
 ```
 
-Both endpoints should return success. If the database is unreachable, check `DATABASE_URL` and network connectivity before continuing.
+Both HTTP endpoints should return success and the `slugbase` service should report healthy. If the database is unreachable, check `DATABASE_URL`, the `postgres` service health, and that `POSTGRES_PASSWORD` matches the password in the connection string.
 
-## Step 5 — Complete initial setup
+## Step 4 — Complete initial setup
 
 Open your public URL in a browser. On a fresh instance you are redirected to **Set up your instance** (`/setup`).
 
@@ -127,6 +167,7 @@ Follow [First workspace setup](/ce/first-workspace-setup) to create the instance
 ## Verify it worked
 
 - `/health` and `/version` respond
+- `docker compose ps` shows `slugbase` and `postgres` healthy
 - The browser shows the setup wizard (first install) or sign-in (if setup already completed)
 - After setup, you can sign in and land on **Home**
 
@@ -134,11 +175,11 @@ Follow [First workspace setup](/ce/first-workspace-setup) to create the instance
 
 ### Container exits immediately
 
-Check logs with `docker logs slugbase`. Missing `SESSION_SECRET`, `ENCRYPTION_KEY`, or `DATABASE_URL` prevents startup.
+Check logs with `docker compose logs slugbase`. Missing `SESSION_SECRET`, `ENCRYPTION_KEY`, or `DATABASE_URL` prevents startup.
 
 ### Database connection errors
 
-Confirm PostgreSQL accepts connections from the container network, credentials match `DATABASE_URL`, and the database exists.
+Confirm PostgreSQL accepts connections from the Compose network, credentials in `slugbase.env` match `POSTGRES_*` in `docker-compose.yml`, and the `postgres` service is healthy before `slugbase` starts.
 
 ### Redirect or cookie issues behind a proxy
 
