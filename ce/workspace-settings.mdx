@@ -37,18 +37,16 @@ Members without admin rights see a notice that workspace settings are restricted
 
 On the **General** section, update the **Workspace name** and click **Save changes**. The name appears in the workspace switcher and member-facing screens.
 
-## Workspace settings sections (CE)
+## Workspace settings sections
 
-On a typical CE instance, workspace admins see these sections under **Workspace**:
+Workspace admins see two sections under **Workspace**:
 
 | Section | What admins can change | Operator-managed? |
 |---------|------------------------|-------------------|
 | **General** | Workspace name and deletion | No |
-| **Email / SMTP** | Read-only notice only | Yes — see [SMTP](/ce/smtp) |
 | **AI suggestions** | Enable/disable toggle | Credential is operator-managed — see [AI suggestions](/ce/ai-suggestions) |
-| **Identity providers** | Read-only notice only | Yes — see [OIDC](/ce/oidc) |
 
-SMTP transport, OIDC provider definitions, and AI API credentials are configured exclusively by the instance operator through deployment environment variables. Workspace admins do not enter passwords, client secrets, or API keys in the UI.
+SMTP transport, OIDC provider definitions, and AI API credentials are configured exclusively by the instance operator through deployment environment variables. There are no workspace settings panels for email, identity providers, or API keys — workspace admins do not enter passwords, client secrets, or API keys in the UI. See [SMTP](/ce/smtp) and [OIDC](/ce/oidc) for operator configuration.
 
 The **Billing** group does not appear on CE instances.
 

@@ -43,9 +43,9 @@ See [Quick start](/ce/quick-start) for install steps.
 
 | Symptom | Likely cause | What to do |
 |---------|--------------|------------|
-| No invitation or reset email | SMTP not configured or failing | Configure [SMTP](/ce/smtp); send a test message |
-| Test email succeeds but mail is spam | Missing DNS auth | Add SPF/DKIM/DMARC for the from domain |
-| SMTP settings read-only | Operator-managed mail | Change deployment config instead of workspace UI |
+| No invitation or reset email | SMTP not configured or failing | Configure [SMTP](/ce/smtp) environment variables and restart the service; trigger a password reset or member invitation to verify delivery |
+| Mail arrives but lands in spam | Missing DNS auth | Add SPF/DKIM/DMARC for the domain in `SMTP_FROM` |
+| Cannot change email in workspace settings | Operator-managed mail | Update `SMTP_*` deployment variables instead — there is no SMTP panel in the UI |
 
 ## Workspaces and members
 

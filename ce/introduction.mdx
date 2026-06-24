@@ -11,7 +11,7 @@ After reading this page, you will understand what SlugBase does on your own infr
 
 SlugBase is a bookmark manager with built-in URL shortening and keyboard-driven navigation. You save links in a **workspace**, assign short **slugs** to bookmarks, and jump to any destination from the address bar or command palette using **forwarding** (`/go/&lt;slug&gt;`).
 
-On a CE instance you run the same product as SlugBase Cloud — one codebase, configured for your deployment. Your data stays on infrastructure you control.
+On a CE instance you run the same product as SlugBase Cloud — one codebase in an **open-core** model: managed Cloud plus **source-available** Community Edition. Your data stays on infrastructure you control.
 
 <Callout kind="info" title="Naming note">
 Older docs and URLs may say **self-hosted** or use `/selfhosted/…` paths. SlugBase now calls this edition **Community Edition (CE)**. Doc paths use `/ce/…`; set `SLUGBASE_EDITION=ce` when configuring your deployment.
@@ -68,8 +68,13 @@ A **slug** is a short keyword on a bookmark (for example `docs`). When **forward
 | Hosting | Your infrastructure | Managed by SlugBase |
 | Billing | Not applicable — full entitlements on your instance | Free, Personal, and Team plans |
 | User onboarding | Setup + invite by default | Public registration with email verification |
-| SMTP and OIDC | Configure in **Settings → Workspace** | Operator-managed on cloud; some settings hidden |
+| SMTP, OIDC, and AI credentials | Configure via deployment environment variables | Operator-managed — not in workspace settings |
+| Workspace settings UI | General settings and AI enable toggle only | General settings and AI enable toggle only |
 | Marketing site | Separate deployment (not in the container image) | Operated separately |
+
+## License
+
+Community Edition is **source available** under the [Elastic License 2.0 (ELv2)](https://www.elastic.co/licensing/elastic-license) — it is not open source. You may self-host for internal use by your organisation. You may not offer SlugBase — or substantially similar functionality — as a hosted or managed service to third parties. No licence key is required in v1. See the [FAQ](/ce/faq) for details.
 
 ## What to read next
 

@@ -11,7 +11,7 @@ Community Edition runs the same application on your infrastructure. You control 
 
 ### What licence applies to Community Edition?
 
-SlugBase Community Edition is released under the [Elastic License 2.0 (ELv2)](https://www.elastic.co/licensing/elastic-license). You may self-host for internal use by your organisation. You may not offer SlugBase — or substantially similar functionality — as a hosted or managed service to third parties. There is no separate commercial licence or dual-licensing workflow in v1.
+SlugBase Community Edition is **source available** under the [Elastic License 2.0 (ELv2)](https://www.elastic.co/licensing/elastic-license) — it is not open source. You may self-host for internal use by your organisation. You may not offer SlugBase — or substantially similar functionality — as a hosted or managed service to third parties. There is no separate commercial licence or dual-licensing workflow in v1.
 
 ### Do I need a license key?
 
@@ -55,6 +55,10 @@ Yes. Instance operators configure OIDC identity providers via `OIDC_{SLUG}_*` de
 
 Outbound email requires SMTP configuration by the instance operator (`SMTP_*` environment variables). See [SMTP](/ce/smtp). After configuring SMTP, trigger a password reset or invitation to verify delivery.
 
+### How long are invitations valid?
+
+Invitation links expire after **7 days**. Workspace admins can resend or revoke pending invitations from **Settings → Administration → Members &amp; teams**.
+
 ### Can I disable email verification?
 
 Email verification is configurable on CE (`EMAIL_VERIFICATION_REQUIRED`). SlugBase Cloud requires verification by default.
@@ -93,7 +97,7 @@ Deploy a newer container image and restart. Database migrations apply automatica
 
 ### Did workspace credential UI go away?
 
-Yes. SMTP, OIDC, and AI API key forms were removed from **Settings → Workspace**. Operators configure `SMTP_*`, `OIDC_{SLUG}_*`, and `OPENAI_*` environment variables instead. See [SMTP](/ce/smtp), [OIDC](/ce/oidc), and [AI suggestions](/ce/ai-suggestions).
+Yes. Workspace settings no longer include SMTP, OIDC, or AI credential forms. Operators configure `SMTP_*`, `OIDC_{SLUG}_*`, and `OPENAI_*` environment variables on the deployment instead. See [SMTP](/ce/smtp), [OIDC](/ce/oidc), and [AI suggestions](/ce/ai-suggestions).
 
 ## Related topics
 

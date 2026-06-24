@@ -13,7 +13,7 @@ See [Introduction](/cloud/introduction) for an overview.
 
 ### How is Cloud different from Community Edition?
 
-SlugBase Cloud is operated by MDG Labs with managed infrastructure, Stripe billing, and public sign-up. Community Edition runs on your own infrastructure with operator-controlled configuration and no cloud billing screens.
+SlugBase Cloud is operated by MDG Labs with managed infrastructure, Stripe billing, and public sign-up. Community Edition runs on your own infrastructure with operator-controlled configuration (SMTP, OIDC, AI via environment variables) and no cloud billing screens.
 
 The same application powers both — features differ by **plan**, not by a separate product fork.
 
@@ -27,7 +27,7 @@ See [Sign up](/cloud/sign-up).
 
 ### Can I use SlugBase without a password?
 
-Yes, if your workspace configures federated sign-in through an identity provider. You can also add a password later from account settings.
+Yes, when federated sign-in (OIDC) is enabled on SlugBase Cloud. You can also add a password later from account settings.
 
 ### How many workspaces can I own?
 
@@ -81,6 +81,10 @@ Member invitations require the **Team** plan. Open **Settings → Members & team
 
 See [Members and teams](/cloud/members-and-teams).
 
+### How long are invitations valid?
+
+Invitation links expire after **7 days**. Workspace admins can resend or revoke pending invitations from **Settings → Members & teams**.
+
 ### What are the member roles?
 
 **Owner** (billing and full control), **Admin** (members and settings), and **Member** (use the product). Roles are per workspace.
@@ -113,7 +117,13 @@ Yes. API tokens are long-lived credentials you create deliberately. Protect them
 
 ### Does SlugBase support SSO?
 
-Workspaces can configure OIDC identity providers for federated sign-in. Availability depends on workspace settings.
+SlugBase Cloud may offer federated sign-in through OIDC identity providers configured by the platform operator. Workspace admins cannot add identity providers in settings. Contact [support](/cloud/support) if your organisation needs SSO.
+
+On Community Edition, instance operators configure OIDC via deployment environment variables. See [OIDC](/ce/oidc).
+
+### Who configures email, SSO, and AI on Cloud?
+
+The SlugBase operator configures SMTP, OIDC, and AI credentials through deployment environment variables — the same model as Community Edition. Workspace admins can enable or disable AI suggestions per workspace but cannot enter mail, identity, or API credentials in settings.
 
 ## Data and privacy
 

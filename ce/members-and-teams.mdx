@@ -44,9 +44,21 @@ After this guide, you can invite members to a workspace, assign roles, and creat
 
 Pending invitations appear in the **Pending invitations** section. You can **Resend** or **Revoke** an invitation before it is accepted.
 
+Invitations expire after **7 days**. If a link has expired, revoke the old invitation and send a new one.
+
 <Callout kind="tip" title="Tip">
 Configure [SMTP](/ce/smtp) before sending invitations. Without outbound email, invitation links cannot be delivered.
 </Callout>
+
+## Accept an invitation
+
+When someone opens the link in an invitation email:
+
+- **New to SlugBase** — the acceptance page asks for a name and password (at least 12 characters) to create an account and join the workspace in one step.
+- **Already have an account** — sign in with the **same email address** the invitation was sent to, then accept.
+- **Signed in with a different account** — sign out, then open the invitation link again or sign in with the invited email address.
+
+After acceptance, the new member can switch to the workspace from the sidebar or command palette.
 
 ## Member roles
 
@@ -108,7 +120,7 @@ The new member appears in the **Members** list after accepting an invitation. Te
 
 ### Invitation email never arrives
 
-Check [SMTP settings](/ce/smtp) and send a test message. Verify the recipient's spam folder.
+Confirm the instance operator has configured [SMTP](/ce/smtp) environment variables and restarted the service. Trigger a password reset or resend the invitation to verify delivery. Check the recipient's spam folder.
 
 ### I don't see Members & teams
 

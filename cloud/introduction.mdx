@@ -29,8 +29,9 @@ SlugBase Cloud is a **managed service**: MDG Labs operates the API, web app, dat
 |-------|----------------|-------------|
 | Setup | Sign up and verify email | Install and run on your infrastructure |
 | Billing | Free, Personal, and Team plans via **Settings → Billing** | No cloud billing — full features by default |
-| Email | Operator-managed — you do not configure SMTP | Workspace admins can configure SMTP |
-| Identity (SSO) | Available when enabled by the operator | Workspace admins configure OIDC providers |
+| Email | Managed by SlugBase operators — you do not configure SMTP | Configure `SMTP_*` on your deployment — see [SMTP](/ce/smtp) |
+| Identity (SSO) | Available when enabled by SlugBase operators | Configure `OIDC_{SLUG}_*` on your deployment — see [OIDC](/ce/oidc) |
+| AI credentials | Operator-managed; enable per workspace in settings | Operator-managed; enable per workspace in settings |
 | Bookmark cap | **50** bookmarks per workspace on Free | No cap by default |
 | Workspaces | Free accounts include **one** workspace | Unrestricted workspace creation |
 
