@@ -22,6 +22,10 @@
     "actions": {
       "links": [
         {
+          "title": "Documentation",
+          "link": "https://docs.slugbase.app"
+        },
+        {
           "title": "GitHub",
           "link": "https://github.com/mdg-labs/slugbase"
         },
