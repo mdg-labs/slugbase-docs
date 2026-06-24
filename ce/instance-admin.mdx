@@ -65,7 +65,7 @@ SMTP transport, OIDC identity providers, and the OpenAI credential are **operato
 | Federated sign-in | `OIDC_{SLUG}_CLIENT_ID`, `OIDC_{SLUG}_CLIENT_SECRET`, `OIDC_{SLUG}_ISSUER_URL`, plus optional `NAME`, `SCOPES`, `ENABLED` | [OIDC](/ce/oidc) |
 | AI suggestions | `OPENAI_API_KEY`, `OPENAI_MODEL` | [AI suggestions](/ce/ai-suggestions) |
 
-Restart the SlugBase service after changing credential variables. Workspace admins can then enable AI suggestions per workspace from **Settings → Workspace → AI suggestions**.
+Restart the **api** service after changing credential variables. Workspace admins can then enable AI suggestions per workspace from **Settings → Workspace → AI suggestions**.
 
 <Callout kind="alert" title="Breaking change">
 Workspace admin UI for entering SMTP passwords, OIDC client secrets, and AI API keys has been removed. Credentials are no longer stored in the database.
@@ -85,7 +85,7 @@ Operators manage infrastructure settings outside the web UI:
 
 | Area | Examples |
 |------|----------|
-| URLs | `APP_BASE_URL`, `FRONTEND_ORIGIN` |
+| URLs | `APP_BASE_URL`, `FRONTEND_ORIGIN` (api); `API_BASE_URL` (web) |
 | Secrets | `SESSION_SECRET`, `ENCRYPTION_KEY` |
 | Database | `DATABASE_URL` |
 | Registration | `PUBLIC_REGISTRATION` (default `false` on CE) |

@@ -61,8 +61,8 @@ This example configures Google as a federated provider alongside SMTP and AI cre
 
 ```yaml title="docker-compose.yml"
 services:
-  slugbase:
-    image: ghcr.io/mdg-labs/slugbase:latest
+  api:
+    image: ghcr.io/mdg-labs/slugbase-api:1.0.0
     environment:
       APP_BASE_URL: https://bookmarks.example.com
       FRONTEND_ORIGIN: https://bookmarks.example.com
@@ -82,7 +82,7 @@ services:
       # OIDC_okta_NAME: Okta
 ```
 
-Restart the SlugBase service after changing OIDC variables.
+Restart the **api** service after changing OIDC variables.
 
 ## What workspace admins see
 

@@ -97,7 +97,7 @@ Use per-user JSON [export](/ce/backup-and-export) for bookmark content and datab
 
 ### How do I upgrade?
 
-Deploy a newer container image and restart. Database migrations apply automatically on startup. Snapshot the database before upgrading production.
+SlugBase CE uses two GHCR images — `slugbase-api` and `slugbase-web` — that version independently. Pin semver tags on each image in `docker-compose.yml`, snapshot the database, run `docker compose pull` and `docker compose up -d`, and verify **api** and **web** health. Migrations apply on api startup. See [Quick start](/ce/quick-start) and [Troubleshooting](/ce/troubleshooting).
 
 ### Did workspace credential UI go away?
 

@@ -1,6 +1,6 @@
 ---
 title: "Quick start"
-description: "Install and run a SlugBase CE instance with Docker Compose, PostgreSQL, and the GHCR image."
+description: "Install and run a SlugBase CE instance with Docker Compose, PostgreSQL, and split GHCR api and web images."
 ---
 
 ## What you'll accomplish
@@ -20,33 +20,47 @@ Never commit real secrets to version control or paste them into documentation. U
 
 ## Architecture overview
 
-SlugBase CE uses one **combined image** that serves the API and web client on a single port (default `3000`). PostgreSQL stores all workspace data. A reverse proxy in front of the container terminates TLS and forwards traffic in production.
+SlugBase CE runs as **two containers** — `slugbase-api` (NestJS API, database migrations, operator integrations) and `slugbase-web` (React Router SSR client). PostgreSQL stores all workspace data. A reverse proxy in front of the **web** container terminates TLS and forwards traffic in production.
+
+```text
+Your reverse proxy (HTTPS)
+        ↓
+slugbase-web (user-facing port 3000)
+        ↓  API_BASE_URL
+slugbase-api (port 3000, internal)
+        ↓
+PostgreSQL
+```
 
 <Callout kind="info" title="Screenshot placeholder">
-**Suggested capture:** `docker compose up` terminal output showing both services healthy, beside a browser tab on the `/setup` screen.
+**Suggested capture:** `docker compose up` terminal output showing postgres, api, and web healthy, beside a browser tab on the `/setup` screen.
 **Suggested filename:** `/assets/ce/quick-start-install.png`
 **Alt text:** Terminal and browser showing a successful SlugBase CE install.
 </Callout>
 
 ## Step 1 — Create your environment file
 
-Create `slugbase.env` in your deployment directory. Minimum runtime keys:
+Create `slugbase.env` in your deployment directory. Minimum runtime keys for the **api** service:
 
 | Variable | Purpose |
 |----------|---------|
-| `SLUGBASE_EDITION` | Edition selector — set to `ce` for Community Edition (required in production; baked into the GHCR image by default) |
+| `SLUGBASE_EDITION` | Edition selector — set to `ce` for Community Edition |
+| `SERVE_WEB_CLIENT` | Must be `false` on the api container (web runs separately) |
 | `SESSION_SECRET` | Signs server-side sessions |
 | `ENCRYPTION_KEY` | Encrypts sensitive settings at rest |
 | `DATABASE_URL` | PostgreSQL connection string — use the Compose service hostname `postgres` |
 | `APP_BASE_URL` | Public HTTPS URL users open in the browser |
-| `FRONTEND_ORIGIN` | Same origin as `APP_BASE_URL` on the combined image |
+| `FRONTEND_ORIGIN` | Origin allowed for CORS — usually matches `APP_BASE_URL`; may differ when the web container is behind a proxy on a different internal hostname |
 | `PUBLIC_REGISTRATION` | `false` for invite-only (recommended default) |
 | `EMAIL_VERIFICATION_REQUIRED` | `false` unless you configure SMTP first |
+
+The **web** service needs `API_BASE_URL` pointing at the api container (for example `http://api:3000` on the Compose network).
 
 Example `slugbase.env` for a local smoke test (replace secrets and URLs before production):
 
 ```bash
 SLUGBASE_EDITION=ce
+SERVE_WEB_CLIENT=false
 SESSION_SECRET=replace-with-openssl-rand-hex-32
 ENCRYPTION_KEY=replace-with-openssl-rand-hex-32
 DATABASE_URL=postgresql://slugbase:CHANGE_ME@postgres:5432/slugbase
@@ -57,12 +71,12 @@ EMAIL_VERIFICATION_REQUIRED=false
 ```
 
 <Callout kind="tip" title="Optional integrations">
-Configure outbound email and federated sign-in through **deployment environment variables** — not the workspace settings UI. See [SMTP](/ce/smtp) and [OIDC](/ce/oidc) when you need invitations, password reset, or SSO. Leave Stripe, Turnstile, and Cloud analytics keys empty — those interfaces are no-ops on CE.
+Configure outbound email and federated sign-in through **deployment environment variables on the api service** — not the workspace settings UI. See [SMTP](/ce/smtp) and [OIDC](/ce/oidc) when you need invitations, password reset, or SSO. Leave Stripe, Turnstile, and Cloud analytics keys empty — those interfaces are no-ops on CE.
 </Callout>
 
 ## Step 2 — Run with Docker Compose (recommended)
 
-**Docker Compose is the recommended install path.** It runs PostgreSQL alongside SlugBase with health checks, persistent database storage, and a copy-pasteable stack you can version in your infrastructure repo.
+**Docker Compose is the recommended install path.** It runs PostgreSQL alongside the api and web images with health checks, persistent database storage, and a copy-pasteable stack you can version in your infrastructure repo.
 
 Create `docker-compose.yml` next to `slugbase.env`:
 
@@ -84,15 +98,38 @@ services:
       retries: 10
       start_period: 5s
 
-  slugbase:
-    image: ghcr.io/mdg-labs/slugbase:latest
+  api:
+    image: ghcr.io/mdg-labs/slugbase-api:1.0.0
     restart: unless-stopped
     env_file: ./slugbase.env
-    ports:
-      - "3000:3000"
+    environment:
+      SERVE_WEB_CLIENT: "false"
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 45s
+
+  web:
+    image: ghcr.io/mdg-labs/slugbase-web:1.0.0
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      API_BASE_URL: http://api:3000
+    ports:
+      - "3000:3000"
     healthcheck:
       test:
         [
@@ -110,7 +147,7 @@ volumes:
   slugbase_pg:
 ```
 
-Pull the image and start the stack:
+Pull the images and start the stack:
 
 ```bash
 docker compose pull
@@ -118,29 +155,18 @@ docker compose up -d
 docker compose ps
 ```
 
-<Callout kind="tip" title="Pin a release tag in production">
-The example uses `ghcr.io/mdg-labs/slugbase:latest` for convenience. In production, pin a specific release tag (for example `ghcr.io/mdg-labs/slugbase:v1.0.0`) so upgrades are deliberate. Snapshot your database before upgrading.
+<Callout kind="tip" title="Pin release tags in production">
+Pin **independent semver tags** on each image — for example `slugbase-api:1.0.0` and `slugbase-web:1.0.1`. Api and web versions bump separately; upgrade each image deliberately. Snapshot your database before upgrading.
 </Callout>
 
 <Tabs>
-  <Tab title="docker run">
-    For a single-container trial without Compose, provide PostgreSQL separately and point `DATABASE_URL` at it:
-
-    ```bash
-    docker pull ghcr.io/mdg-labs/slugbase:latest
-
-    docker run -d \
-      --name slugbase \
-      --env-file /path/to/slugbase.env \
-      -p 3000:3000 \
-      --restart unless-stopped \
-      ghcr.io/mdg-labs/slugbase:latest
-    ```
-
-    Pin a release tag instead of `latest` in production.
-  </Tab>
   <Tab title="Behind a reverse proxy">
-    Terminate TLS at nginx, Caddy, or Traefik. Proxy HTTPS traffic to `http://127.0.0.1:3000`. Set `APP_BASE_URL` and `FRONTEND_ORIGIN` in `slugbase.env` to your public `https://` URL so cookies and CORS match what users see. You can remove the published `3000:3000` port mapping and expose the container only on the Docker network.
+    Terminate TLS at nginx, Caddy, or Traefik. Proxy HTTPS traffic to the **web** service (`http://web:3000` on the Compose network, or `http://127.0.0.1:3000` on the host). Set `APP_BASE_URL` and `FRONTEND_ORIGIN` in `slugbase.env` to your public `https://` URL so cookies and CORS match what users see. You can remove the published `3000:3000` port mapping and expose the web container only on the Docker network.
+
+    When api and web share one public hostname, `FRONTEND_ORIGIN` and `APP_BASE_URL` typically match. If you expose the API on a separate hostname, set `API_BASE_URL` on the web service to that public API URL instead of the internal `http://api:3000` address.
+  </Tab>
+  <Tab title="Migrating from the legacy combined image">
+    Older releases used a single `ghcr.io/mdg-labs/slugbase` image. Replace it with `slugbase-api` + `slugbase-web`, move operator env vars (`SMTP_*`, `OIDC_*`, `OPENAI_*`, secrets, `DATABASE_URL`) to the **api** service, and set `SERVE_WEB_CLIENT=false`. Add a **web** service with `API_BASE_URL` and publish its port (or proxy to it). Pin both new image tags before restarting production.
   </Tab>
 </Tabs>
 
@@ -148,15 +174,20 @@ The API applies schema migrations automatically on startup.
 
 ## Step 3 — Verify health
 
-Confirm the stack is responding:
+Confirm both containers are responding:
 
 ```bash
+# User-facing web (published port)
 curl -sS http://127.0.0.1:3000/health
 curl -sS http://127.0.0.1:3000/version
+
+# Api directly (if exposed on the compose network or for debugging)
+docker compose exec api node -e "fetch('http://127.0.0.1:3000/health').then(r=>console.log(r.status))"
+
 docker compose ps
 ```
 
-Both HTTP endpoints should return success and the `slugbase` service should report healthy. If the database is unreachable, check `DATABASE_URL`, the `postgres` service health, and that `POSTGRES_PASSWORD` matches the password in the connection string.
+`web` and `api` should report healthy; `/version` on each image returns that package's semver. If the database is unreachable, check `DATABASE_URL`, the `postgres` service health, and that `POSTGRES_PASSWORD` matches the password in the connection string.
 
 ## Step 4 — Complete initial setup
 
@@ -164,10 +195,22 @@ Open your public URL in a browser. On a fresh instance you are redirected to **S
 
 Follow [First workspace setup](/ce/first-workspace-setup) to create the instance administrator and your first workspace.
 
+## Upgrading
+
+Api and web images version **independently**. To upgrade:
+
+1. Read release notes for both `slugbase-api` and `slugbase-web`.
+2. Snapshot the PostgreSQL database.
+3. Update the pinned image tag(s) in `docker-compose.yml` — you may upgrade api only, web only, or both in one maintenance window.
+4. Run `docker compose pull` and `docker compose up -d`.
+5. Verify health on **both** services (`docker compose ps`, `/health` on web, api logs for migration success).
+
+Example: api at `1.0.2` with web still at `1.0.0` is valid when the release notes allow it; always pin explicit semver tags rather than `:latest` in production.
+
 ## Verify it worked
 
-- `/health` and `/version` respond
-- `docker compose ps` shows `slugbase` and `postgres` healthy
+- `/health` and `/version` respond on the web port
+- `docker compose ps` shows `api`, `web`, and `postgres` healthy
 - The browser shows the setup wizard (first install) or sign-in (if setup already completed)
 - After setup, you can sign in and land on **Home**
 
@@ -175,15 +218,19 @@ Follow [First workspace setup](/ce/first-workspace-setup) to create the instance
 
 ### Container exits immediately
 
-Check logs with `docker compose logs slugbase`. Missing `SESSION_SECRET`, `ENCRYPTION_KEY`, or `DATABASE_URL` prevents startup.
+Check logs with `docker compose logs api` and `docker compose logs web`. Missing `SESSION_SECRET`, `ENCRYPTION_KEY`, or `DATABASE_URL` on the api service prevents startup.
 
 ### Database connection errors
 
-Confirm PostgreSQL accepts connections from the Compose network, credentials in `slugbase.env` match `POSTGRES_*` in `docker-compose.yml`, and the `postgres` service is healthy before `slugbase` starts.
+Confirm PostgreSQL accepts connections from the Compose network, credentials in `slugbase.env` match `POSTGRES_*` in `docker-compose.yml`, and the `postgres` service is healthy before `api` starts.
+
+### Web loads but API calls fail
+
+Verify `API_BASE_URL` on the web service reaches the api container (`http://api:3000` on the default Compose network). Behind a split-hostname proxy, use the public API URL.
 
 ### Redirect or cookie issues behind a proxy
 
-Ensure `APP_BASE_URL` and `FRONTEND_ORIGIN` use the same `https://` hostname users type in the browser. Configure your proxy to forward `X-Forwarded-Proto` and `Host` correctly.
+Ensure `APP_BASE_URL` and `FRONTEND_ORIGIN` use the same `https://` hostname users type in the browser. Configure your proxy to forward `X-Forwarded-Proto` and `Host` correctly to the **web** service.
 
 ### Setup screen says the instance is already configured
 
